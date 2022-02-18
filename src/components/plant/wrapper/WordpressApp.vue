@@ -39,6 +39,9 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
             },
 
             async reciveData(data) {
+
+                console.log('搜到的 wordpress 的数据 = ', data)
+                
                 let res = data && data.params ? data.params : null
 
                 res = res ? this.ser_plant(res) : null

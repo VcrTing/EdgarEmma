@@ -14,8 +14,8 @@ const ENDPOINT = {
 }
 
 const STRAPI = {
-  named: 'vcrting@163.com',
-  pass: 'ZT123zlt'
+  named: 'strapi-admin@gmail.com',
+  pass: '1Qazxc2Wsxcv'
 }
 
 export default {

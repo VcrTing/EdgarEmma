@@ -13,7 +13,7 @@
                         </span>
                     </nav>
                     <div class="w-60">
-                        <button-primary class="btn-icon mh_n mh_n-w" @tap="insert"
+                        <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
                         >
                             <i class="fas fa-plus"></i>

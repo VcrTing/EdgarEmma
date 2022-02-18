@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <div>
         <div class="row pb_x">
             <input-wrapper class="w-40" :label="'公司编号 CR No.'" :valid="form_err.tax_id">
                 <input type="text" class="input" placeholder="Please input" v-model="form.tax_id">
@@ -36,7 +36,7 @@
             <input-wrapper class="pb_x" :label="'The Email receive notification'" :valid="form_err.emails">
                 <ccf-phone-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-phone-add>
             </input-wrapper>
-    </form>
+    </div>
 </template>
 
 <script>

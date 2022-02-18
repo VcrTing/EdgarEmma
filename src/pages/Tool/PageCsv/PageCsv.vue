@@ -1,7 +1,7 @@
 <template>
     <div class="py_x2 px">
         <h2 class="t-c pri">Import your company</h2>
-        <p class="t-c py">From csv</p>
+        <p class="t-c py sus">From csv</p>
         <div class="py"></div>
 
         <div class="py_x3 max-w">
@@ -10,20 +10,22 @@
             <div class="py"></div>
 
             <button-primary class="w-100" @tap="turn()">
-                导入至后台
+                導入至後臺
             </button-primary>
-        </div>
 
-        <tool-import-company ref="impREF"></tool-import-company>
+            <page-csv-company ref="csvCompREF"></page-csv-company>
+        </div>
     </div>
 </template>
 
 <script>
 import plugin_csv from '../../../air/plugin/csv/index'
+
 import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
 import ToolImportCompany from '../Import/company/ToolImportCompany.vue'
+import PageCsvCompany from './import_typed/PageCsvCompany.vue'
     export default {
-  components: { ButtonPrimary, ToolImportCompany },
+  components: { ButtonPrimary, ToolImportCompany, PageCsvCompany },
         name: '',
         data() {
             return {
@@ -32,35 +34,29 @@ import ToolImportCompany from '../Import/company/ToolImportCompany.vue'
             }
         },
         methods: {
-            // 传输到 后台
+            // 傳輸到 後臺
             turn() {
-                let res = null
                 const src = this.res
 
                 if (src) {
-                    const header = plugin_csv.header.header_company(src[0])
-                    res = src[1] ? src[1] : []
-                    res = res.map(ee => { return plugin_csv.csv_map(header, ee) })
-
-                    // 开始导入
-                    this.$refs.impREF.import_backend( res, this.file_name )
+                    this.$refs.csvCompREF.init(src, this.file_name)
+                } else {
+                    alert('未發現要導入的數據。')
                 }
             },
 
             // 序列化
-            _renderCsv(src) {
-                return plugin_csv.parse_array( src )
-            },
+            _renderCsv(src) { this.res = plugin_csv.parse_array( src ) },
 
             readCSVFile() {
                 const _this = this
+                let reader = new FileReader()
                 let src = document.getElementById('csv')
                 
-                let reader = new FileReader()
                 this.file_name = src.files[0].name
+                
                 reader.readAsText(src.files[0])
-
-                reader.onload = function() { _this.res = _this._renderCsv(this.result) }
+                reader.onload = function() { _this._renderCsv(this.result) }
             },
 
         }
