@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reminds",
+  "info": {
+    "name": "Remind"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "unsure": {
+      "type": "boolean",
+      "default": false
+    },
+    "remind_date": {
+      "type": "string"
+    },
+    "company": {
+      "via": "remind",
+      "model": "company"
+    }
+  }
+}
