@@ -5,13 +5,12 @@
         <div class="w-17">
             公司編號 CR No.<company-tool-tip :k="'comp_cr_id'"></company-tool-tip>
         </div>
-        <div class="w-38">
+        <div class="w-40 pr">
             公司名字 Company name<company-tool-tip :k="'comp_name'"></company-tool-tip>
         </div>
-        <div class="w-26">
+        <div class="w-38">
             成立日期 Incorporation date<company-tool-tip :k="'comp_since'"></company-tool-tip>
         </div>
-        <div class="w-14"></div>
     </div>
 </template>
 

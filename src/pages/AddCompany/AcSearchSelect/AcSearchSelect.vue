@@ -1,5 +1,5 @@
 <template>
-    <div class="px pt_x2">
+    <div class="pt_x2">
 
         <page-header :header="'Search your company'"></page-header>
 

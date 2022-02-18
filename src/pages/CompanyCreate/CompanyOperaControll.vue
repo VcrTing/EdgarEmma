@@ -2,7 +2,7 @@
     <div class="max-w px">
         <page-header :header="_header"></page-header>
 
-        <com-crt-form class="pb_x2" ref="formREF" v-if="typed == 'plus'"></com-crt-form>
+        <com-crt-form class="pb_x2 pt" ref="formREF" v-if="typed == 'plus'"></com-crt-form>
 
         <div v-else class="pb_x2">
             <com-crt-form class="pb_x2" ref="formREF" v-if="def" :origin="def"></com-crt-form>
@@ -18,6 +18,8 @@
                 Cancel
             </button-primary-out>
         </div>
+
+        <div class="mb-for-keyboard"></div>
     </div>
 </template>
 

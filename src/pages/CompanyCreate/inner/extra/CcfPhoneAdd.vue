@@ -6,13 +6,13 @@
                 <div class="row fx-l upper" 
                     :class="{ 'pt': i > 0 }"
                 >
-                    <nav class="w-40 input-attach">
+                    <nav class="w-40 input-attach mb-w-618">
                         <input type="text" placeholder="Please input" v-model="v.v" class="input">
                         <span class="icon pri_son">
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>
                     </nav>
-                    <div class="w-60">
+                    <div class="w-60 mb-w-382">
                         <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
                         >

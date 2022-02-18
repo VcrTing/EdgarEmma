@@ -4,11 +4,11 @@
             v-for="(v, i) in _items" :key="i"
         >
             <div class="w-5">&nbsp;</div>
-            <div class="w-17">{{ v.tax_id }}</div>
-            <div class="w-38">
+            <div class="w-17 mb-b mb-tit">{{ v.tax_id }}</div>
+            <div class="w-40 pr">
                 <view-company-name :names="v.names"></view-company-name>
             </div>
-            <div class="w-26">
+            <div class="w-24">
                 {{ view.ser_timed(v.company_since, 1) }}
             </div>
             <div class="w-14">

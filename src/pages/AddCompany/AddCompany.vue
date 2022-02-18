@@ -6,7 +6,7 @@
 
         <!--transition :name="moveName">
         </transition-->
-        <div class="max-w py_x2 ps-r">
+        <div class="max-w py_x2 ps-r px">
             <router-view/>
         </div>
     </div>

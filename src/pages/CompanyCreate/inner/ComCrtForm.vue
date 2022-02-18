@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row pb_x">
-            <input-wrapper class="w-40" :label="'公司编号 CR No.'" :valid="form_err.tax_id">
+            <input-wrapper class="w-40 mb-w-618" :label="'公司編號 CR No.'" :valid="form_err.tax_id">
                 <input type="text" class="input" placeholder="Please input" v-model="form.tax_id">
             </input-wrapper>
         </div>
@@ -18,13 +18,13 @@
             <!--input-wrapper class="w-60" :label="'Company Type'">
                 <company-type-select ref="comtypeREF"></company-type-select>
             </input-wrapper-->
-            <input-wrapper class="w-40" :label="'成立日期 Company Since'">
+            <input-wrapper class="w-40 mb-w-618" :label="'成立日期 Company Since'">
                 <input-data :_date="form.company_since" v-if="form.company_since" @result="(v) => form.company_since = v"></input-data>
             </input-wrapper>
         </div>
 
         <div class="row pb_x">
-            <input-wrapper class="w-40" :label="'财政年度年结日 Last Tax filing time'">
+            <input-wrapper class="w-40 mb-w-618" :label="'財政年度年結日 Last Tax filing time'">
                 <input-data :_date="form.last_tax_filing_time" v-if="form.last_tax_filing_time" @result="(v) => form.last_tax_filing_time = v"></input-data>
             </input-wrapper>
         </div>
@@ -36,6 +36,7 @@
             <input-wrapper class="pb_x" :label="'The Email receive notification'" :valid="form_err.emails">
                 <ccf-phone-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-phone-add>
             </input-wrapper>
+
     </div>
 </template>
 

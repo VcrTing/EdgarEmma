@@ -16,7 +16,7 @@ import ToolTip from '../../../funcks/ui/tool/ToolTip.vue'
         props: [ 'k' ],
         data() {
             return {
-                txts: { 'comp_cr_id': '公司编号', 'comp_name': '公司名字', 'comp_since': '成立日期', 'comp_filling': '財政年度年結日' }
+                txts: { 'comp_cr_id': '公司編號', 'comp_name': '公司名字', 'comp_since': '成立日期', 'comp_filling': '財政年度年結日' }
             }
         },
         computed: {

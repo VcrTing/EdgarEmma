@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="ul-def focus_tab_three">
+        <ul class="ul-def focus_tab_three" :class="'tab_ftt_' + now ">
             <li class="w-25">
                 <focus-text-counter :cont="'Search and select your company'" 
                 

@@ -4,7 +4,7 @@
             v-for="(v, i) in _items" :key="i"
         >
             <div class="w-3">&nbsp;</div>
-            <div class="w-18">
+            <div class="w-18 mb-b mb-tit">
                 {{ v.tax_id }}
             </div>
             <div class="w-33">
