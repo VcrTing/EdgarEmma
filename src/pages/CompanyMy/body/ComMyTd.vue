@@ -7,7 +7,7 @@
             <div class="w-18 mb-b mb-tit">
                 {{ v.tax_id }}
             </div>
-            <div class="w-33">
+            <div class="w-33 mb-b mb-tit">
                 <view-company-name :names="v.names"></view-company-name>
             </div>
             <div class="w-21">
