@@ -13,7 +13,6 @@ import route from './routes'
 const router = new Router({
   routes: route,
   mode: 'hash',
-  // mode: 'history',
   scrollBehviour(to, from, savedPosition) {
     
     if (savedPosition) {
