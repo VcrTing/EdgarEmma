@@ -1,4 +1,3 @@
-const msg = require('./fetch_content')
 const smstrapi = require('../../../../plugins/smstrapi/api/index')
 
 const _build_result = function(res) {

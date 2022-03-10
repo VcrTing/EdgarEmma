@@ -28,12 +28,6 @@
     "send_way_world": {
       "type": "string"
     },
-    "sending_time_start": {
-      "type": "string"
-    },
-    "sending_time_really": {
-      "type": "string"
-    },
     "sends": {
       "via": "remind",
       "collection": "send"
@@ -44,6 +38,15 @@
     },
     "work_year": {
       "type": "string"
+    },
+    "send_date_real_str": {
+      "type": "string"
+    },
+    "send_date_real_start_str": {
+      "type": "string"
+    },
+    "send_date_real_start": {
+      "type": "date"
     }
   }
 }

@@ -20,15 +20,14 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
             }
         },
         async mounted() {
-            if (!this.conf.TEST) {
+            if (this.conf.TEST) {
                 this.doLogin(this.def)
             }
         },
         methods: {
             async doLogin(plant) {
                 let res = await this.serv.user.user_from_strapi(this, plant.wordpress_id, plant.email)
-                console.log('拿了 USER RES =', res)
-
+                console.log('用该用户做登录, 可用数据 =', plant)
                 if (res) {
                     await this.$store.commit('change', [ 'user', res ])
                 }

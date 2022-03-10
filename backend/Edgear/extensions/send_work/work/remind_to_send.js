@@ -43,7 +43,7 @@ const _build_rule = function(rmd, day_sending) {
 // 1. 序列化 
 const _ser_remind = function(rmd, year) {
     let rs = rmd.rule
-    let _src = year + '-' + rmd.sending_time_really // rmd.unsure ? rmd.sending_time_really : rmd.real_filling_date
+    let _src = year + '-' + rmd.send_date_real_str // rmd.unsure ? rmd.sending_time_really : rmd.real_filling_date
     rmd.rule_ser = rs ? rs.map(e => _build_rule(rmd, util.time_num(_src, e.day))) : [ ]
     return rmd
 }
