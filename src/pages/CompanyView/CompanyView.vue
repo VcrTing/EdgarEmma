@@ -6,7 +6,7 @@
 
         <company-view-body v-if="item" :comp="item" class="pl_view"></company-view-body>
 
-        <div class="fx-c py_x3">
+        <div class="fx-c py_x4">
             <button-primary @tap="goEdit()" class="px_x2 lefter">
                 Edit
             </button-primary>

@@ -10,7 +10,6 @@ import AcItFirst from './panel/AcItFirst.vue'
 import AcItSecond from './panel/AcItSecond.vue'
     export default {
   components: { AcItFirst, AcItSecond },
-        name: '',
         data() {
             return {
                 page: 0

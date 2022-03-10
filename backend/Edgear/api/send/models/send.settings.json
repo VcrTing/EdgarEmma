@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sends",
+  "info": {
+    "name": "Send",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "times": {
+      "type": "json"
+    },
+    "conts": {
+      "type": "json"
+    },
+    "send_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "send_finish": {
+      "type": "boolean",
+      "default": false
+    },
+    "remind": {
+      "via": "sends",
+      "model": "remind"
+    },
+    "work_year": {
+      "type": "integer"
+    },
+    "is_serial": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

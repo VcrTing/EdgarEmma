@@ -4,14 +4,14 @@
 
         <search @hook:mounted="search" @res="search"></search>
 
-        <div class="py"></div>
+        <div class="py_x2"></div>
 
         <layout-table :title="'My Company'">
             <com-my-tr class="tr"></com-my-tr>
             <com-my-td class="td" :_items="items"></com-my-td>
         </layout-table>
 
-        <div class="fx-c py_x3">
+        <div class="fx-c py_x4">
             <button-primary-out class="px_x2 upper" @tap="$router.push('/home/company_create')">
                 Create Company Profile
             </button-primary-out>

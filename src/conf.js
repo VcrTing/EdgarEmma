@@ -1,7 +1,8 @@
 
 const TEST = false
 
-const baseURL = 'https://strapi07.svr.up5d.com' // 'http://127.0.0.1:1337' // 'https://strapi01.svr.up5d.com'
+const baseURL = 'https://strapi07.svr.up5d.com'
+// const baseURL = 'http://127.0.0.1:1337'
 const API = baseURL // + '/api'
 
 const ENDPOINT = {

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <layout v-if="$store.state.token"></layout>
+        <layout></layout>
     </div>
 </template>
 

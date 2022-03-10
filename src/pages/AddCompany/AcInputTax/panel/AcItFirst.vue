@@ -21,7 +21,7 @@
         <div class="py"></div>
 
         <div class="fx-c py_x2">
-            <button-primary class="px_x3 w-163 upper" @tap="submit()">
+            <button-primary class="px_x3 w-163 upper" @tap="submit">
                 完成
             </button-primary>
         </div>
@@ -76,7 +76,10 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
                 comp.data_from = 'WEB_CREATE'
                 comp.user = this.$store.state.user.id
                 comp = this.view.def.delete_strapi_def(comp)
-
+                
+                console.log('储存的 我的 Company =', comp)
+                console.log('储存的 我的 Remind =', remind)
+                // return 0
                 let res = await this.serv.company.company_plus(this, comp)
 
                 // 创建 REMIND
