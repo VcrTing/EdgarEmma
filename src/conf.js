@@ -1,11 +1,11 @@
 
-const TEST = false
+const TEST = true
 
 const baseURL = 'https://strapi07.svr.up5d.com'
 // const baseURL = 'http://127.0.0.1:1337'
 const API = baseURL // + '/api'
 
-const VERSION = '0.61'
+const VERSION = '0.62'
 const VERSION_TIMED = '2022-03-21'
 
 const ENDPOINT = {

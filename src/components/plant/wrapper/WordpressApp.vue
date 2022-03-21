@@ -34,16 +34,13 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
 
             async doLogin(plant) {
                 let res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                console.log('登录的用户 =', plant)
                 if (res) { await this.$store.commit('change', [ 'user', res ]) }
             },
 
             ser_plant(plant) {
-                let tk = null
-                tk = plant.token ? plant.token : [ ]
+                let tk = plant.token ? plant.token : [ ]
                 tk = tk.length > 0 ? tk[ 0 ] : null
-                if (!this.conf.TEST) {
-                    this.$store.commit('change', [ 'token', tk ]) 
-                }
                 return { wordpress_id: plant.user_id, token: tk }
             },
 
@@ -51,6 +48,10 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
 
                 let res = data && data.params ? data.params : null
                 res = res ? this.ser_plant(res) : null
+                if (!this.conf.TEST) {
+                    console.log('储存 TOKEN =', tk)
+                    await this.$store.commit('change', [ 'token', tk ]) 
+                }
                 await this.$store.commit('change', [ 'plant', res ])
                 this.doLogin(res)
             }
