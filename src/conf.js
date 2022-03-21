@@ -1,9 +1,12 @@
 
-const TEST = true
+const TEST = false
 
 const baseURL = 'https://strapi07.svr.up5d.com'
 // const baseURL = 'http://127.0.0.1:1337'
 const API = baseURL // + '/api'
+
+const VERSION = '0.61'
+const VERSION_TIMED = '2022-03-21'
 
 const ENDPOINT = {
   user: '/users',
@@ -25,5 +28,8 @@ export default {
 
   TEST,
   STRAPI,
-  ENDPOINT
+  ENDPOINT,
+
+  VERSION,
+  VERSION_TIMED
 }

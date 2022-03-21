@@ -1,6 +1,15 @@
 <template>
     <div>
         <router-view/>
+
+        <nav class="version">
+            <p>
+                版本:&nbsp;{{ conf.VERSION }}
+            </p>
+            <p>
+                日期:&nbsp;{{ conf.VERSION_TIMED }}
+            </p>
+        </nav>
     </div>
 </template>
 
@@ -48,4 +57,16 @@ import CompanyMy from '../CompanyMy/CompanyMy.vue'
     transform: translateY(20vh)    
 .ani_down
     transform: translateY(-20vh)
+
+.version
+    position: fixed !important
+    bottom: 0
+    left: 0
+    font-size: 10px !important
+    padding: 4px 12px
+    background: #00000088
+    box-shadow: 0.2px -0.5px 2px -0.5px rgba(0, 0, 0, 0.4)
+    border-top-right-radius: 7px
+    *
+        color: #FFFFFFEF !important
 </style>
