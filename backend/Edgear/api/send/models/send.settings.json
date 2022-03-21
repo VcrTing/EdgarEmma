@@ -15,16 +15,9 @@
     "times": {
       "type": "json"
     },
-    "conts": {
-      "type": "json"
-    },
     "send_active": {
       "type": "boolean",
       "default": true
-    },
-    "send_finish": {
-      "type": "boolean",
-      "default": false
     },
     "remind": {
       "via": "sends",
@@ -36,6 +29,15 @@
     "is_serial": {
       "type": "boolean",
       "default": false
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "sends"
+    },
+    "company": {
+      "via": "sends",
+      "model": "company"
     }
   }
 }

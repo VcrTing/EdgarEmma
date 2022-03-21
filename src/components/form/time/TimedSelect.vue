@@ -1,5 +1,6 @@
 <template>
 	<vuejs-datepicker
+		:disabled="dis"
 		:minimum-view="'day'"
 		:maximum-view="'month'"
 
@@ -13,6 +14,7 @@ import VuejsDatepicker from 'vuejs-datepicker'
 	export default {
 		name: 'app',
 		props: {
+			dis: Boolean,
 			timed: String
 		},
 		components: {

@@ -1,5 +1,5 @@
 
-const TEST = false
+const TEST = true
 
 const baseURL = 'https://strapi07.svr.up5d.com'
 // const baseURL = 'http://127.0.0.1:1337'

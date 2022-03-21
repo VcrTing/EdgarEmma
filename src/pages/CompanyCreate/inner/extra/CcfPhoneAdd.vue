@@ -34,6 +34,9 @@ import ButtonPrimary from '@/funcks/ui/button/ButtonPrimary.vue'
             'typed',
             'data'
         ],
+        mounted() {
+            
+        },
         methods: {
             can(v) {
                 let res = (v != null && v != '' && v.length > 5)
@@ -46,7 +49,8 @@ import ButtonPrimary from '@/funcks/ui/button/ButtonPrimary.vue'
             },
 
             valid() {
-                return this.data.filter(e => this.can(e.v))
+                console.log('DATA =', this.data, ' 即将进入 filter')
+                return this.data ? this.data.filter(e => this.can(e.v)) : false
             },
 
             submit() {

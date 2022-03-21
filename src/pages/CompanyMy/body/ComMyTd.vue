@@ -14,7 +14,7 @@
                 {{ view.ser_timed(v.company_since, 1) }}
             </div>
             <div class="w-16">
-                {{ view.ser_timed(v.company_since, 1) }}
+                {{ view.ser_timed(v.last_tax_filing_time, 1) }}
             </div>
 
             <div class="w-9">

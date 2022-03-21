@@ -28,19 +28,12 @@ export default new Vuex.Store({
                     res = true
                 } else {
                     state.token = token
-                    
-                    console.log('token = ', token.substring(0, 15) + '...')
+                    // console.log('token = ', token.substring(0, 15) + '...')
                 }
     
-            try{
-
-            } catch(e) {
-
-            }
+            try{ } catch(e) { }
             
-            return v => {
-              return res
-            }
+            return v => { return res }
         },
     },
     modules: {

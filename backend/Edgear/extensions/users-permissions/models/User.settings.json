@@ -68,6 +68,10 @@
     },
     "wordpress_name": {
       "type": "string"
+    },
+    "sends": {
+      "via": "user",
+      "collection": "send"
     }
   }
 }

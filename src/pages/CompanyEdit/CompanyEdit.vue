@@ -26,12 +26,18 @@ import CompanyOperaControll from '../CompanyCreate/CompanyOperaControll.vue'
                 if (this.cdt) {
                     let res = await this.serv.company.company_one(this, this.cdt)
                     if (res) {
-                        const ser_names = this.view.company.convert_names(res.names)
-                        res = Object.assign( res, ser_names )
-                        this.item = res
+                        this.item = this.fix_company( res )
                     }
                 }
             },
+
+            fix_company(cp) {
+                const ser_names = this.view.company.convert_names(cp.names)
+                cp.emails = cp.emails ? cp.emails : [ { v: '' } ]
+                cp.phones = cp.phones ? cp.phones : [ { v: '' } ]
+
+                return Object.assign( cp, ser_names )
+            }
         }
     }
 </script>

@@ -17,7 +17,9 @@ const company = async function( vue, data = { _limit: 99 }) {
 
 //
 const company_search = async function(vue, q) {
-    let res = await vue.net.get('company', _tool.token(vue), build_search(q))
+    let cdt = build_search(q)
+    cdt.user = vue.$store.state.user.id
+    let res = await vue.net.get('company', _tool.token(vue), cdt)
     res = res ? res : [ ]
     return res.sort((n, o) => (o.id - n.id))
 }

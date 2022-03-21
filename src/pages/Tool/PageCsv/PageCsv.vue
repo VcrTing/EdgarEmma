@@ -1,8 +1,7 @@
 <template>
     <div class="py_x2 px">
-        <h2 class="t-c pri">Import your company</h2>
-        <p class="t-c py sus">From csv</p>
-        <div class="py"></div>
+        <h3 class="">Import your company</h3>
+        <p class="py sus">From csv</p>
 
         <div class="py_x3 max-w">
             <input type="file" accept=".csv" class="input" id="csv" @change="readCSVFile()" />
@@ -10,7 +9,7 @@
             <div class="py"></div>
 
             <button-primary class="w-100" @tap="turn()">
-                導入至後臺
+                導入數據
             </button-primary>
 
             <page-csv-company ref="csvCompREF"></page-csv-company>

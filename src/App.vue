@@ -17,13 +17,13 @@ import Layout from './Layout.vue'
                 loading: false,
             }
         },
-        mounted() {
-            this.init() },
+        mounted() { this.init() },
         methods: {
             async init() {
-                let res = await this.net._admin()
-                this.$store.commit('change', [ 'token', res ])
+                if (this.conf.TEST) { await this._token() }
             },
+
+            async _token() { console.log('拉取默认 TOKEN'); this.$store.commit('change', [ 'token', await this.net._admin() ]) },
 
             root_router() {
                 return new Promise((rej, rev) => { this.$router.onReady(() => { rej( _layout ) }) })

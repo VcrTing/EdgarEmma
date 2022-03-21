@@ -15,7 +15,7 @@ import CountryFlagSelect from "../select/CountryFlagSelect.vue"
         name: '',
         data() {
             return {
-                prefix: '',
+                prefix: '+852',
                 phoned: ''
             }
         },
@@ -31,6 +31,7 @@ import CountryFlagSelect from "../select/CountryFlagSelect.vue"
             ser() {
                 const v = Number.parseInt(this.phoned)
                 this.phoned = v ? v : ''
+                this.prefix = this.$refs.flagREF.now
             }
         }
     }

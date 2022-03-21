@@ -3,12 +3,12 @@
         <h4 class="py_x3">如果你想我們幫忙免費提醒你報稅，請輸入財政年度年結日</h4>
 
         <div class="pt">
-            <input-wrapper :label="'財政年度年結日'" :valid="form_vid.filling">
-                <input-data :_date="form.filling" @result="(v) => form.filling = v" v-if="form.filling"></input-data>
+            <input-wrapper :class="{ 'input-disable': form.unsure }" :label="'財政年度年結日'" :valid="form_vid.filling">
+                <input-data :_dis="form.unsure" :_date="form.filling" @result="(v) => form.filling = v" v-if="form.filling"></input-data>
             </input-wrapper>
 
             <div class="pt_x2">
-                <input-check-box ref="usREF">
+                <input-check-box ref="usREF" @change="(us) => form.unsure = us">
                     <span class="ttd">不確定年結日</span>
                 </input-check-box>
             </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import ButtonPrimary from '../../../../funcks/ui/button/ButtonPrimary.vue'
 import ButtonPrimaryOut from '../../../../funcks/ui/button/ButtonPrimaryOut.vue'
 import InputCheckBox from '../../../../funcks/ui/input/InputCheckBox.vue'
@@ -46,6 +48,14 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
         },
         mounted() { this.reset() },
         methods: {
+            
+            build_remind(f) {
+                f.send_date_real_str = f.unsure ? f.remind_date : moment(f.filling).format('MM-DD')
+                f.rule = this.view.remind.build_rule()
+                f.is_stop = false
+                return f
+            },
+
             reset() {
                 this.form = {
                     filling: '2020-01-01', unsure: false, remind_date: this.$refs.rdREF.now
@@ -58,28 +68,24 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
                 this.form.remind_date = this.$refs.rdREF.now
 
                 let res = this.view.get_ss('company_active_company')
-
                 res.step = 4
                 res.last_tax_filing_time = this.form.filling
 
-                res.remind = this.form
-
-
-                this._submit(res, this.form)                
+                this._submit(res, this.build_remind(this.form))                
                 this.view.set_ss('company_active_company', res)
-
             },
             async _submit(comp, remind) {
+                //
+                remind.send_way_world = comp.send_way_world
 
                 // 创建自己的 COMPANY
                 comp.status = true
+                comp.work_year = '0'
                 comp.data_from = 'WEB_CREATE'
                 comp.user = this.$store.state.user.id
+                comp.last_tax_filing_time = new Date().getFullYear() + '-' + remind.send_date_real_str
                 comp = this.view.def.delete_strapi_def(comp)
                 
-                console.log('储存的 我的 Company =', comp)
-                console.log('储存的 我的 Remind =', remind)
-                // return 0
                 let res = await this.serv.company.company_plus(this, comp)
 
                 // 创建 REMIND
@@ -87,7 +93,7 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
                     remind.company = res.id
                     res = await this.serv.remind.create(this, remind)
                     if (res) {
-                        setTimeout(e => { this.$emit('finsh') }, 800)
+                        setTimeout(e => { this.$emit('finsh') }, 2)
                     }
                 }
             }

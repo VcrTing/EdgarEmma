@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view v-if="$store.state.token"></router-view>
+        <router-view v-if="$store.state.user"></router-view>
 
         <wordpress-app></wordpress-app>
     </div>

@@ -37,16 +37,11 @@
       "default": false
     },
     "work_year": {
-      "type": "string"
+      "type": "string",
+      "default": "_"
     },
     "send_date_real_str": {
       "type": "string"
-    },
-    "send_date_real_start_str": {
-      "type": "string"
-    },
-    "send_date_real_start": {
-      "type": "date"
     }
   }
 }

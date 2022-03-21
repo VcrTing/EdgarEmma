@@ -1,7 +1,7 @@
 <template>
     <div class="fx-l">
-        <input :id="pk" type="checkbox" class="checkbox" v-model="now">
-        <label :for="pk" class="pl">
+        <input :id="pk" type="checkbox" class="checkbox hand" v-model="now">
+        <label :for="pk" class="pl hand">
             <slot></slot>
         </label>
     </div>
@@ -18,6 +18,11 @@
         data() {
             return {
                 now: false
+            }
+        },
+        watch: {
+            now(n, o) {
+                this.$emit('change', n)
             }
         },
         mounted() { this.now = this._def ? this._def : false },

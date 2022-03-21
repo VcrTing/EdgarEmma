@@ -29,9 +29,6 @@
     "names": {
       "type": "json"
     },
-    "data_from": {
-      "type": "string"
-    },
     "user": {
       "via": "companies",
       "plugin": "users-permissions",
@@ -50,6 +47,14 @@
     },
     "company_type_txt": {
       "type": "string"
+    },
+    "sends": {
+      "via": "company",
+      "collection": "send"
+    },
+    "level": {
+      "type": "integer",
+      "default": 5
     }
   }
 }

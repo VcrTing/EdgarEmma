@@ -4,6 +4,7 @@ import float from './num/float'
 import clean from './backend/clean'
 import def from './backend/def'
 
+import remind from './backend/remind'
 import company from './backend/company'
 
 const if_def = function(rec, def = '- -') {
@@ -24,6 +25,7 @@ export default {
 
     //
     def,
+    remind,
     company,
     
     //

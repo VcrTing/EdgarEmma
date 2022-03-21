@@ -1,6 +1,6 @@
 <template>
     <nav class="input-attach input-timed">
-        <timed-select :timed="v" @result="res"></timed-select>
+        <timed-select :dis="_dis" :timed="v" @result="res"></timed-select>
         <span class="icon pri_son">
             <i class="fa fa-calendar"></i>
         </span>
@@ -14,6 +14,7 @@ import moment from 'moment'
   components: { TimedSelect },
         name: '',
         props: [
+            '_dis',
             '_date'
         ],
         data() {

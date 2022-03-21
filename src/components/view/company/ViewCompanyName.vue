@@ -3,7 +3,7 @@
         <p>
             {{ named_en }}
         </p>
-        <p>
+        <p class="pt_s">
             {{ named_ch }}
         </p>
     </div>
@@ -11,7 +11,7 @@
         <p v-if="mode == 'en'">
             {{ named_en }}
         </p>
-        <p v-else-if="mode == 'hk'">
+        <p class="pt_s" v-else-if="mode == 'hk'">
             {{ named_ch }}
         </p>
     </div>

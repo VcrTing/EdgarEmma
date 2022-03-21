@@ -95,7 +95,9 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
                     this.reset_statis()
                     src.map((dt, i) => { dt = dt ? dt : []; setTimeout(e => { this._import_backend(dt) }, (1000 * i)) })
                 }
-                setTimeout(e => { this.deal_result(); this.importing = false }, 3600)
+                setTimeout(e => {
+                    if (src) { this.deal_result() }
+                    this.importing = false }, 3600)
             },
 
             // 处理结果
