@@ -1,5 +1,5 @@
 <template>
-    <div class="py_x2 px">
+    <div class="py_x2">
         <h3 class="">Import your company</h3>
         <p class="py sus">From csv</p>
 

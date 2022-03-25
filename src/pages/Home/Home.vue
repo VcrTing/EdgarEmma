@@ -1,23 +1,28 @@
 <template>
-    <div>
-        <router-view/>
-
-        <nav class="version">
-            <p>
-                版本:&nbsp;{{ conf.VERSION }}
-            </p>
-            <p>
-                日期:&nbsp;{{ conf.VERSION_TIMED }}
-            </p>
-        </nav>
-    </div>
+    <main-layout>
+        <main-menu slot="menu"></main-menu>
+        
+        <div slot="cont">                
+            <router-view/>
+            <nav class="version">
+                <p>
+                    版本:&nbsp;{{ conf.VERSION }}
+                </p>
+                <p>
+                    日期:&nbsp;{{ conf.VERSION_TIMED }}
+                </p>
+            </nav>
+        </div>
+    </main-layout>
 </template>
 
 <script>
+import MainMenu from '../../components/menu/main/MainMenu.vue'
+import MainLayout from '../../funcks/ui_layout/main/MainLayout.vue'
 import CompanyMy from '../CompanyMy/CompanyMy.vue'
 
     export default {
-        components: {CompanyMy },
+        components: {CompanyMy, MainLayout, MainMenu },
         name: '',
         data() {
             return {

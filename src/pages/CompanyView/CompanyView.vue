@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w px">
+    <div class="">
         <page-header :header="'Company Profile'"></page-header>
 
         <div class="py"></div>

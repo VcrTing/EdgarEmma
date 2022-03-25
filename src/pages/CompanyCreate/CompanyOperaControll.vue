@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w px">
+    <div class="">
         <page-header :header="_header"></page-header>
 
         <com-crt-form class="pb_x2 pt" ref="formREF" v-if="typed == 'plus'"></com-crt-form>

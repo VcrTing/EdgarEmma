@@ -1,21 +1,24 @@
 <template>
     <div>
-        <div class="max-w_x2 py">
+        <div class="py">
             <search-select-tab-three></search-select-tab-three>
         </div>
 
         <!--transition :name="moveName">
         </transition-->
-        <div class="max-w py_x2 ps-r px">
+        <div class="py_x2 ps-r">
             <router-view/>
+
+            <tool-go-top></tool-go-top>
         </div>
     </div>
 </template>
 
 <script>
 import SearchSelectTabThree from '../../components/tab/company/SearchSelectTabThree.vue'
+import ToolGoTop from '../../funcks/element/tool/ToolGoTop.vue'
     export default {
-  components: { SearchSelectTabThree },
+  components: { SearchSelectTabThree, ToolGoTop },
         name: '',
         data() {
             return {

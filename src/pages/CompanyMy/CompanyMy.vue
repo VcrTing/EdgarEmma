@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w px">
+    <div class="">
         <page-header :header="'Search your company'"></page-header>
 
         <search @hook:mounted="search" @res="search"></search>
