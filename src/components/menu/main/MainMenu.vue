@@ -18,42 +18,35 @@ export default {
     data() {
         return {
             now: 0,
-            menu: [
+        }
+    },
+    computed: {
+        is_admin() { return this.$store.state.plant.is_admin },
+        menu() {
+            let res = [
                 {
-                    txt: 'Add Company',
+                    txt: 'Add Company', index: 0, admin: false,
                     link: '/home/add_company',
-                    index: 0
                 },
                 {
-                    txt: 'My Company',
+                    txt: 'My Company', index: 1, admin: false,
                     link: '/home/company_my',
-                    index: 1
-                },
-                {
-                    txt: 'Import',
-                    link: '/home/csv',
-                    index: 2
                 }
             ]
+            if (this.is_admin) {
+                res.push({
+                    txt: 'Import', index: 2, admin: true,
+                    link: '/home/csv',
+                })
+            }
+            return res
         }
     },
-    mounted() { 
-        let rout = this.$route.fullPath
-        console.log(rout)
-        this.localRoute(rout)
-    },
-    watch: {
-        $route(to,from){
-            console.log('path =', from.path) //从哪来
-        }
-    },
+    mounted() { this.localRoute(this.$route.fullPath) },
+    watch: { $route(to,from){ } },
     methods: {
         localRoute(path) {
-            this.menu.map(e => {
-                if (path.indexOf(e.link) >= 0) {
-                    this.now = e.index
-                }
-            })
+            this.menu.map(e => { if (path.indexOf(e.link) >= 0) { this.now = e.index } })
         },
         go(v) {
             this.now = v.index
