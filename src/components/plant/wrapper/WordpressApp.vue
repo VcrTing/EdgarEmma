@@ -49,6 +49,7 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
 
             async reciveData(data) {
                 let res = data && data.params ? data.params : null
+                console.log('接受的数据 =', res)
                 res = res ? this.ser_plant(res) : null
                 if (!this.conf.TEST) {
                     console.log('储存 TOKEN =', tk)
