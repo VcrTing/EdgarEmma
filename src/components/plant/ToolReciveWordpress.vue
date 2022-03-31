@@ -6,7 +6,7 @@
                 console.log('接收 Wordpress 的数据：')
                 let data = event.data
                 console.log('data =', data)
-                if (data) { this.$emit('recive', data) }
+                this.$emit('recive', data)
             },
         },
         created() {

@@ -44,12 +44,14 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
                 tk = tk.length > 0 ? tk[ 0 ] : null
                 tk = { wordpress_id: plant.user_id, token: tk, is_admin: plant.is_admin }
                 await this.$store.commit('change', [ 'plant', tk ])
+                console.log('序列化后的数据 tk =', tk)
                 return tk
             },
 
             async reciveData(data) {
+                console.log('接受的数据 recive =', data)
                 let res = data && data.params ? data.params : null
-                console.log('接受的数据 =', res)
+                console.log('接受的数据 res =', res, ' TEST =', this.conf.TEST)
                 res = res ? this.ser_plant(res) : null
                 if (!this.conf.TEST) {
                     console.log('储存 TOKEN =', tk)
