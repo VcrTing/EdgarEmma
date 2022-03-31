@@ -28,12 +28,11 @@
             },
 
             async reciveData(data) {
-                console.log('接受的数据 recive =', data)
                 let res = data && data.params ? data.params : null
                 console.log('接受的数据 res =', res)
                 res = res ? this.ser_plant(res) : null
                 if (!this.conf.TEST) {
-                    console.log('储存 TOKEN =', tk)
+                    console.log('储存 TOKEN =', res)
                     await this.$store.commit('change', [ 'token', tk ]) 
                 }; this.doLogin(res)
             }
@@ -44,7 +43,7 @@
         },
         destroyed() {
             console.log('销毁 message 方法。')
-            // window.removeEventListener('message', this.returnMessage);
+            window.removeEventListener('message', this.returnMessage);
         }
     }
 </script>
