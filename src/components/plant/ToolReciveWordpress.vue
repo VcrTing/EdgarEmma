@@ -28,12 +28,13 @@
             },
 
             async reciveData(data) {
+                console.log('接受的数据 recive =', data)
                 let res = data && data.params ? data.params : null
-                console.log('接受的数据 res =', res)
+                console.log('接受的数据 res =', res, ' TEST =', this.conf.TEST)
                 res = res ? this.ser_plant(res) : null
                 if (!this.conf.TEST) {
                     console.log('储存 TOKEN =', res)
-                    await this.$store.commit('change', [ 'token', tk ]) 
+                    await this.$store.commit('change', [ 'token', res.token ]) 
                 }; this.doLogin(res)
             }
         },
