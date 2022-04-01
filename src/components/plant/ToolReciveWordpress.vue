@@ -7,6 +7,7 @@
                 let data = event.data
                 console.log('data =', data)
                 console.log('开始登录')
+
                 this.reciveData(data)
             },
 
@@ -18,11 +19,11 @@
                 console.log('结束登录') }
             },
 
-            async ser_plant(plant) {
+            ser_plant(plant) {
                 let tk = plant.token ? plant.token : [ ]
                 tk = tk.length > 0 ? tk[ 0 ] : null
                 tk = { wordpress_id: plant.user_id, token: tk, is_admin: plant.is_admin }
-                await this.$store.commit('change', [ 'plant', tk ])
+                this.$store.commit('change', [ 'plant', tk ])
                 console.log('序列化后的数据 tk =', tk)
                 return tk
             },
@@ -32,10 +33,12 @@
                 let res = data && data.params ? data.params : null
                 console.log('接受的数据 res =', res, ' TEST =', this.conf.TEST)
                 res = res ? this.ser_plant(res) : null
+
                 if (!this.conf.TEST) {
                     console.log('储存 TOKEN =', res)
                     await this.$store.commit('change', [ 'token', res.token ]) 
-                }; this.doLogin(res)
+                }; 
+                await this.doLogin(res)
             }
         },
         created() {
