@@ -7,7 +7,7 @@
                 let data = event.data
                 console.log('data =', data)
 
-                if (data.type && data.type.startsWith('get')) { 
+                if (data.cmd && data.cmd.startsWith('get')) { 
                     console.log('开始登录'); this.reciveData(data) }
             },
 
