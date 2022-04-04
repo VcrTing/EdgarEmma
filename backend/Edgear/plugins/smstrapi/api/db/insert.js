@@ -16,6 +16,8 @@ const _fetch_items = async function(MODEL, params) {
 
 const diff = async function(MODEL, param) {
     let res = await _fetch_items(MODEL, param)
+
+    console.log(' Filter Params =', param)
     return !(res && res.length > 0)
 }
 
@@ -28,6 +30,7 @@ module.exports = {
 
         if (can && phoned) {
             const params = { send_day, content, phoned, phoned_prefix }
+            console.log(' Insert Params =', params)
             return await _insert_note(conf.ENDPOINT.smsnote, params)
         }
     },

@@ -11,6 +11,8 @@ const user_from_strapi = async function(vue, wordpress_id, email) {
     return res && res.length > 0 ? res[0] : null
 }
 
+
+
 export default {
     user_from_strapi
 }

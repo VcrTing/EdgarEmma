@@ -11,7 +11,8 @@ const _build_result = function(res) {
 module.exports = {
     // to 是接收，timed 是哪天发送，cont 是信息对象类型
     note: async function(to, timed, cont) {
-        to = to.v ? to.v.split(' ') : null
+        to = to.v ? to.v.split(' ') : [ ]
+        to = to.length > 1 ? to : [ '852', to[0] ]
         // to = 接收者，timed = 发送日期，cont.content = 短信内容
         let res = await smstrapi.insert[ 
             smstrapi.conf.KEY_NOTE ]( timed, to[1], to[0], cont.content, true )

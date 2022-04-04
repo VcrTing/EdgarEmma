@@ -1,5 +1,6 @@
 
 const TEST = false
+const TEST_LOCAL = false
 
 const baseURL = 'https://strapi07.svr.up5d.com'
 // const baseURL = 'http://127.0.0.1:1337'
@@ -27,6 +28,8 @@ export default {
   API,
 
   TEST,
+  TEST_LOCAL,
+  
   STRAPI,
   ENDPOINT,
 

@@ -32,7 +32,19 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
             },
 
             async doLogin(plant) {
-                let res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                let res = undefined
+                if (!this.conf.TEST_LOCAL) {
+                    res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                } else {
+                    console.log('本地登录')
+                    const token = await this.net._admin()
+                    plant.token = token
+                    console.log('本地登录 token=', token)
+                    if (token) {
+                        await this.$store.commit('change', [ 'token', token ]) 
+                        res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                    }
+                }
                 if (res) { await this.$store.commit('change', [ 'user', res ]); console.log('默认的用户 =', res) }
             },
 

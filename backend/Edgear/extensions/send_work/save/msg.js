@@ -6,7 +6,7 @@ module.exports = {
                 company_named: '',
                 filling_timed: ''
             }, 
-            subject: '', content: '【EdgarEmma 纳税提醒】Hi，Dear {{user_email}}. 您的{{company_named}}将于{{filling_timed}}到达法定纳税时间，望您提前做好安排。' }
+            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' }
     ],
     'email': [
         { id: 1, 
