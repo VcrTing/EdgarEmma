@@ -45,7 +45,7 @@
         },
         destroyed() {
             console.log('销毁 message 方法。')
-            window.removeEventListener('message', this.returnMessage);
+            // window.removeEventListener('message', this.returnMessage);
         }
     }
 </script>

@@ -25,9 +25,8 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
         mounted () { this.init() },
         methods: {
             async init() {
-                console.log('this.conf.TEST =', this.conf.TEST)
                 if (this.conf.TEST) {
-                    console.log('使用默认数据登录。。。token =', this.$store.state.token)
+                    console.log('使用默认数据登录。')
                     this.doLogin( this.ser_plant( this.def ) )
                 }
             },
