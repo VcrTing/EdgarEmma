@@ -1,10 +1,12 @@
 <template>
     <div class="">
+        <!--
         <page-header :header="'Search your company'"></page-header>
 
         <search @hook:mounted="search" @res="search"></search>
 
         <div class="py_x2"></div>
+        -->
 
         <layout-table :title="'My Company'">
             <com-my-tr class="tr"></com-my-tr>
@@ -36,7 +38,7 @@ import ComMyTr from './Top/ComMyTr.vue'
                 items: [ ]
             }
         },
-        mounted() {  },
+        mounted() { this.search() },
         methods: {
             async search(q) {
                 let res = await this.serv.company.company_search( this, q )

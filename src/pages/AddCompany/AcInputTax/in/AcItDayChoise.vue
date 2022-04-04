@@ -22,7 +22,7 @@ import ButtonPrimaryOut from '../../../../funcks/ui/button/ButtonPrimaryOut.vue'
 
                 dates: [
                     {
-                        txt: '3月21日', v: '03-21' },
+                        txt: '3月31日', v: '03-31' },
                     {
                         txt: '6月30日', v: '06-30' },
                     {
@@ -31,7 +31,7 @@ import ButtonPrimaryOut from '../../../../funcks/ui/button/ButtonPrimaryOut.vue'
             }
         },
         mounted() {
-            this.now = this._def ? this._def : '03-21'
+            this.now = this._def ? this._def : '03-31'
         },
     }
 </script>

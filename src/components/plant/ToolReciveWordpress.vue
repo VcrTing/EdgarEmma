@@ -6,9 +6,9 @@
                 console.log('接收 Wordpress 的数据：Event =', event, ' TEST =', this.conf.TEST)
                 let data = event.data
                 console.log('data =', data)
-                console.log('开始登录')
 
-                this.reciveData(data)
+                if (data.type && data.type.startsWith('get')) { 
+                    console.log('开始登录'); this.reciveData(data) }
             },
 
             // 
@@ -34,10 +34,8 @@
                 console.log('接受的数据 res =', res, ' TEST =', this.conf.TEST)
                 res = res ? this.ser_plant(res) : null
 
-                if (!this.conf.TEST) {
-                    console.log('储存 TOKEN =', res)
-                    await this.$store.commit('change', [ 'token', res.token ]) 
-                }; 
+                console.log('储存 TOKEN =', res)
+                await this.$store.commit('change', [ 'token', res.token ]) 
                 await this.doLogin(res)
             }
         },
