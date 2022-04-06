@@ -31,11 +31,15 @@ export default {
                 {
                     txt: 'My Company', index: 1, admin: false,
                     link: '/home/company_my',
+                },
+                {
+                    txt: 'Task of Remind', index: 2, admin: false,
+                    link: '/home/remind_record',
                 }
             ]
             if (this.is_admin) {
                 res.push({
-                    txt: 'Import', index: 2, admin: true,
+                    txt: 'Import', index: 3, admin: true,
                     link: '/home/csv',
                 })
             }

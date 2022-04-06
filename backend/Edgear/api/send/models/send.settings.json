@@ -38,6 +38,9 @@
     "company": {
       "via": "sends",
       "model": "company"
+    },
+    "times_since": {
+      "type": "json"
     }
   }
 }

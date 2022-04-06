@@ -29,33 +29,30 @@ const _judge_send = function(tmd) {
 }
 
 // 1. 判断发送是否现在，是的话就建立发送任务
+const _doing = async function(_tis, snd, ways) {
+    // 判断是否 超出当前时间
+    _tis[ 'send_day_real' ] = outdate.outdate( _tis.day_sending )
+    // 判断 能不能，返回结果是 电话s / 电邮s
+    let can = _judge_send(_tis)
+    // 循环发送 类型
+    for (let k in can) {
+        // 获取 任务内容，先获取内容对象，再建立清洗参数，再拿去清洗，得出最终要发送的内容对象
+        let cont = content.wash_content( content.content(k, _tis.conts), _build_params(snd))
+        // 取出每个 联络电话 / 电邮
+        can[ k ] = can[ k ].map(async v => {
+            if ((ways.indexOf(k) >= 0) && cont.content) {
+                    // 插入新 任务队列 结果
+                    v.is_serial = true
+                    v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont)
+            }  else {
+                    // 用户没有选择 该发送方式 的 时候
+                    v.is_serial = false }; return v
+        })
+    }; return _tis
+}
 const _ser_send = async function(snd, ways) {
-    snd.times = snd.times.map(e => {
-        // 判断是否 超出当前时间
-        e[ 'send_day_real' ] = outdate.outdate( e.day_sending )
-        // 判断 能不能，返回结果是 电话s / 电邮s
-        let can = _judge_send(e)
-
-        // 循环发送 类型
-        for (let k in can) {
-
-                // 获取 任务内容，先获取内容对象，再建立清洗参数，再拿去清洗，得出最终要发送的内容对象
-                let cont = content.wash_content( content.content(k, e.conts), _build_params(snd))
-                // 取出每个 联络电话 / 电邮
-                can[ k ] = can[ k ].map(async v => {
-
-                        if ((ways.indexOf(k) >= 0) && cont.content) {
-                                // 插入新 任务队列 结果
-                                v.is_serial = true
-                                v.result = await insert[ k ]( v, e[ 'send_day_real' ], cont)
-                        }  else {
-                                // 用户没有选择 该发送方式 的 时候
-                                v.is_serial = false
-                        }
-                        return v
-                })
-        }; return e
-    })
+    snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
+    snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e })
     return snd
 }
 
@@ -64,7 +61,6 @@ module.exports = async function() {
     const year = new Date().getFullYear()
     // 搜索 Send
     let sends = await get.getSend(year)
-
     // 操作 Send
     sends.map(async e => { 
 
@@ -73,8 +69,7 @@ module.exports = async function() {
         way = way ? way.split('_') : [ ]
         
         try { // 序列化 Send，生成发送
-            e = await _ser_send( e, way ) 
-        } catch( err ) { }
+            e = await _ser_send( e, way ) } catch( err ) { }
 
         // 修改 结果
         await upd.updSend_Result(e)

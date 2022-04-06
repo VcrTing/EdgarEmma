@@ -3,7 +3,7 @@
         <p>
             {{ named_en }}
         </p>
-        <p class="pt_s">
+        <p v-if="!one" class="pt_s">
             {{ named_ch }}
         </p>
     </div>
@@ -21,6 +21,7 @@
     export default {
         name: '',
         props: [
+            'one',
             'mode',
             'names'
         ],

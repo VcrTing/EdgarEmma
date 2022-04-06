@@ -42,6 +42,9 @@
     },
     "send_date_real_str": {
       "type": "string"
+    },
+    "send_date_since_real_str": {
+      "type": "string"
     }
   }
 }

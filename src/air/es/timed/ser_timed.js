@@ -40,29 +40,15 @@ const ser_timed = function(e, mode = 0, long = false) {
     return long ? e.format('yyyy-MM-DD hh:mm:ss') : e.format('yyyy-MM-DD')
 }
 
-const _ser_timed = function (e, cn = false, short = true) {
-    if (e == null || e == undefined) {
-        return '--'
-    } else {
-        const year = e.substring(0, 4)
-        const month = e.substring(5, 7)
-        const day = e.substring(8, 10)
-        const hour = e.substring(11, 13)
-        const minute = e.substring(14, 16)
+const ser_timed_short = function(e, mode = 0, long = false) {
+    e = moment(e)
 
-        if (cn) {
-            if (short) {
-                return year + '年' + month + '月' + day + '日 '
-            }
-            return year + '年' + month + '月' + day + '日 ' + hour + '時' + minute + '分'
-        }
-        
-        if (short) {
-            return year + '-' + month + '-' + day
-        }
-        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+    if (mode == 1) {
+        return long ? e.format('ss:mm:hh DD/MM/yyyy') : e.format('DD/MM/yyyy')
     }
+    return long ? e.format('yyyy-MM-DD hh:mm:ss') : e.format('yyyy-MM-DD')
 }
+
 
 const getToday = function(cn = false, fill = false, num_month = 0, num_day = 0) {
     const d = new Date()

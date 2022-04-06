@@ -1,9 +1,9 @@
 
 const TEST = false
-const TEST_LOCAL = false
 
 const baseURL = 'https://strapi07.svr.up5d.com'
 // const baseURL = 'http://127.0.0.1:1337'
+
 const API = baseURL // + '/api'
 
 const VERSION = '0.70'
@@ -11,6 +11,7 @@ const VERSION_TIMED = '2022-04-04'
 
 const ENDPOINT = {
   user: '/users',
+  send: '/sends',
   remind: '/reminds',
   company: '/companies',
   import_record: '/import-records',
@@ -28,7 +29,7 @@ export default {
   API,
 
   TEST,
-  TEST_LOCAL,
+  TEST_LOCAL: baseURL.endsWith('1:1337'),
   
   STRAPI,
   ENDPOINT,

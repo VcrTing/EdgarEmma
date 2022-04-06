@@ -26,8 +26,8 @@ module.exports = {
             <body>
                 <div class="box">
                     <img src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
-                    <h2>Hi，Dear {{user_email}}.</h2>
-                    <p>您的{{company_named}}将于{{filling_timed}}到达法定纳税时间，望您提前做好安排。</p>
+                    <h2>你好 {{user_email}}，提提你， </h2>
+                    <p>你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。</p>
                 </div>
                 <style>
                     html { color: #1e1f22; }
@@ -40,7 +40,13 @@ module.exports = {
         }
     ],
     'whatsapp': [
-        { id: 1, subject: '', content: '这里是普通的Whatsapp 信息' }
+        { id: 1,
+            params: { 
+                user_email: '',
+                company_named: '',
+                filling_timed: ''
+            }, 
+            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' }
     ],
 
     'error': { id: 0, subject: '錯誤提示', content: '您尚未選擇發送內容。' }

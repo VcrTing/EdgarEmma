@@ -21,9 +21,9 @@ const _insert_content = function(ways = smstrapi.conf.WAY) {
 //    为 times 添加 内容模版 ID，每个发送时间的内容都可以不一样的，这里使用默认的模版
 const _ser_to_sending = async function(rmd, year) {
     let send = { work_year: year, remind: rmd.id, is_serial: false }
-        send.times = rmd.rule_ser.map(e => { 
-            e.conts = _insert_content(); return e 
-        })
+        send.times = rmd.rule_ser.map(e => { e.conts = _insert_content(); return e })
+        // 第二时间
+        send.times_since = rmd.rule_ser_since.map(e => { e.conts = _insert_content(); return e })
         send.user = rmd.company.user
         send.company = rmd.company.id
     return await save.saveSend( send )
@@ -40,11 +40,15 @@ const _build_rule = function(rmd, day_sending) {
 
 // 1. 序列化，会用到 
 //    send_date_real_str 前端需要把这个参数确定好；
+//    第二个时间
 //    e.day 是加减 的 天数
 const _ser_remind = function(rmd, year) {
     let rs = rmd.rule
     let _src = moment(year + '-' + rmd.send_date_real_str)
     rmd.rule_ser = rs ? rs.map(e => _build_rule(rmd, util.time_num(_src, e.day))) : [ ]
+    // 第二发送时间
+    let _src_since = moment(year + '-' + rmd.send_date_since_real_str)
+    rmd.rule_ser_since = rs ? rs.map(e => _build_rule(rmd, util.time_num(_src_since, e.day))) : [ ]
     return rmd
 }
 
@@ -55,9 +59,7 @@ module.exports = async function() {
     
     // 序列 remind
     reminds.map(async e => {
-        try {
-            await _ser_to_sending( _ser_remind( e, _y ), _y )
-        } catch(err) { }
+        try { await _ser_to_sending( _ser_remind( e, _y ), _y ) } catch(err) { }
 
         // 5. 修改 今年已经序列化好的 Remind
         await upd.updRemind_Serial(e, _y)

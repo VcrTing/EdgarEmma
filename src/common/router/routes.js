@@ -3,6 +3,7 @@ import Home from '@/pages/Home/Home'
 
 import tool_csv from './tool/tool_csv'
 import company from './child/company'
+import remind from './child/remind'
 import add_company from './child/add_company'
 
 const AllRoutes = [
@@ -13,6 +14,7 @@ const AllRoutes = [
       children: [
         ...tool_csv,
         ...company,
+        ...remind,
         ...add_company
       ]
     },
