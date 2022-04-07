@@ -45,6 +45,14 @@
     },
     "send_date_since_real_str": {
       "type": "string"
+    },
+    "send_typed": {
+      "type": "integer",
+      "default": 1
+    },
+    "send_typed_finish": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

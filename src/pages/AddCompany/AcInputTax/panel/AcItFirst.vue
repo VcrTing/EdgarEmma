@@ -52,6 +52,7 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
             build_remind(f) {
                 f.send_date_real_str = f.unsure ? f.remind_date : moment(f.filling).format('MM-DD')
                 f.rule = this.view.remind.build_rule()
+                f.send_typed = 1
                 f.is_stop = false
                 return f
             },
@@ -91,6 +92,9 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
                 // 创建 REMIND
                 if (res) {
                     remind.company = res.id
+                    remind.send_typed = 0 
+                    remind.send_typed_finish = false
+                    remind.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
                     res = await this.serv.remind.create(this, remind)
                     if (res) {
                         setTimeout(e => { this.$emit('finsh') }, 2)

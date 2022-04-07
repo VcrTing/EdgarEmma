@@ -33,7 +33,7 @@ export default {
                     link: '/home/company_my',
                 },
                 {
-                    txt: 'Task of Remind', index: 2, admin: false,
+                    txt: 'Sent Record', index: 2, admin: false,
                     link: '/home/remind_record',
                 }
             ]

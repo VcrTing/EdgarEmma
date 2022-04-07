@@ -40,7 +40,13 @@ const rep_year = function(src, _y) {
     return src.format('yyyy-MM-DD')
 }
 
+// 获取今天
+const _now = function() {
+    return moment(new Date()).format('yyyy-MM-DD')
+}
+
 module.exports = {
+    _now,
     rep_year,
     split_time,
 

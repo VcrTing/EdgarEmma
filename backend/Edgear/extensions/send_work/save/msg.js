@@ -4,9 +4,14 @@ module.exports = {
             params: { 
                 user_email: '',
                 company_named: '',
-                filling_timed: ''
-            }, 
-            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' }
+                filling_timed: '' }, 
+            subject: '', content: '你好，提醒你，你旗下 {{company_named}} 需要在30天內完成報稅，遲左會罰款架。' },
+        { id: 2,
+            params: { 
+                user_email: '',
+                company_named: '',
+                filling_timed: '' }, 
+            subject: '', content: '你好，提醒你，您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。' }
     ],
     'email': [
         { id: 1, 
@@ -26,8 +31,37 @@ module.exports = {
             <body>
                 <div class="box">
                     <img src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
-                    <h2>你好 {{user_email}}，提提你， </h2>
+                    <h2>你好 {{user_email}}，提醒你， </h2>
                     <p>你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。</p>
+                </div>
+                <style>
+                    html { color: #1e1f22; }
+                    p { color: #58595c; }
+                    .box { padding: 24px; border-radius: 7px; background-color: #f7f8f9; text-align: center; }
+                    .Logo { margin: 24px; max-width: 320px; }
+                </style>
+            </body>
+            </html>` 
+        },
+        { id: 2, 
+            params: { 
+                user_email: '',
+                company_named: '',
+                filling_timed: ''
+            },
+            subject: 'EdgarEmma 操作提醒', content: `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>操作提醒</title>
+            </head>
+            <body>
+                <div class="box">
+                    <img src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
+                    <h2>你好 {{user_email}}，提提你， </h2>
+                    <p>您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。</p>
                 </div>
                 <style>
                     html { color: #1e1f22; }
@@ -46,7 +80,13 @@ module.exports = {
                 company_named: '',
                 filling_timed: ''
             }, 
-            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' }
+            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' },
+        { id: 2,
+            params: { 
+                user_email: '',
+                company_named: '',
+                filling_timed: '' }, 
+            subject: '', content: '你好，提醒你，您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。' }
     ],
 
     'error': { id: 0, subject: '錯誤提示', content: '您尚未選擇發送內容。' }

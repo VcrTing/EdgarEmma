@@ -41,6 +41,14 @@
     },
     "times_since": {
       "type": "json"
+    },
+    "is_first": {
+      "type": "boolean",
+      "default": false
+    },
+    "finish_first": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -76,13 +76,15 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
             async plusRemind(comp) {
                 let rmd = { company: comp.id, unsure: false, rule: this.view.remind.build_rule(), is_stop: false, work_year: '_', send_way_world: this.view.remind.SEND_WAY_DEF }
                 rmd.send_date_real_str = moment(comp.last_tax_filing_time).format('MM-DD')
+                rmd.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
+                rmd.send_typed = 0
+                rmd.send_typed_finish = false
                 return await this.serv.remind.create(this, rmd)
             },
 
             buildPlus(res) {
                 res.user = this.$store.state.user.id
                 res.last_tax_filing_time = res.last_tax_filing_time ? res.last_tax_filing_time.substring(0, 10) : ''
-                console.log('PLUS RES = ', res)
                 return res
             },
 

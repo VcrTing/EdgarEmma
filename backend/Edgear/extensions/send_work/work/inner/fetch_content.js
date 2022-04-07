@@ -24,24 +24,28 @@ const wash_content = function(conts, data) {
     }); return conts
 }
 
+// 根据 ID 搜取内容
+const _cont_by_id = function(id, way) { 
+    const c = conts[ way ].filter(e => e.id == id)
+    return c && c.length > 0 ? c[0] : conts[ 'error' ] }
+
 module.exports = {
+    // 插入首发
+    get_first: function(ways, _id = 2) {
+        let res = { }
+        ways.map(_w => { res[_w] = { id: _cont_by_id(_id, _w).id } })
+        return res
+    },
 
     // 插入系统自带的 提醒模版
     get_def_content: function(way) {
-        let c = conts[ way ].filter(e => e.id == 1)
-        c = c && c.length > 0 ? c[0] : conts[ 'error' ]
+        let c = _cont_by_id(1, way) 
         return { id: c.id }
     },
     
     // 获取内容
-    
     content: function(way, ids) {
-        ids = ids[ way ]
-        let src = conts[ way ]
-        src = src.filter(e => e.id == ids.id)
-        src = src && src.length > 0 ? src[0] : null
-
-        return src 
+        return _cont_by_id(ids[ way ].id, way)
     },
 
     // 清洗内容

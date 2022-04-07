@@ -1,0 +1,20 @@
+$succ: #15aa60
+
+.btn-succ
+    color: $succ !important
+
+.btn-succ_txt
+    position: relative
+    color: $succ !important
+    padding-left: 0.8em
+    &::after
+        position: absolute
+        content: ''
+        left: 0
+        top: 50%
+        width: 0.4em
+        height: 0.4em
+        opacity: 0.92
+        background: $succ
+        border-radius: 100%
+        transform: translateY(-50%)

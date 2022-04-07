@@ -21,7 +21,7 @@ const updSend = async function(id, snd) {
 // 修改 Send 结果，因为 Send 序列化完成了
 const updSend_Result = async function(snd) {
     const id = snd.id 
-    const data = { times: snd.times, is_serial: true }
+    const data = { times: snd.times, is_serial: true, finish_first: snd.finish_first ? true : false }
     return await updSend(id, data)
 }
 
