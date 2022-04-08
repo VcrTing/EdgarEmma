@@ -21,12 +21,18 @@ export default {
         }
     },
     computed: {
+        plant() { return this.$store.state.plant },
         user() { return this.$store.state.user }
     },
     mounted() {
-        this.fetching({ user: this.user.id, _limit: 200 })
+        this.fetching( this.condition() )
     },
     methods: {
+        condition() {
+            let res = { _limit: 200 }
+            if (this.plant && this.plant.is_admin != true) { res.user = this.user.id }
+            return res
+        },
         async fetching(condition) {
             this.loading = true
             let res = await this.serv.send.many(this, condition )

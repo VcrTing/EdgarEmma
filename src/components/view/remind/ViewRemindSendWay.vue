@@ -13,7 +13,7 @@ export default {
         return {
             ws: {
                 'note': { txt: '短信' },
-                'email': { txt: '电邮' },
+                'email': { txt: '電郵' },
                 'whatsapp': { txt: 'whatsapp' }
             }
         }

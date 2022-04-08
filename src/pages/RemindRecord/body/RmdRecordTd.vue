@@ -7,6 +7,9 @@
             <div class="w-7">
                 <span class="sus">{{ i + 1 }}</span>
             </div>
+            <div class="w-11">
+                {{ v.company.tax_id }}
+            </div>
             <div class="w-21">
                 <view-company-name :one="true" :names="v.company.names"></view-company-name>
             </div>
@@ -32,10 +35,10 @@
                     隊列中
                 </div>
             </div>
-            <div class="w-11 t-c">
+            <!--div class="w-11 t-c">
                 <a class="pri_son hand">查看
                 </a>
-            </div>
+            </div-->
         </div>
     </div>
 </template>
