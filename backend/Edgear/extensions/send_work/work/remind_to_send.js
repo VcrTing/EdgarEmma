@@ -51,7 +51,6 @@ module.exports = async function() {
     let _y = new Date().getFullYear()
     // 0. 获取 remind 
     let reminds = await get.getRemind(_y)
-    console.log('Reminds =', reminds)
     // 序列 remind
     reminds.map(async e => {
         try { await _ser_to_sending( _ser_remind( e, _y ), _y ) } catch(err) { }

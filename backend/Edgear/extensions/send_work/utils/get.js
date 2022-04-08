@@ -6,23 +6,21 @@ const db_snd = 'send'
 // send type = 1: 只包含定时
 // 获取能够 序列化的 Remind
 const getRemind = async function (year) {
-    let cdt = { 
+    let res = await strapi.query(db_rmd).find({ 
         _limit: 30, 
         is_stop: false, 
         send_typed_gt: -1,
         work_year_ncontains: year 
-    }
-    let res = await strapi.query(db_rmd).find(cdt, null)
+    }, null)
     return res ? res : [ ]
 }    
 const getRemind_First = async function () {
-    let cdt = { 
+    let res = await strapi.query(db_rmd).find({ 
         _limit: 30, 
         is_stop: false, 
         send_typed_lt: 1,
         send_typed_finish: false,
-    }
-    let res = await strapi.query(db_rmd).find(cdt, null)
+    }, null)
     return res ? res : [ ]
 }    
 
@@ -41,7 +39,7 @@ const getSend = async function(y) {
 // 获取首发的 Send
 const getSend_First = async function() {
     let res = await strapi.query(db_snd).find({ 
-        _limit: 60,
+        _limit: 30,
         is_first: true,
         is_serial: false,
         send_active: true,

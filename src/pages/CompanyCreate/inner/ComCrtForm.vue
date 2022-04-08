@@ -15,9 +15,6 @@
         </input-wrapper>
 
         <div class="row pb_x fx-l">
-            <!--input-wrapper class="w-60" :label="'Company Type'">
-                <company-type-select ref="comtypeREF"></company-type-select>
-            </input-wrapper-->
             <input-wrapper class="w-40 mb-w-618" :label="'成立日期 Company Since'">
                 <input-data :_date="form.company_since" v-if="form.company_since" @result="(v) => form.company_since = v"></input-data>
             </input-wrapper>
@@ -96,7 +93,7 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
                     const y = new Date().getFullYear()
                     this.form = {
                         tax_id: '', name_en: '', name_ch: '', company_type: 1, // this.$refs.comtypeREF.now, 
-                        company_since: '2000-01-01', last_tax_filing_time: y + '-01-01',
+                        company_since: y + '-01-01', last_tax_filing_time: y + '-01-01',
                         phones: [ { v: '' } ], emails: [ { v: '' } ]
                     }
                 }

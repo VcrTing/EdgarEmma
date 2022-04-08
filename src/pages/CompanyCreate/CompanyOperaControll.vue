@@ -46,35 +46,30 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
             _header() {
                 if (this.typed == 'edit') {
                     return 'Edit Company Profile'
-                }
-                return 'Create Company Profile'
+                }; return 'Create Company Profile'
             }
         },
         methods: {
             async submit() {
                 this.loading = true
                 let data = this.$refs.formREF.submit()
-
                 if (data) {
                     let res = null
-
                     if (this.typed == 'edit') {
                         res = await this.serv.company.company_update(this, this.deleteUpdateData(data))
+                        if (res && res.id) { await this.serv.remind.remind_update_for_send(this, res) }
                     } else if (this.typed == 'plus') {
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))
-                        if (res && res.id) {
-                            await this.plusRemind(res)
-                        }
+                        if (res && res.id) { await this.plusRemind(res) }
                     }
-                    if (res) {
-                        setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600)
-                    }
-                }
-                this.ani()
+                    if (res) { setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600) }
+                }; this.ani()
             },
 
             async plusRemind(comp) {
-                let rmd = { company: comp.id, unsure: false, rule: this.view.remind.build_rule(), is_stop: false, work_year: '_', send_way_world: this.view.remind.SEND_WAY_DEF }
+                let rmd = { 
+                    company: comp.id, unsure: false, rule: this.view.remind.build_rule(), 
+                    is_stop: false, work_year: '_', send_way_world: this.view.remind.SEND_WAY_DEF }
                 rmd.send_date_real_str = moment(comp.last_tax_filing_time).format('MM-DD')
                 rmd.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
                 rmd.send_typed = 0
@@ -99,9 +94,7 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
                 console.log('UPDATE RES =', res)
                 return res
             },
-            ani() {
-                setTimeout(e => { this.loading = false }, 1200)
-            }
+            ani() { setTimeout(e => { this.loading = false }, 1200) }
         }
     }
 </script>

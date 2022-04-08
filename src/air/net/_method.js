@@ -47,11 +47,17 @@ const put = async function(uri, id, token, data ) {
     return res
 }
 
-
+const trash = async function(uri, id, token) {
+    const url = conf.API + conf.ENDPOINT[ uri ] + '/' + id
+    let res = await _net(url, token, {}, 'DELETE', {})
+    return res
+}
 export default {
     get,
     get_one,
 
     put,
     post,
+
+    trash
 }

@@ -7,6 +7,7 @@ export default {
     
     put: _method.put,
     post: _method.post,
+    trash: _method.trash,
 
     _admin: _auth._admin
 }

@@ -54,10 +54,14 @@ const _do_send = async function(snds) {
 module.exports = async function() {
 
     // 操作 remind
-    let reminds = await get.getRemind_First()
-    reminds.map(e => _do_remind(e))
+    try {
+        let reminds = await get.getRemind_First()
+        reminds.map(e => _do_remind(e)) 
+    } catch (err) { }
 
     // 操作 send
-    let sends = await get.getSend_First()
-    await _do_send(sends)
+    try {
+        let sends = await get.getSend_First()
+        await _do_send(sends)
+    } catch (err) { }
 }

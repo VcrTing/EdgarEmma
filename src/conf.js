@@ -1,13 +1,13 @@
 
-const TEST = false
+const TEST = true
 
-const baseURL = 'https://strapi07.svr.up5d.com'
-// const baseURL = 'http://127.0.0.1:1337'
+// const baseURL = 'https://strapi07.svr.up5d.com'
+const baseURL = 'http://127.0.0.1:1337'
 
 const API = baseURL // + '/api'
 
-const VERSION = '0.72'
-const VERSION_TIMED = '2022-04-07'
+const VERSION = '0.76'
+const VERSION_TIMED = '2022-04-08'
 
 const ENDPOINT = {
   user: '/users',

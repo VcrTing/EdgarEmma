@@ -16,8 +16,18 @@ const many = async function( vue, data = { _limit: 99 }) {
     return res
 }
 
+const one = async function(vue, id) {
+    let res = await vue.net.get_one('send', id, _tool.token(vue), null)
+    return res
+}
+
+const trash = async function(vue, data) {
+    return await vue.net.trash('send', data.id, _tool.token(vue))
+}
 
 export default {
+    one,
     many,
+    trash
 }
 

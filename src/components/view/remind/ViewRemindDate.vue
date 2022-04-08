@@ -6,21 +6,18 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
-    props: {
-        rmd: {
-            type: Object
-        }
-    },
+    props: { rmd: { type: Object } },
     computed: {
         txt1() {
             let res = this.rmd.send_date_real_str
-            return moment(res).format('MM月DD日')
+            res = res ? res.split('_') : [ ]
+            return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
         },
         txt2() {
             let res = this.rmd.send_date_since_real_str
-            return moment(res).format('MM月DD日')
+            res = res ? res.split('_') : [ ]
+            return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
         }
     }
 }
