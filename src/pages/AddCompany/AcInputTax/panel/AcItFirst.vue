@@ -58,8 +58,9 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
             },
 
             reset() {
+                const y = new Date().getFullYear() 
                 this.form = {
-                    filling: '2020-01-01', unsure: false, remind_date: this.$refs.rdREF.now
+                    filling: y + '-01-01', unsure: false, remind_date: this.$refs.rdREF.now
                 }
                 this.$refs.usREF.def(false)
             },

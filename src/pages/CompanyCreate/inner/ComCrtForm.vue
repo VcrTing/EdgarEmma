@@ -93,9 +93,10 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
                 if (this.origin) {
                     this.form = this.origin
                 } else {
+                    const y = new Date().getFullYear()
                     this.form = {
                         tax_id: '', name_en: '', name_ch: '', company_type: 1, // this.$refs.comtypeREF.now, 
-                        company_since: '2000-01-01', last_tax_filing_time: '2020-01-01',
+                        company_since: '2000-01-01', last_tax_filing_time: y + '-01-01',
                         phones: [ { v: '' } ], emails: [ { v: '' } ]
                     }
                 }

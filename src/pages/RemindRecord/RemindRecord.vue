@@ -20,8 +20,11 @@ export default {
             loading: true,
         }
     },
+    computed: {
+        user() { return this.$store.state.user }
+    },
     mounted() {
-        this.fetching({})
+        this.fetching({ user: this.user.id, _limit: 200 })
     },
     methods: {
         async fetching(condition) {
