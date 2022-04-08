@@ -11,12 +11,12 @@ export default {
     computed: {
         txt1() {
             let res = this.rmd.send_date_real_str
-            res = res ? res.split('_') : [ ]
+            res = res ? res.split('-') : [ ]
             return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
         },
         txt2() {
             let res = this.rmd.send_date_since_real_str
-            res = res ? res.split('_') : [ ]
+            res = res ? res.split('-') : [ ]
             return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
         }
     }
