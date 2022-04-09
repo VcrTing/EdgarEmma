@@ -23,6 +23,11 @@ const _build_params = function(snd) {
     return snd
 }
 
+// 6. 构建 Mark 标识
+const _build_mark = function(way, snd_id) {
+    return way + '_' + snd_id
+}
+
 // 2. 判断能不能执行发送，传入 时间参数
 const _judge_send = function(tmd) {
     let can = { }
@@ -38,28 +43,28 @@ const _doing = async function(_tis, snd, ways) {
     _tis[ 'send_day_real' ] = outdate.outdate( _tis.day_sending )
     // 判断 能不能，返回结果是 电话s / 电邮s
     let can = _judge_send(_tis)
-    console.log('3: Doing')
     // 循环发送 类型
     for (let k in can) {
         // 获取 任务内容，先获取内容对象，再建立清洗参数，再拿去清洗，得出最终要发送的内容对象
         let cont = content.wash_content( content.content(k, _tis.conts), _build_params(snd))
         // 取出每个 联络电话 / 电邮
-        can[ k ] = can[ k ].map(async v => {
-            console.log('4: Method res =', k, ways, ways.indexOf(k) >= 0, cont)
+        can[ k ] = await can[ k ].map(async v => {
             if ((ways.indexOf(k) >= 0) && cont.content) {
-                    // 插入新 任务队列 结果
-                    v.is_serial = true
-                    v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont)
+                // 插入新 任务队列 结果
+                v.is_serial = true
+                v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
+                return v
             }  else {
-                    // 用户没有选择 该发送方式 的 时候
-                    v.is_serial = false }; return v
+                // 用户没有选择 该发送方式 的 时候
+                v.is_serial = false  
+                return v
+            }
         })
     }; return _tis
 }
 const _ser_send = async function(snd, ways) {
-    console.log('2: Ser')
-    snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
-    if (snd.times_since) { snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }
+    await snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
+    if (snd.times_since) { await snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }
     return snd
 }
 

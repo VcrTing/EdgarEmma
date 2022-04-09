@@ -9,9 +9,9 @@ const db_email = require('../data/email')
 const _note = async function(e, fac, sender) {
     if (e && !e.send_status && e.send_active) {
         let _send = null 
-        // try {
+        try {
             _send = await twilio.send(fac, e.content, e.phoned_prefix + ' ' + e.phoned, sender)
-        // } catch (err) { }
+        } catch (err) { }
         _send = twilio.ser_result(_send)
         db_note.update({ id: e.id, ..._send }, conf.ENDPOINT.smsnote)
     }

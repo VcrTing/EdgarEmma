@@ -16,36 +16,33 @@ const _fetch_items = async function(MODEL, params) {
 
 const diff = async function(MODEL, param) {
     let res = await _fetch_items(MODEL, param)
-
-    console.log(' Filter Params =', param)
     return !(res && res.length > 0)
 }
 
 module.exports = {
-    note: async function(send_day, phoned, phoned_prefix, content, unique = null) {
+    note: async function(send_day, phoned, phoned_prefix, content, mark, unique = null) {
         let can = true
         if (unique) {
-            can = await diff(conf.ENDPOINT.smsnote, { send_day, phoned })
+            can = await diff(conf.ENDPOINT.smsnote, { send_day, phoned, mark })
         }
-
+        
         if (can && phoned) {
-            const params = { send_day, content, phoned, phoned_prefix }
-            console.log('6: Insert Params =', params)
+            const params = { send_day, content, phoned, phoned_prefix, mark }
             return await _insert_note(conf.ENDPOINT.smsnote, params)
         }
     },
-    email: async function(send_day, to, subject, content, unique = null) {
+    email: async function(send_day, to, subject, content, mark, unique = null) {
         let can = true
         if (unique) {
-            can = await diff(conf.ENDPOINT.smsemail, { send_day, to })
+            can = await diff(conf.ENDPOINT.smsemail, { send_day, to, mark })
         }
 
         if (can && to) {
-            const params = { send_day, to, subject, content }
+            const params = { send_day, to, subject, content, mark }
             return await _insert_note(conf.ENDPOINT.smsemail, params)
         }
     },
-    whatsapp: async function(send_day, user, conts) {
+    whatsapp: async function(send_day, user, conts, mark) {
         console.log('新增 whatsapp =', send_day, user, conts)
     }
 }

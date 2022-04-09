@@ -37,16 +37,14 @@ const _do_remind = async function(rmd) {
     发送
 */
 const _do_send = async function(snds) {
-    console.log('1: Do =', snds)
     // 生成 STRAPI
-    snds.map(async e => { 
+    await snds.map(async e => { 
         // 解析 Way
         let way = e.remind.send_way_world
         way = way ? way.split('_') : [ ]
-        console.log('1.5: way =', way)
-        // try { // 序列化 Send，生成发送
+        try { // 序列化 Send，生成发送
             e = await func._ser_send( e, way ) 
-        // } catch( err ) { }
+        } catch( err ) { }
         // 修改 结果
         e.finish_first = true
         await upd.updSend_Result(e)
@@ -56,14 +54,14 @@ const _do_send = async function(snds) {
 module.exports = async function() {
 
     // 操作 remind
-    // try {
-    let reminds = await get.getRemind_First()
-    reminds.map(e => _do_remind(e)) 
-    // } catch (err) { }
+    try {
+        let reminds = await get.getRemind_First()
+        reminds.map(e => _do_remind(e)) 
+    } catch (err) { }
 
     // 操作 send
-    // try {
-    let sends = await get.getSend_First()
-    await _do_send(sends)
-    // } catch (err) { }
+    try {
+        let sends = await get.getSend_First()
+        await _do_send(sends)
+    } catch (err) { }
 }
