@@ -14,6 +14,7 @@ module.exports = {
         to = to.v ? to.v.split(' ') : [ ]
         to = to.length > 1 ? to : [ '852', to[0] ]
         // to = 接收者，timed = 发送日期，cont.content = 短信内容
+        console.log('5: Insert =', to)
         let res = await smstrapi.insert[ 
             smstrapi.conf.KEY_NOTE ]( timed, to[1], to[0], cont.content, true )
         if (res && res.id) { res = _build_result(res); res['to'] = to; return res }

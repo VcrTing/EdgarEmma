@@ -30,7 +30,7 @@ module.exports = {
 
         if (can && phoned) {
             const params = { send_day, content, phoned, phoned_prefix }
-            console.log(' Insert Params =', params)
+            console.log('6: Insert Params =', params)
             return await _insert_note(conf.ENDPOINT.smsnote, params)
         }
     },
