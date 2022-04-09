@@ -78,7 +78,7 @@ import AcItDayChoise from '../in/AcItDayChoise.vue'
             },
             async _submit(comp, remind) {
                 //
-                remind.send_way_world = comp.send_way_world
+                remind.send_way_world = comp.send_way_world ? comp.send_way_world : this.view.remind.SEND_WAY_DEF
 
                 // 创建自己的 COMPANY
                 comp.status = true
