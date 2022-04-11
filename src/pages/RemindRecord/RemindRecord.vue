@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         condition() {
-            let res = { _limit: 200 }
+            let res = { _limit: 200, '_sort': 'published_at:asc' }
             if (this.plant && this.plant.is_admin != true) { res.user = this.user.id }
             return res
         },

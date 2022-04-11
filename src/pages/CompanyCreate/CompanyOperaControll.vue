@@ -60,7 +60,7 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
                         if (res && res.id) { await this.serv.remind.remind_update_for_send(this, res) }
                     } else if (this.typed == 'plus') {
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))
-                        if (res && res.id) { await this.plusRemind(res) }
+                        if (res) { await this.plusRemind(res) }
                     }
                     if (res) { setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600) }
                 }; this.ani()
