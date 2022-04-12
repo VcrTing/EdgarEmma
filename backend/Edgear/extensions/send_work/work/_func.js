@@ -46,20 +46,22 @@ const _doing = async function(_tis, snd, ways) {
     // 循环发送 类型
     for (let k in can) {
         // 获取 任务内容，先获取内容对象，再建立清洗参数，再拿去清洗，得出最终要发送的内容对象
-        let cont = content.wash_content( content.content(k, _tis.conts), _build_params(snd))
-        // 取出每个 联络电话 / 电邮
-        can[ k ] = await can[ k ].map(async v => {
-            if ((ways.indexOf(k) >= 0) && cont.content) {
-                // 插入新 任务队列 结果
-                v.is_serial = true
-                v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
-                return v
-            }  else {
-                // 用户没有选择 该发送方式 的 时候
-                v.is_serial = false  
-                return v
-            }
-        })
+        if ((ways.indexOf(k) >= 0)) {
+            let cont = content.wash_content( content.content(k, _tis.conts), _build_params(snd))
+            // 取出每个 联络电话 / 电邮
+            can[ k ] = can[ k ].map(async v => {
+                if (cont.content) {
+                    // 插入新 任务队列 结果
+                    v.is_serial = true
+                    v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
+                    return v
+                }  else {
+                    // 用户没有选择 该发送方式 的 时候
+                    v.is_serial = false  
+                    return v
+                }
+            })
+        }
     }; return _tis
 }
 const _ser_send = async function(snd, ways) {

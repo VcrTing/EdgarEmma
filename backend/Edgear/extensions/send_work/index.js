@@ -17,6 +17,7 @@ const hour = function(src = [ 11, 12, 13, 16, 20, 21 ]) {
 
 module.exports = async function() {
     fisrt_send()
+    return 0
     if (hour()) { 
         console.log('工作')
         await remind_to_send()

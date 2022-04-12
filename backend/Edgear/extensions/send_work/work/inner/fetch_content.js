@@ -26,8 +26,10 @@ const wash_content = function(conts, data) {
 
 // 根据 ID 搜取内容
 const _cont_by_id = function(id, way) { 
-    const c = conts[ way ].filter(e => e.id == id)
-    return c && c.length > 0 ? c[0] : conts[ 'error' ] }
+    let c = conts[ way ].filter(e => e.id == id)
+    c = c && c.length > 0 ? c[0] : conts[ 'error' ] 
+    return JSON.parse(JSON.stringify(c))
+}
 
 module.exports = {
     // 插入首发
