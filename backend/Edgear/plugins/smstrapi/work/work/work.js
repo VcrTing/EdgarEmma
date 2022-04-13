@@ -1,6 +1,7 @@
 const conf = require('../../conf')
 const tw_email = require('../api/email')
 const twilio = require('../api/twilio')
+const mailgun = require('../api/mailgun')
 
 const db_note = require('../data/note')
 const db_email = require('../data/email')
@@ -8,12 +9,12 @@ const db_email = require('../data/email')
 // 短信
 const _note = async function(e, fac, sender) {
     if (e && !e.send_status && e.send_active) {
-        let _send = null 
+        let res = null 
         try {
-            _send = await twilio.send(fac, e.content, e.phoned_prefix + ' ' + e.phoned, sender)
+            res = await twilio.send(fac, e.content, e.phoned_prefix + ' ' + e.phoned, sender)
         } catch (err) { }
-        _send = twilio.ser_result(_send)
-        db_note.update({ id: e.id, ..._send }, conf.ENDPOINT.smsnote)
+        res = twilio.ser_result(res)
+        db_note.update({ id: e.id, ...res }, conf.ENDPOINT.smsnote)
     }
 }
 const note = async function(key) {
@@ -25,17 +26,22 @@ const note = async function(key) {
 }
 
 // 电邮
-const _email = async function(e, sender) {
+const _email = async function(e, fac, domain, from) {
     if (e && !e.send_status && e.send_active) {
-        try { await tw_email.send(e.to, sender, e.subject, e.content) } catch(err) { }
-        await db_email.update({ id: e.id, send_status: true }, conf.ENDPOINT.smsemail)
+        let res = null
+        try { 
+            res = await mailgun.send(fac, domain, from, [ e.to ], e.subject, e.content)
+        } catch(err) { }
+        res = mailgun.ser_result(res); res.id = e.id
+        await db_email.update(res, conf.ENDPOINT.smsemail)
     }
 }
 
 const email = async function(key) {
     if (key && key.sender) {
+        const fac = mailgun.factory(key.sid, key.token)
         let res = await db_email.query(conf.ENDPOINT.smsemail)
-        if (res) { res.map(async e => await _email(e, (e.from ? e.from : key.sender))) }
+        if (res) { res.map(async e => await _email(e, fac, key.sender, key.sid)) }
     }
 }
 
