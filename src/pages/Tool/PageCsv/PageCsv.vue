@@ -8,6 +8,10 @@
 
             <div class="py"></div>
 
+            <button-primary class="w-100 refresh" @tap="refresh">
+                <span class="tit_ipt">刷新頁面</span>
+            </button-primary>
+            <div class="py_s"></div>
             <button-primary class="w-100" @tap="turn()">
                 導入數據
             </button-primary>
@@ -33,6 +37,10 @@ import PageCsvCompany from './import_typed/PageCsvCompany.vue'
             }
         },
         methods: {
+            refresh() { // location.reload() 
+                this.$router.go(0)
+            },
+
             // 傳輸到 後臺
             turn() {
                 const src = this.res
@@ -63,5 +71,6 @@ import PageCsvCompany from './import_typed/PageCsvCompany.vue'
 </script>
 
 <style lang="sass" scoped>
-    
+.refresh
+    background: #F8F8F8
 </style>

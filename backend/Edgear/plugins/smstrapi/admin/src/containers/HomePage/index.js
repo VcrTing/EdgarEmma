@@ -16,6 +16,8 @@ const HomePage = () => {
       <p></p>
       <h3>SMS KEY</h3>
       <p>储存发送note、email、whatsapp所需要的关键的 Appkey 与 Apptoken</p>
+      <h4>安装插件</h4>
+      <p>mailgun.js, moment, twilio</p>
     </div>
   );
 };

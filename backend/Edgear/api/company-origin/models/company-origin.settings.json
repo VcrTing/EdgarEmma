@@ -14,7 +14,7 @@
     "tax_id": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "company_type": {
       "type": "integer",
