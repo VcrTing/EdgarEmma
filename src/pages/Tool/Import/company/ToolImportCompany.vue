@@ -13,7 +13,7 @@
         </tool-import-result-panel>
         
         <tool-import-result-panel :ciear="true" :funn="file_name">
-            <h4>錯誤數據</h4>
+            <h4 class="sus">錯誤數據</h4>
             <div class="pt">
                 <p v-for="(v, i) in mistakes" :key="i">{{ v }}</p>
             </div>
