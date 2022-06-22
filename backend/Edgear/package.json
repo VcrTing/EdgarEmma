@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "devDependencies": {
+    "csv-parse": "^5.2.0",
     "mailgun.js": "^5.2.0"
   },
   "dependencies": {

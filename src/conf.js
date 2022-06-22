@@ -6,7 +6,7 @@ const baseURL = 'https://strapi07.svr.up5d.com'
 
 const API = baseURL // + '/api'
 
-const VERSION = '0.86'
+const VERSION = '0.88'
 const VERSION_TIMED = '2022-06-22'
 
 const ENDPOINT = {

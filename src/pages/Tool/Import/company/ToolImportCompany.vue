@@ -11,6 +11,13 @@
             <p class="h3">導入數：<span class="h3">{{ doii }}<span>&nbsp;&nbsp;/&nbsp;{{ aii }}</span></span></p>
             <p class="py">錯誤數量:&nbsp;&nbsp;&nbsp;&nbsp;{{ err }}</p>
         </tool-import-result-panel>
+        
+        <tool-import-result-panel :ciear="true" :funn="file_name">
+            <h4>錯誤數據</h4>
+            <div class="pt">
+                <p v-for="(v, i) in mistakes" :key="i">{{ v }}</p>
+            </div>
+        </tool-import-result-panel>
     </div>
 </template>
 
@@ -26,13 +33,14 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
                 aii: 0,
                 err: 0,
 
+                mistakes: [ ],
+
                 speed: 1800,
 
                 file_name: '',
                 importing: false,
             }
         },
-        
         methods: {
             // 構建後臺數據
             _ser_names(_d) {
@@ -77,13 +85,17 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
             },
 
             // 導入 後臺 以及 處理 正誤
+            _mistake(src) {
+                this.err += 1; this.doii -= 1; 
+                this.mistakes.push(src)
+            },
             import_company(src) {
                 this.doii += 1
                 this.serv.company.company_origin_plus(this, src, (err) => {
-                    if (err) { this.err += 1; this.doii -= 1 }
+                    if (err) { this._mistake(src) }
                 })
                 this.doii = this.doii < 0 ? 0 : this.doii
-                if (this.doii + this.err >= this.aii) { this.importing = false }
+                if (this.doii + this.err >= this.aii) { this.importing = false; console.log('出错数据 =', this.mistakes) }
             }, 
 
         }
