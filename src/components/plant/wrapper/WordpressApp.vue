@@ -13,11 +13,11 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
         data() {
             return {
                 def: {
-                    wordpress_id: 2,
+                    wordpress_id: 0,
                     email: 'edic@163.com',
                     wordpress_name: 'Edic',
                     token: [ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY0NjkwNTE3NywiZXhwIjoxNjQ5NDk3MTc3fQ.kyBfv17XotaOzJchJOFbtBvTHKiocb8y0sBH8MEUOco" ],
-                    user_id: 2,
+                    user_id: 0,
                     is_admin: true
                 }
             }
@@ -27,31 +27,35 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
             async init() {
                 if (this.conf.TEST) {
                     console.log('使用默认数据登录。')
-                    this.doLogin( this.ser_plant( this.def ) )
+                    await this.doLogin( await this.ser_plant( this.def ) )
                 }
             },
 
             async doLogin(plant) {
+                console.log('PLANT =', plant)
                 let res = undefined
                 if (!this.conf.TEST_LOCAL) {
                     res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                    await this.$store.commit('change', [ 'user', res ]);
                 } else {
                     console.log('本地登录')
                     const token = await this.net._admin()
                     plant.token = token
-                    console.log('本地登录 token=', token)
                     if (token) {
-                        await this.$store.commit('change', [ 'token', token ]) 
+                        await this.$store.commit('change', [ 'token', token ])
+                        console.log('搜寻用户 =', plant.wordpress_id)
                         res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
+                        console.log('rES =', res)
+                        await this.$store.commit('change', [ 'user', res ]);
                     }
                 }
-                if (res) { await this.$store.commit('change', [ 'user', res ]); console.log('默认的用户 =', res) }
             },
 
             async ser_plant(plant) {
                 let tk = plant.token ? plant.token : [ ]
                 tk = tk.length > 0 ? tk[ 0 ] : null
                 tk = { wordpress_id: plant.user_id, token: tk, is_admin: plant.is_admin }
+
                 await this.$store.commit('change', [ 'plant', tk ])
                 await this.$store.commit('change', [ 'token', tk.token ]) 
                 console.log('Token =', tk.token)

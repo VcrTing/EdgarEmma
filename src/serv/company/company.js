@@ -36,15 +36,15 @@ const company_plus = async function(vue, data) {
     let res = await vue.net.post('company', _tool.token(vue), data)
     return res
 }
-const company_origin_plus = async function(vue, data) {
-    let res = null
+const company_origin_plus = async function(vue, data, caii = null) {
+    // let res = null
+    // res = { fail: true, code: 500 }
+    // res['code'] = _tool.catch_err(err + '')
     try {
-        res = await vue.net.post('company_origin', _tool.token(vue), data)
+        return await vue.net.post('company_origin', _tool.token(vue), data)
     } catch(err) {
-        res = { fail: true, code: 500 }
-        res['code'] = _tool.catch_err(err + '')
+        caii(err)
     }
-    return res
 }
 
 const company_update = async function(vue, data) {

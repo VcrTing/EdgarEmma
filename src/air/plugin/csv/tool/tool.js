@@ -1,6 +1,6 @@
 
 const array_split = function(src) {
-    const max = 10
+    const max = 5
     const src_LEN = src.length
 
     let res = [ ]

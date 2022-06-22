@@ -26,7 +26,7 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
                 aii: 0,
                 err: 0,
 
-                speed: 800,
+                speed: 1800,
 
                 file_name: '',
                 importing: false,
@@ -61,11 +61,7 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
                 for(let i= 0; i< dts_LEN; i++ ) {
                     let _d = dts[ i ]
                     dts[ i ] = this._ser_data(_d)
-                    try {
-                        this.import_company(_d)
-                        this.doii += 1
-                    } catch(err) { this.err += 1 }; 
-                    if (this.doii + this.err >= this.aii) { this.importing = false }
+                    this.import_company(_d)
                 }
             },
 
@@ -82,7 +78,12 @@ import ToolImportResultPanel from '../result/ToolImportResultPanel.vue'
 
             // 導入 後臺 以及 處理 正誤
             import_company(src) {
-                this.serv.company.company_origin_plus(this, src)
+                this.doii += 1
+                this.serv.company.company_origin_plus(this, src, (err) => {
+                    if (err) { this.err += 1; this.doii -= 1 }
+                })
+                this.doii = this.doii < 0 ? 0 : this.doii
+                if (this.doii + this.err >= this.aii) { this.importing = false }
             }, 
 
         }

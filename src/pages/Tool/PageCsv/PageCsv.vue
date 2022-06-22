@@ -6,17 +6,18 @@
         <div class="py_x3 max-w">
             <input type="file" accept=".csv" class="input" id="csv" @change="readCSVFile()" />
 
-            <div class="py"></div>
+            <div v-if="!doing" class="py"></div>
 
-            <button-primary class="w-100 refresh" @tap="refresh">
-                <span class="tit_ipt">刷新頁面</span>
-            </button-primary>
-            <div class="py_s"></div>
-            <button-primary class="w-100" @tap="turn()">
+            <button-primary v-if="!doing" class="w-100" @tap="turn()">
                 導入數據
             </button-primary>
 
+            <div v-else class="fx-r pt_x2 t-r">
+                <button-primary class="btn px_x2" @tap="refresh">刷新</button-primary>
+            </div>
+
             <page-csv-company ref="csvCompREF"></page-csv-company>
+            
         </div>
     </div>
 </template>
@@ -25,27 +26,29 @@
 import plugin_csv from '../../../air/plugin/csv/index'
 
 import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
-import ToolImportCompany from '../Import/company/ToolImportCompany.vue'
 import PageCsvCompany from './import_typed/PageCsvCompany.vue'
     export default {
-  components: { ButtonPrimary, ToolImportCompany, PageCsvCompany },
+  components: { ButtonPrimary, PageCsvCompany },
         name: '',
         data() {
             return {
                 res: [ ],
-                file_name: ''
+                file_name: '',
+                doing: false,
             }
         },
         methods: {
-            refresh() { // location.reload() 
-                this.$router.go(0)
+            refresh() { // 
+                location.reload() 
+                // this.$router.go(0)
             },
 
             // 傳輸到 後臺
             turn() {
                 const src = this.res
-
+                console.log(src)
                 if (src) {
+                    this.doing = true
                     this.$refs.csvCompREF.init(src, this.file_name)
                 } else {
                     alert('未發現要導入的數據。')
