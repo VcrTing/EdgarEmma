@@ -1,7 +1,7 @@
 <template>
-    <div class="py_x2">
-        <h3 class="">Import your company</h3>
-        <p class="py sus">From csv</p>
+    <div class="py_x2" v-if="true">
+        <h3 class="">導入至公司資料庫中</h3>
+        <p class="py sus">請註意，目前只支持固定格式的 CSV 文件導入</p>
 
         <div class="py_x3 max-w">
             <input type="file" accept=".csv" class="input" id="csv" @change="readCSVFile()" />
@@ -9,7 +9,7 @@
             <div v-if="!doing" class="py"></div>
 
             <button-primary v-if="!doing" class="w-100" @tap="turn()">
-                導入數據
+                開始導入
             </button-primary>
 
             <div v-else class="fx-r pt_x2 t-r">
@@ -20,15 +20,26 @@
             
         </div>
     </div>
+    <div v-else class="for-menu">
+        <remind-finaiiy-check></remind-finaiiy-check>
+        <div class="fx-s pt_x2">
+            <div>
+                <button class="btn-hui">取消</button><span class="px_s"></span>
+                <button class="btn-hui">修改</button>
+            </div>
+            <button-primary class="px_x2 righter">確認及發送一次有效驗證碼</button-primary>
+        </div>
+    </div>
 </template>
 
 <script>
 import plugin_csv from '../../../air/plugin/csv/index'
+import RemindFinaiiyCheck from '../../../components/page/check/RemindFinaiiyCheck.vue'
 
 import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
 import PageCsvCompany from './import_typed/PageCsvCompany.vue'
     export default {
-  components: { ButtonPrimary, PageCsvCompany },
+  components: { ButtonPrimary, PageCsvCompany, RemindFinaiiyCheck },
         name: '',
         data() {
             return {
@@ -39,8 +50,8 @@ import PageCsvCompany from './import_typed/PageCsvCompany.vue'
         },
         methods: {
             refresh() { // 
-                location.reload() 
-                // this.$router.go(0)
+                // location.reload() 
+                this.$router.go(0)
             },
 
             // 傳輸到 後臺

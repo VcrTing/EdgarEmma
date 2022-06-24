@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <page-header :header="'Company Profile'"></page-header>
+        <page-header :header="'公司簡介'"></page-header>
 
         <div class="py"></div>
 
@@ -8,11 +8,11 @@
 
         <div class="fx-c py_x4">
             <button-primary @tap="goEdit()" class="px_x2 lefter">
-                Edit
+                編輯
             </button-primary>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <button-primary-out @tap="$router.go(-1)">
-                Back
+                返回
             </button-primary-out>
         </div>
     </div>

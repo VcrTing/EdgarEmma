@@ -12,7 +12,7 @@
                 {{ view.ser_timed(v.company_since, 1) }}
             </div>
             <div class="w-14">
-                <span class="pri_son hand" @click="add(v)">Add Company</span>
+                <span class="pri_son hand" @click="add(v)">增加提醒服務</span>
             </div>
         </div>
     </div>

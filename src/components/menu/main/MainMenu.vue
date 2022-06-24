@@ -25,21 +25,21 @@ export default {
         menu() {
             let res = [
                 {
-                    txt: 'Add Company', index: 0, admin: false,
+                    txt: '增加新的公司', index: 0, admin: false,
                     link: '/home/add_company',
                 },
                 {
-                    txt: 'My Company', index: 1, admin: false,
+                    txt: '我的公司', index: 1, admin: false,
                     link: '/home/company_my',
                 },
                 {
-                    txt: 'Sent Record', index: 2, admin: false,
+                    txt: '提醒任務記錄', index: 2, admin: false,
                     link: '/home/remind_record',
                 }
             ]
             if (this.is_admin) {
                 res.push({
-                    txt: 'Import', index: 3, admin: true,
+                    txt: '導入', index: 3, admin: true,
                     link: '/home/csv',
                 })
             }

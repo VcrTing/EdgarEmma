@@ -11,7 +11,7 @@ module.exports = {
                 user_email: '',
                 company_named: '',
                 filling_timed: '' }, 
-            subject: '', content: '你好，提醒你，您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。' }
+            subject: '', content: '你好，提醒你，您已成功添加了妳的公司 {{company_named}}。這個一個由EdgarEmma.com提供的免費提醒服務，請留心好妳公司的合規和報稅等提示。' }
     ],
     'email': [
         { id: 1, 
@@ -30,7 +30,7 @@ module.exports = {
             </head>
             <body>
                 <div class="box">
-                    <img src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
+                    <img width="320px" style="max-width: 320px; width: 320px;" src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
                     <h2>你好 {{user_email}}，提醒你， </h2>
                     <p>你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。</p>
                 </div>
@@ -59,9 +59,10 @@ module.exports = {
             </head>
             <body>
                 <div class="box">
-                    <img src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
-                    <h2>你好 {{user_email}}，提提你， </h2>
-                    <p>您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。</p>
+                    <img width="320px" style="max-width: 320px; width: 320px;" src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
+                    <h2>{{user_email}}提提妳， </h2>
+                    <p>您已成功添加了妳的公司 {{company_named}}。這個一個由EdgarEmma.com提供的免費提醒服務，請留心好妳公司的合規和報稅等提示。</p>
+                    <p>如有查詢，請電郵info@EdgarEmma.com</p>
                 </div>
                 <style>
                     html { color: #1e1f22; }

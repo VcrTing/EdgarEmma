@@ -7,7 +7,7 @@
                     :class="{ 'pt': i > 0 }"
                 >
                     <nav class="w-40 input-attach mb-w-618">
-                        <input type="text" placeholder="Please input" v-model="v.v" class="input">
+                        <input type="text" placeholder="請輸入" v-model="v.v" class="input">
                         <span class="icon pri_son">
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>

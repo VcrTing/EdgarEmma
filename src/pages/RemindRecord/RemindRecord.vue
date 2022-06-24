@@ -1,6 +1,6 @@
 <template>
     <div>
-        <layout-table :title="'Sent Record'">
+        <layout-table :title="'提醒任務記錄'">
             <rmd-record-tr class="tr"></rmd-record-tr>
             <rmd-record-td class="td" :_items="items"></rmd-record-td>
         </layout-table>

@@ -1,17 +1,17 @@
 <template>
     <div class="max-w_remind pt_x3">
-        <h4 class="py_x3 ttd">請輸入接送提醒的方式(only input whatsapp and email)</h4>
+        <h4 class="py_x3 ttd t-c">請輸入接送提醒的方式</h4>
 
         <div class="pt">
 
             <input-wrapper :label="'WhatsApp'" :valid="form_vid.phoned">
-                <input-whatsapp ref="phoneREF"></input-whatsapp>
+                <input-whatsapp :picd="'請輸入您的 Whatsapp 號碼'" ref="phoneREF"></input-whatsapp>
             </input-wrapper>
 
             <div class="py_s"></div>
 
             <input-wrapper :label="'Email'" :valid="form_vid.email">
-                <input type="text" @keyup.enter="next()" v-model="form.email" class="input input-air" placeholder="Please input">
+                <input type="text" @keyup.enter="next()" v-model="form.email" class="input input-air" placeholder="請輸入您的電郵地址">
             </input-wrapper>
 
             <checkbox-send-way ref="wayREF"></checkbox-send-way>

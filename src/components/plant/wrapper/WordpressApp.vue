@@ -14,7 +14,7 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
             return {
                 def: {
                     wordpress_id: 0,
-                    email: 'edic@163.com',
+                    email: 'strapi-admin@gmail.com',
                     wordpress_name: 'Edic',
                     token: [ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY0NjkwNTE3NywiZXhwIjoxNjQ5NDk3MTc3fQ.kyBfv17XotaOzJchJOFbtBvTHKiocb8y0sBH8MEUOco" ],
                     user_id: 0,
@@ -43,9 +43,8 @@ import ToolReciveWordpress from '../ToolReciveWordpress.vue'
                     plant.token = token
                     if (token) {
                         await this.$store.commit('change', [ 'token', token ])
-                        console.log('搜寻用户 =', plant.wordpress_id)
                         res = await this.serv.user.user_from_strapi(this, plant.wordpress_id)
-                        console.log('rES =', res)
+                        console.log('USER RES =', res)
                         await this.$store.commit('change', [ 'user', res ]);
                     }
                 }

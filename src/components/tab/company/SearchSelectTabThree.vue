@@ -2,7 +2,7 @@
     <div>
         <ul class="ul-def focus_tab_three" :class="'tab_ftt_' + now ">
             <li class="w-25">
-                <focus-text-counter :cont="'Search and select your company'" 
+                <focus-text-counter :cont="'輸入公司名字搜尋你的公司，你可以用公司名稱起首來搜尋'" 
                 
                 @tap="() => $router.push('/home/add_company/search_select')">
                     <div class="counter_icon" :class="{ 'active': now == 1 }">
@@ -13,7 +13,7 @@
             <li class="w-10 ftt_hr"></li>
 
             <li class="w-25">
-                <focus-text-counter :cont="'恭喜你，你將會可以免費接收合規提醒'"
+                <focus-text-counter :cont="'恭喜你，你日後可以免費接收有關公司註冊處的合規提醒'"
 
                 @tap="() => $router.push('/home/add_company/input_remind')">
                     <div class="counter_icon" :class="{ 'active': now == 2 }">
@@ -24,7 +24,7 @@
             <li class="w-10 ftt_hr"></li>
 
             <li class="w-25">
-                <focus-text-counter :cont="'如果你想我嗎幫忙免費提醒你報稅，請輸入財政年度年結日'"
+                <focus-text-counter :cont="'如果你想收到有關稅局的合規提醒，請輸入你公司的財政年度年結日'"
 
                 @tap="() => $router.push('/home/add_company/input_tax')">
                     <div class="counter_icon" :class="{ 'active': now == 3 }">

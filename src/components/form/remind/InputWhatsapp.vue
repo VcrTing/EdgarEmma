@@ -3,7 +3,7 @@
 
         <country-flag-select ref="flagREF" class="input input-inset-in input-air"></country-flag-select>
 
-        <input type="text" v-model="phoned" class="input input-inset-wrapper input-air" placeholder="Please input">
+        <input type="text" v-model="phoned" class="input input-inset-wrapper input-air" :placeholder="picd">
     </nav>
 </template>
 
@@ -13,6 +13,7 @@ import CountryFlagSelect from "../select/CountryFlagSelect.vue"
     export default {
         components: { CountryFlagSelect },
         name: '',
+        props: [ 'picd' ],
         data() {
             return {
                 prefix: '+852',

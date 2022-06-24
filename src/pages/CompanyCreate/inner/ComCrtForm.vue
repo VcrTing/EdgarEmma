@@ -2,21 +2,21 @@
     <div>
         <div class="row pb_x">
             <input-wrapper class="w-40 mb-w-618" :label="'公司編號 CR No.'" :valid="form_err.tax_id">
-                <input type="text" class="input" placeholder="Please input" v-model="form.tax_id">
+                <input type="text" class="input" placeholder="請輸入" v-model="form.tax_id">
             </input-wrapper>
         </div>
 
         <input-wrapper :label="'公司名字 Company Name (English)'" class="pb_x" :valid="form_err.name_en">
-            <input type="text" class="input" placeholder="Please input" v-model="form.name_en">
+            <input type="text" class="input" placeholder="請輸入" v-model="form.name_en">
         </input-wrapper>
 
         <input-wrapper :label="'公司名字 Company Name (Chinese)'" class="pb_x" :valid="form_err.name_ch">
-            <input type="text" class="input" placeholder="Please input" v-model="form.name_ch">
+            <input type="text" class="input" placeholder="請輸入" v-model="form.name_ch">
         </input-wrapper>
 
         <div class="row pb_x fx-l">
             <input-wrapper class="w-40 mb-w-618" :label="'成立日期 Company Since'">
-                <input-data :_date="form.company_since" v-if="form.company_since" @result="(v) => form.company_since = v"></input-data>
+                <input-data :_date="since" v-if="since" @result="(v) => form.company_since = v"></input-data>
             </input-wrapper>
         </div>
 
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import CompanyTypeSelect from '../../../components/form/select/CompanyTypeSelect.vue'
 import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
 import InputData from '../../../funcks/ui/input/InputData.vue'
@@ -49,6 +50,11 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
         props: [
             'origin'
         ],
+        computed: {
+            since() {
+                return this.form.company_since ? this.form.company_since : this.view.timed.getToday()
+            }
+        },
         data() {
             return {
                 form: {

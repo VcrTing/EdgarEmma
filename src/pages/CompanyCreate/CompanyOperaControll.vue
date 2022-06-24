@@ -11,11 +11,11 @@
         <div class="fx-c py_x2">
             <button-primary class="px_x lefter" @tap="submit">
                 <i v-if="loading" class="fas fa-circle-notch circle-around"></i>
-                <span v-else>Save</span>
+                <span v-else>保存</span>
             </button-primary>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <button-primary-out @tap="$router.go(-1)">
-                Cancel
+                返回
             </button-primary-out>
         </div>
 
@@ -45,8 +45,8 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
         computed: {
             _header() {
                 if (this.typed == 'edit') {
-                    return 'Edit Company Profile'
-                }; return 'Create Company Profile'
+                    return '更改公司資料'
+                }; return '填寫公司資料'
             }
         },
         methods: {

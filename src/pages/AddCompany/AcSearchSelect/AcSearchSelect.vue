@@ -1,13 +1,13 @@
 <template>
     <div class="pt_x2">
 
-        <page-header :header="'Search your company'"></page-header>
+        <page-header :header="'搜尋妳的公司'"></page-header>
 
         <search @hook:mounted="search" @res="search"></search>
         
         <div class="py_x2"></div>
 
-        <layout-table :title="'Company list'">
+        <layout-table :title="'搜尋結果'">
             <ac-ss-tr class="tr"></ac-ss-tr>
             <ac-ss-td class="td" :_items="items"></ac-ss-td>
         </layout-table>
@@ -16,7 +16,7 @@
 
         <div class="fx-c py_x2">
             <button-primary-out class="px_x2 upper" @tap="$router.push('/home/company_create')">
-                Create Company Profile
+                找不到妳的公司？妳也可以增加妳的公司資料
             </button-primary-out>
         </div>
     </div>

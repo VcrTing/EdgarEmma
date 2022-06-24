@@ -8,6 +8,6 @@ module.exports = {
   '1 * * * * *': () => {
     running()
     sms_work()
-    impo.import_company()
+    // impo.import_company()
   }
 };

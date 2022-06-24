@@ -14,7 +14,7 @@
     "tax_id": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "company_type": {
       "type": "integer",
@@ -51,6 +51,9 @@
       "default": 1
     },
     "company_type_txt": {
+      "type": "string"
+    },
+    "company_dissolved": {
       "type": "string"
     }
   }

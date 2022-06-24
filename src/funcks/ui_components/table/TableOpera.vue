@@ -1,8 +1,8 @@
 <template>
     <div class="pri_son">
 
-        <span class="hand" @click="$emit('view')">view</span>&nbsp;&nbsp;
-        <span class="hand" @click="$emit('edit')">edit</span>
+        <span class="hand" @click="$emit('view')">詳情</span>&nbsp;&nbsp;
+        <span class="hand" @click="$emit('edit')">編輯</span>
     </div>
 </template>
 
