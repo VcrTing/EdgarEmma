@@ -4,6 +4,8 @@ import AcSearchSelect from '@/pages/AddCompany/AcSearchSelect/AcSearchSelect'
 import AcInputRemind from '@/pages/AddCompany/AcInputRemind/AcInputRemind'
 import AcInputTax from '@/pages/AddCompany/AcInputTax/AcInputTax'
 
+import AcFinished from '@/pages/AddCompany/AcFinished/AcFinished.vue'
+
 export default [
 
     {
@@ -28,4 +30,9 @@ export default [
             }
         ]
     },
+
+    {
+        path: '/home/add_company/finished',
+        component: AcFinished
+    }
 ]

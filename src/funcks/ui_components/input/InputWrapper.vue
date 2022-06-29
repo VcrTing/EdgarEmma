@@ -13,11 +13,15 @@
         name: '',
         props: [
             'label',
-            'valid'
+            'valid',
+            'tip'
         ],
+        mounted() {
+            this.msg = this.tip ? this.tip : '請檢查妳的輸入'
+        },
         data() {
             return {
-                msg: 'Please check your input'
+                msg: ''
             }
         }
     }

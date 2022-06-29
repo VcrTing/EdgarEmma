@@ -29,6 +29,10 @@ export default {
         },
         collect() {
             return this.send_way
+        },
+
+        ioc(snd =  [ 'email' ]) {
+            this.send_way = snd
         }
     }
 }

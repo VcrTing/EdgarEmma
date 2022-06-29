@@ -21,6 +21,10 @@ import CountryFlagSelect from "../select/CountryFlagSelect.vue"
             }
         },
         methods: {
+            ioc(pre_fix, phone) {
+                this.phoned = phone
+                this.prefix = this.$refs.flagREF.ioc( pre_fix )
+            },
             reset() {
                 this.prefix = this.$refs.flagREF.reset()
                 this.phoned = ''

@@ -13,6 +13,9 @@
             pk: {
                 type: String,
                 default: 'box_1'
+            },
+            _def: {
+                type: Boolean
             }
         },
         data() {
@@ -25,7 +28,7 @@
                 this.$emit('change', n)
             }
         },
-        mounted() { this.now = this._def ? this._def : false },
+        mounted() { this.now = this._def ? this._def : false; },
         methods: {
             def(v) { this.now = v }
         }

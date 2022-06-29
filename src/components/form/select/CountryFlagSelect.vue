@@ -54,6 +54,9 @@
             }
         },
         methods: {
+            ioc(_fx = '+852') {
+                this.now = _fx; return this.now
+            },
             reset() {
                 this.now = '+852'
                 return this.now

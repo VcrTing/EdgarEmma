@@ -55,6 +55,11 @@
     "level": {
       "type": "integer",
       "default": 5
+    },
+    "agreement": {
+      "type": "component",
+      "repeatable": false,
+      "component": "agree.agreement"
     }
   }
 }

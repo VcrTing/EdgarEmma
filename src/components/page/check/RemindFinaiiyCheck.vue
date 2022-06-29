@@ -1,28 +1,28 @@
 <template>
     <div class="panel br">
-        <div class="px pb_x2">
-            <p class="h5">收集个人资料声明</p>
-            <p class="pb pt_s a">按此阅览《收集个人资料声明》之内容</p>
+        <div class="px_x2 pb_x2">
+            <p class="h5 pt_s">收集個人資料聲明</p>
+            <p class="pb pt_s a">按此閱覽《收集個人資料聲明》之內容</p>
             <div class="pt">
-                <input-check-box :pk="1">
-                    本人/吾等特此确认已阅览《收集个人资料声明》之内容；
+                <input-check-box ref="box_1_REF" :_def="is_coiiect" @change="(v) => { is_coiiect = v; recive() }" :pk="'box_0'">
+                    <span class="pl_s">本人/吾等特此確認已閱覽《收集個人資料聲明》之內容；</span>
                 </input-check-box>
                 <br/>
-                <input-check-box :pk="2">
-                    本人同意保证作为国际集团公司，为提供保险相关产品或服务，可能需要在中国内地境外储存或处理您的个人信息，更多咨询，请参阅保证的《隐私声明》；
+                <input-check-box ref="box_2_REF" :_def="is_deal_with" @change="(v) => { is_deal_with = v; recive() }" :pk="'box_2'">
+                    <span class="pl_s">本人同意保證作為國際集團公司，為提供保險相關產品或服務，可能需要在中國內地境外儲存或處理您的個人信息，更多咨詢，請參閱保證的《隱私聲明》；</span>
                 </input-check-box>
                 <br/>
-                <input-check-box :pk="3">
-                    保证有意向阁下发送促销信息或资料，但仅经过阁下同意我们才可以这样做。如阁下同意，保证将可能使用阁下的联络资料及有关阁下已购买的产品的资料（包括购买有关产品的销售渠道）。如同意，请勾选左方的空格；
+                <input-check-box :_def="is_sales_message" @change="(v) => { is_sales_message = v; recive() }" :pk="'box_3'">
+                    <span class="pl_s">保證有意向閣下發送促銷信息或資料，但僅經過閣下同意我們才可以這樣做。如閣下同意，保證將可能使用閣下的聯絡資料及有關閣下已購買的產品的資料（包括購買有關產品的銷售渠道）。如同意，請勾選左方的空格；</span>
                 </input-check-box>
                 <br/>
-                <input-check-box :pk="4">
-                    本人/吾等，明白在此申请时所使用的手提电话号码/电邮地址是来自本人/吾等的保单记录，系统将会以手机短讯形式或电邮发送身份验证码及有关此申请进度的相关通知到保单持有人保单记录的手提电话号码或电邮地址；
+                <input-check-box :_def="is_personal_info" @change="(v) => { is_personal_info = v; recive() }" :pk="'box_4'">
+                    <span class="pl_s">本人/吾等，明白在此申請時所使用的手提電話號碼/電郵地址是來自本人/吾等的保單記錄，系統將會以手機短訊形式或電郵發送身份驗證碼及有關此申請進度的相關通知到保單持有人保單記錄的手提電話號碼或電郵地址；</span>
                 </input-check-box>
             </div>  
                 <br/>
             <p>
-                按“确认及发送一次有效验证码”即代表本人确认明白并同意:&nbsp;(1)上述声明之内容；(2)上述《收集个人资料声明》部分之内容；及(3)《隐私政策》。“一次有效验证码”将会经手机短讯发送到您的手提电话号码。
+                按“確認及發送一次有效驗證碼”即代表本人確認明白並同意:&nbsp;(1)上述聲明之內容；(2)上述《收集個人資料聲明》部分之內容；及(3)《隱私政策》。“一次有效驗證碼”將會經手機短訊發送到您的手提電話號碼。
             </p>
         </div>
     </div>
@@ -32,7 +32,38 @@
 import InputCheckBox from '../../../funcks/ui/input/InputCheckBox.vue'
 export default {
   components: { InputCheckBox },
+    data() {
+        return {
+            is_coiiect: true,
+            is_deal_with: true,
+            is_sales_message: true,
+            is_personal_info: true
+        }
+    },
+    created() { this.def() },
+    methods: {
+        is_submit() {
+            let res = true
+            if (!this.is_coiiect) { res = false }
+            if (!this.is_deal_with) { res = false }
 
+            if (!res) {
+                this.$refs.box_1_REF.now = true
+                this.$refs.box_2_REF.now = true
+            } else {
+                return res
+            }
+        },
+
+        recive() {
+            this.view.set_ss('company_active_checkbox', this._data)
+        },
+        coiiect() { return this._data },
+        def() {
+            let res = this.view.get_ss('company_active_checkbox')
+            if (res != '' && res != null) { for(let k in res) { this[ k ] = res[ k ] } }
+        }
+    }
 }
 </script>
 

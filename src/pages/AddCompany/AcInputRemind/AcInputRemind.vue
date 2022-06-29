@@ -9,26 +9,28 @@
             </input-wrapper>
 
             <div class="py_s"></div>
-
             <input-wrapper :label="'Email'" :valid="form_vid.email">
-                <input type="text" @keyup.enter="next()" v-model="form.email" class="input input-air" placeholder="請輸入您的電郵地址">
+                <input type="text" v-model="form.email" class="input input-air" placeholder="請輸入您的電郵地址"
+                
+                    @keyup.enter="_confirm()" @blur="_confirm()" @change="_confirm()"
+                >
             </input-wrapper>
 
+
+            <nav v-if="again">
+                <div class="py_s"></div>
+                <input-wrapper class="upper" :label="'Email Confirm'" :valid="form_vid.email_again" :tip="'請檢查上下輸入的郵箱是否一致'">
+                    <input type="text" v-model="form.email_again" class="input input-air" placeholder="請再次輸入您的郵箱"
+                        οnpaste="return false" @blur="_confirm()"
+                    />
+                </input-wrapper>
+            </nav>
+
             <checkbox-send-way ref="wayREF"></checkbox-send-way>
-            <!--nav class="py_x pb fx-l">
-                <div class="fx-l">
-                    <input type="checkbox" v-model="send_way" name="way" value="email" id="way_email"/>
-                    <label class="pl_s ttd hand" for="way_email">电邮提示</label>
-                </div>
-                <div class="fx-l pl">
-                    <input type="checkbox" v-model="send_way" name="way" value="note" id="way_note"/>
-                    <label class="pl_s ttd hand" for="way_note">短信提示</label>
-                </div>
-            </nav-->
         </div>
 
         <div class="fx-c py_x2">
-            <button-primary class="px_x3 w-163 upper" @tap="next()">
+            <button-primary class="px_x3 w-163 upper" @tap="confirm()">
                 下一步
             </button-primary>
         </div>
@@ -47,12 +49,13 @@ import CheckboxSendWay from '../../../components/form/checkbox/CheckboxSendWay.v
         name: '',
         data() {
             return {
+                again: false,
                 send_way: [ 'email' ],
-                form: { phoned: '+852', email: '' },
-                form_vid: { phoned: '', email: '' },
+                form: { phoned: '+852', email: '', email_again: '' },
+                form_vid: { phoned: '', email: '', email_again: '' },
             }
         },
-        
+        mounted() { this.def() },
         methods: {
             next() {
                 let res = undefined
@@ -85,6 +88,40 @@ import CheckboxSendWay from '../../../components/form/checkbox/CheckboxSendWay.v
                     if (this.form_vid[k]) { return true }
                 }
             },
+
+            _confirm() {
+                const ori = this.form.email.trim()
+                let again = this.form.email_again.trim()
+                this.form_vid.email = !this.vid.val_email(ori)
+
+                if (ori.indexOf('.') >= 0 ) { 
+                    if (again) {
+                        if (ori == again) { this.form_vid.email_again = ''; return true } else { this.form_vid.email_again = true }
+                    } else {
+                        if (ori.indexOf('@') >= 0) { this.again = true }
+                    }
+                } else { this.form_vid.email = true }
+            },
+            confirm() {
+                if (this._confirm()) {
+                    this.next() 
+                }
+            },
+
+            def() {
+                const res = this.view.get_ss('company_active_company')
+                res.emails ? res.emails.map(e => {
+                    this.form.email = e.v
+                }) : ''
+                res.phones ? res.phones.map(e => {
+                    e = e.v ? e.v.split(' ') : [ ]
+                    this.$refs.phoneREF.ioc(...e)
+                }): ''
+                const snd = res.send_way_world ? res.send_way_world.split('_') : null
+                snd ? this.$refs.wayREF.ioc( snd ) : ''
+
+                if (this.form.email) { this.again = true; this.form.email_again = this.form.email }
+            }
         },
         computed: {
             comp() {

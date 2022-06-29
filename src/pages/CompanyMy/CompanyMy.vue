@@ -8,7 +8,7 @@
 
         <div class="fx-c py_x4">
             <button-primary-out class="px_x2 upper" @tap="$router.push('/home/company_create')">
-                增加妳的公司資料
+                增加新的公司資料
             </button-primary-out>
         </div>
     </div>
