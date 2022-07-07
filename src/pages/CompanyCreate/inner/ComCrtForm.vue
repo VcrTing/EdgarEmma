@@ -30,6 +30,11 @@
                 <ccf-phone-add ref="phonesREF" :typed="'phone'" :data="form.phones"></ccf-phone-add>
             </input-wrapper>
 
+<div class="py">
+<p>有關電郵提示，提供選項：</p>
+<div class="pt_s pb">想公司拍檔或公司行政財務等同事也同步收到電郵提升？立即增加他們的電郵。</div>
+</div>
+
             <input-wrapper class="pb_x" :label="'The Email receive notification'" :valid="form_err.emails">
                 <ccf-phone-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-phone-add>
             </input-wrapper>

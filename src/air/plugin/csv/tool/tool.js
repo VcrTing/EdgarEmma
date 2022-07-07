@@ -14,7 +14,6 @@ const array_split = function(src) {
             res.push( _lis )
         }
     }
-
     return res
 }
 

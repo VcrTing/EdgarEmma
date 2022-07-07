@@ -1,0 +1,63 @@
+
+@keyframes verc_rot
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(35deg)
+        
+.i-refresh
+    width: 1em
+    height: 1em
+    cursor: pointer
+    user-select: none
+    position: relative
+    display: inline-block
+    &::before
+        position: absolute
+        content: ''
+        border-radius: 100%
+        width: 0.6em
+        height: 0.6em
+        top: 0.1em
+        z-index: 300
+        transform: rotate(35deg)
+        animation-iteration-count: 3
+        border: 2px solid transparent
+        border-left-color: transparent !important
+    
+.vertify-code
+    display: flex
+    justify-content: center
+    align-items: center
+    input
+        width: 2.4em
+        height: 2.2em
+        font-size: 1.4em
+        text-align: center
+        border-radius: 6.5px
+        margin: 0 0.3em !important
+        border: 2px solid #cdcaca
+    .nx_cd_err
+        border-color: $err
+        box-shadow: 0px 2px 3px -1px $err_sd
+
+.verc-ioading
+    * 
+        color: $sub !important
+    div
+        transition: .24s
+    .i-refresh::before
+        animation: verc_rot .62s ease-in-out
+        border: 2px solid $sub !important
+        border-left-color: transparent !important
+
+.verc-can
+    *
+        color: $primary !important
+    div
+        transition: .24s
+    .i-refresh::before
+        animation: verc_rot .62s ease-in-out
+        border: 2px solid $primary !important
+        border-left-color: transparent !important
+        

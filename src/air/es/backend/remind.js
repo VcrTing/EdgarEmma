@@ -1,8 +1,8 @@
 
 const SEND_WAY = [ 'note', 'email', 'whatsapp' ]
 const SEND_WAY_TXT = {
-    'email': { v: 'email', def: true, txt: '電郵提示', id: "way_email", class: '' },
-    'note': { v: 'note', def: true, txt: '短信提示', id: "way_note", class: 'pl' },
+    'email': { v: 'email', def: true, txt: '電郵提示', id: "way_email", class: 'checkbox-need', require: true },
+    'note': { v: 'note', def: true, txt: '短信提示', id: "way_note", class: 'pl', require: false },
 }
 
 const SEND_WAY_DEF = 'note_email'

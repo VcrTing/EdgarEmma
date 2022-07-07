@@ -4,13 +4,14 @@
             v-for="(v, i) in data" :key="i"
             :class="v.class"
         >
-            <input type="checkbox" v-model="send_way" name="way" :value="v.v" :id="v.id"/>
+            <input type="checkbox" :disabled="v.require" v-model="send_way" name="way" :value="v.v" :id="v.id"/>
             <label class="pl_s ttd hand" :for="v.id">{{ v.txt }}</label>
         </div>
     </nav>
 </template>
 
 <script>
+// #0275ff
 export default {
     data() {
         return {

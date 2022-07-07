@@ -4,9 +4,7 @@
             <search-select-tab-three></search-select-tab-three>
         </div>
 
-        <!--transition :name="moveName">
-        </transition-->
-        <div class="py_x2 ps-r">
+        <div class="py_x2 ">
             <router-view/>
 
             <tool-go-top></tool-go-top>
