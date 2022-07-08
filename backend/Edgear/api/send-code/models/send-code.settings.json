@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "send_codes",
+  "info": {
+    "name": "SendCode",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "integer"
+    },
+    "to": {
+      "type": "email"
+    },
+    "from": {
+      "type": "email"
+    },
+    "is_send": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "send_timed": {
+      "type": "datetime"
+    },
+    "run_timed": {
+      "type": "datetime"
+    },
+    "is_valid_email": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_used": {
+      "type": "boolean",
+      "default": false
+    },
+    "user_id": {
+      "type": "string"
+    }
+  }
+}

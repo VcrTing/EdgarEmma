@@ -31,8 +31,9 @@ module.exports = {
             <body>
                 <div class="box">
                     <img width="320px" style="max-width: 320px; width: 320px;" src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
-                    <h2>你好 {{user_email}}，提醒你， </h2>
+                    <h2>你好 <span>{{user_email}}</span>，提醒你， </h2>
                     <p>你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。</p>
+                    <p>如有查詢，請電郵<a href="mailto:info@EdgarEmma.com">info@EdgarEmma.com</a></p>
                 </div>
                 <style>
                     html { color: #1e1f22; }
@@ -60,9 +61,9 @@ module.exports = {
             <body>
                 <div class="box">
                     <img width="320px" style="max-width: 320px; width: 320px;" src="https://edgaremma.com/wp-content/uploads/Edgaremma-logo.png" class="Logo" />
-                    <h2>{{user_email}}提提妳， </h2>
+                    <h2><span>{{user_email}}</span>提提妳， </h2>
                     <p>您已成功添加了妳的公司 {{company_named}}。這個一個由EdgarEmma.com提供的免費提醒服務，請留心好妳公司的合規和報稅等提示。</p>
-                    <p>如有查詢，請電郵info@EdgarEmma.com</p>
+                    <p>如有查詢，請電郵<a href="mailto:info@EdgarEmma.com">info@EdgarEmma.com</a></p>
                 </div>
                 <style>
                     html { color: #1e1f22; }

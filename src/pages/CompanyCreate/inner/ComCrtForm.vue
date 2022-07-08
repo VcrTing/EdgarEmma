@@ -75,7 +75,7 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
             errorForm() {
                 this.form_err.tax_id = (!this.form.tax_id || this.form.tax_id.length < 2 || this.form.tax_id.length > 60)
                 this.form_err.name_en = (!this.form.name_en || this.form.name_en.length < 2 || this.form.name_en.length > 220)
-                this.form_err.name_ch = (!this.form.name_ch || this.form.name_ch.length < 2 || this.form.name_ch.length > 160)
+                // this.form_err.name_ch = (!this.form.name_ch || this.form.name_ch.length < 2 || this.form.name_ch.length > 160)
 
                 this.form_err.phones = this.$refs.phonesREF.valid().length <= 0
                 this.form_err.emails = this.$refs.emailsREF.valid().length <= 0

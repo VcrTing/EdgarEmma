@@ -7,13 +7,14 @@ const remind_to_send = require('./work/remind_to_send')
 // 根据发送任务表 生成 SMStrapi 队列数据
 const send_to_smstrapi = require('./work/send_to_smstrapi')
 
+// 发送验证码
+
 // 现今时间
 const hour = function(src = [ 11, 12, 13, 16, 20, 21 ]) {
     let h = new Date().getHours()
     h = h ? Number.parseInt(h) : 0
     return src.indexOf(h) >= 0
 }
-
 
 module.exports = async function() {
     fisrt_send()

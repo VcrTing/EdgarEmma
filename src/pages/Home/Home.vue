@@ -67,11 +67,15 @@ import CompanyMy from '../CompanyMy/CompanyMy.vue'
     position: fixed !important
     bottom: 0
     left: 0
-    font-size: 10px !important
     padding: 6px 12px
     background: none
+    
     // box-shadow: 0.2px -0.5px 2px -0.5px rgba(0, 0, 0, 0.4)
     border-top-right-radius: 7px
     *
+        color: #b8b8b8 !important
+        font-weight: 300
+        font-size: 10px !important
+        
         // color: #FFFFFFEF !important
 </style>

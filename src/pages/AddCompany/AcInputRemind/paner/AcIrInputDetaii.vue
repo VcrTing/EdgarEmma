@@ -1,6 +1,6 @@
 <template>
     <div class="max-w_remind pt_x3">
-        <h4 class="py_x3 ttd t-c">請輸入接送提醒的方式</h4>
+        <h4 class="py_x3 ttd t-c">請輸入接收提醒的方式</h4>
 
         <div class="pt">
 
