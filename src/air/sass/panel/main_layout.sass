@@ -16,6 +16,13 @@ $mL: calc(120px + 5vw)
     width: 100%
     padding-left: calc( 172px + 5vw )
 
+@media screen and (max-width: 763px)
+    .cont
+        padding-left: calc( 118px + 5vw )
+    $mL: calc(106px + 5vw)
+    .menu
+        width: $mL
+
 
 // MENU
 
@@ -28,6 +35,7 @@ $mL: calc(120px + 5vw)
         li
             cursor: pointer
             padding: 12px 24px
+            padding-right: 6px
             &:hover
                 background: #f6f6f6
 

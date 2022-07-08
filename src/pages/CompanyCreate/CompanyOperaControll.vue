@@ -57,12 +57,15 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
                     let res = null
                     if (this.typed == 'edit') {
                         res = await this.serv.company.company_update(this, this.deleteUpdateData(data))
-                        if (res && res.id) { await this.serv.remind.remind_update_for_send(this, res) }
+                        console.log('更新后的 RES =', res)
+                        if (res && res.id) { 
+                            console.log('分割线')
+                            await this.serv.remind.remind_update_for_send(this, res) }
                     } else if (this.typed == 'plus') {
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))
                         if (res) { await this.plusRemind(res) }
                     }
-                    if (res) { setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600) }
+                    // if (res) { setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600) }
                 }; this.ani()
             },
 
@@ -85,8 +88,11 @@ import ComCrtForm from "./inner/ComCrtForm.vue"
 
             deleteUpdateData(res) {
                 delete res.user
-                delete res.name_ch
-                delete res.name_en
+                delete res.sends
+                delete res.remind
+                // delete res.name_ch
+                // delete res.name_en
+                delete res.agreement
                 delete res.created_at
                 delete res.updated_at
                 delete res.published_at
