@@ -45,6 +45,9 @@
     },
     "user_id": {
       "type": "string"
+    },
+    "result": {
+      "type": "text"
     }
   }
 }

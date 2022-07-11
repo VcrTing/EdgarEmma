@@ -31,7 +31,8 @@
 
         <div class="fx-c py_x2">
             <button-primary class="px_x3 w-163 upper" @tap="confirm()">
-                下一步
+                <span v-if="_skip">下一步</span>
+                <span v-else>驗證您的電郵</span>
             </button-primary>
         </div>
     </div>
@@ -46,7 +47,7 @@ import CountryFlagSelect from '../../../../components/form/select/CountryFlagSel
 import CheckboxSendWay from '../../../../components/form/checkbox/CheckboxSendWay.vue'
     export default {
   components: { InputWrapper, InputWhatsapp, ButtonPrimary, CountryFlagSelect, CheckboxSendWay },
-        name: '',
+        props: [ '_skip' ],
         data() {
             return {
                 again: false,
@@ -76,7 +77,7 @@ import CheckboxSendWay from '../../../../components/form/checkbox/CheckboxSendWa
                     
                     this.view.set_ss('company_active_company', res)
 
-                    this.$emit('next')
+                    this.$emit('next', this.form.email)
                 }
             },
 

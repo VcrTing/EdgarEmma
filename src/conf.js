@@ -16,7 +16,9 @@ const ENDPOINT = {
   company: '/companies',
   import_record: '/import-records',
   company_origin: '/company-origins',
-  company_search: '/companies_search'
+  company_search: '/companies_search',
+
+  sms_code: '/send-codes/code/send'
 }
 
 const STRAPI = {

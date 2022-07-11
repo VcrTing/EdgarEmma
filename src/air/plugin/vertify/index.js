@@ -1,8 +1,24 @@
+import moment from "moment"
+
 
 export default {
-    vertify(code) {
-        if (code) {
-            
+    _now() { return moment(new Date()).format('yyyy-MM-DD hh:mm:ss') },
+
+    sav_timed() { sessionStorage.setItem('vertify_timed', moment(new Date()).format('yyyy-MM-DD hh:mm:ss') )},
+
+    _g_code(L = 6){
+        let res = [ ]
+        for (let i= 0; i< L; i++ ) {
+            const cc = Math.floor(Math.random() * 10)
+            res.push(cc + '')
         }
+        return res.join('')
+    },
+    genate_code() { return this._g_code() + '' },
+
+    cansend(itv = 25) {
+        let tt = sessionStorage.getItem('vertify_timed'); tt = tt ? tt : this._now()
+        tt = (moment( this._now() ).diff(moment(tt), 'seconds'))
+        return tt > itv
     }
 }
