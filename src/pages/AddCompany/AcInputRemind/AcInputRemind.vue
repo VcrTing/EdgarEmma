@@ -19,7 +19,8 @@ export default {
     data() {
         return {
             now: 1, 
-            company: { }, resiver: '', actived: ''
+            company: { }, actived: '',
+            resiver: '', resiver_phoned: ''
         }
     },
     created() { this.refresh() },
@@ -43,13 +44,17 @@ export default {
         },
 
         async send_code(code) {
-            let res = ''
-            const to = this.resiver; console.log('TO =', to)
-            if (to) { 
+            let res = ''; this.refresh()
+            const condition = {
+                email: this.resiver, code,
+                to_email: this.resiver, to_note: this.resiver_phoned,
+                send_way: this.company.send_way_world
+            }
+            if (this.resiver) { 
                 try {
-                    res = await this.serv.code.code_send(this, code, to)
+                    res = await this.serv.code.code_send(this, condition)
                 } catch(err) {
-                    res = await this.serv.code.code_send(this, code, to)
+                    res = await this.serv.code.code_send(this, condition)
                 }
             }
         },
@@ -69,6 +74,8 @@ export default {
 
             const em = this.company.emails
             if (em) { this.resiver = em[0] ? em[0].v : '' }
+            const nt = this.company.phones
+            if (nt) { this.resiver_phoned = nt[0] ? nt[0].v : '' }
 
             this.actived = this.company.actived_emaii;
         }

@@ -49,13 +49,13 @@
       }
     },
 
-    {
-      "method": "POST",
-      "path": "/send-codes/code/send",
-      "handler": "sc-instant.send_code",
-      "config": {
-        "policies": []
+      {
+        "method": "POST",
+        "path": "/send-codes/code/send",
+        "handler": "sc-instant.send_code",
+        "config": {
+          "policies": []
+        }
       }
-    }
   ]
 }

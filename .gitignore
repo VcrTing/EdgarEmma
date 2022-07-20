@@ -4,6 +4,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+backend/Edgear/extensions/dbpub_refresh/*
+
 # Editor directories and files
 .idea
 .vscode

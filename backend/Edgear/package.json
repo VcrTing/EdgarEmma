@@ -14,8 +14,10 @@
     "mailgun.js": "^5.2.0"
   },
   "dependencies": {
+    "jsdom": "^20.0.0",
     "knex": "0.21.18",
     "moment": "^2.29.1",
+    "papaparse": "^5.3.2",
     "sqlite3": "5.0.0",
     "strapi": "3.6.9",
     "strapi-admin": "3.6.9",

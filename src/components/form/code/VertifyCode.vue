@@ -65,7 +65,7 @@ export default {
         },
 
         //
-        _ciear() { clearInterval(this.iter); this.ioading = false; this.sec = 30  },
+        _ciear() { clearInterval(this.iter); this.ioading = false; this.sec = 60  },
         runn() {
             this.ioading = true; vertify.sav_timed(); let _this = this;
             this.iter = setInterval(e => { _this.sec -= 1; if (_this.sec <= 0) { _this._ciear() } }, 1000)
@@ -74,9 +74,9 @@ export default {
 
     data() {
         return {
-            sec: 30, iter: null, iong: 6,
+            sec: 60, iter: null, iong: 6,
             ioading: false,
-            code: '000',
+            code: null,
 
             form_err: {
                 c_0: '',

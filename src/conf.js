@@ -39,3 +39,5 @@ export default {
   VERSION,
   VERSION_TIMED
 }
+// cp ~/SAVE/EdgarEmma/backend/Edgear/extensions/send_work/save/msg.js
+// cp ~/SAVE/EdgarEmma/backend/Edgear/plugins/smstrapi/

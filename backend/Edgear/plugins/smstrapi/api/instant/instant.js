@@ -1,17 +1,29 @@
 const conf = require('../../conf')
 const key = require('../../work/data/key')
-const emaii = require('../../work/api/mailgun')
 
-const _email = async function(fac, sender, to, subject, content) {
-    return fac ? await emaii.send(fac, sender, conf.COMPANY_EMAIL, [ to ], subject, content) : null
+const SRC = {
+    email: () => require('../../work/api/mailgun'),
+    note: () => require('../../work/api/twilio')
 }
 
-module.exports = {
-    email: async (to, subject, content) => {
-        let res = ''; const ky = await key[ conf.KEY_EMAIL ]( conf.KEY_EMAIL )
+const RUNNING = {
+    email: async function(fac, sender, to, subject, content) {
+        const res = await fac ? await SRC.email().send(fac, sender, conf.COMPANY_EMAIL, [ to ], subject, content) : null
+        return res
+        },
+    note: async function(fac, sender, to, subject, content) {
+        const res = await fac ? await SRC.note().send(fac, content, to, sender) : null
+        return res
+        }
+}
+
+module.exports = function(WAY, to, subject, content) {
+    return new Promise( async (rej, rev) => {
+        const ky = await key[ WAY ]( WAY )
         if (ky && ky.sid) {
-            res = await _email(
-                emaii.factory(ky.sid, ky.token), ky.sender, to, subject, content)
-        }; return res
-    }
+            const res = await RUNNING[ WAY ](
+                SRC[ WAY ]().factory(ky.sid, ky.token), ky.sender, to, subject, content)
+            rej( res )
+        } else { rev(null) }
+    })
 }

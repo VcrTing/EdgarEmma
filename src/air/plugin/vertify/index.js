@@ -16,9 +16,9 @@ export default {
     },
     genate_code() { return this._g_code() + '' },
 
-    cansend(itv = 25) {
-        let tt = sessionStorage.getItem('vertify_timed'); tt = tt ? tt : this._now()
-        tt = (moment( this._now() ).diff(moment(tt), 'seconds'))
-        return tt > itv
+    cansend(itv = 50) {
+        let tt = sessionStorage.getItem('vertify_timed'); 
+        tt = tt ? (moment( this._now() ).diff(moment(tt), 'seconds')) : itv
+        return tt >= itv
     }
 }

@@ -11,8 +11,6 @@ const KEY_EMAIL = 'email'
 const KEY_WHATSAPP = 'whatsapp'
 const WAY = [ KEY_NOTE, KEY_EMAIL, KEY_WHATSAPP ]
 
-const COMPANY_EMAIL = 'info@EdgarEmma.com'
-
 module.exports = {
     WAY,
     ENDPOINT,
@@ -22,5 +20,5 @@ module.exports = {
     KEY_EMAIL,
     KEY_WHATSAPP,
 
-    COMPANY_EMAIL
+    COMPANY_EMAIL: 'info@EdgarEmma.com'
 }
