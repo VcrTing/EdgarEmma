@@ -6,7 +6,7 @@
                     :class="{ 'pt': i > 0 }"
                 >
                     <nav class="w-40 input-attach mb-w-618">
-                        <input type="text" placeholder="請輸入手機號碼" v-model="v.v" class="input">
+                        <input type="text" placeholder="請輸入電郵地址" v-model="v.v" class="input">
                         <span class="icon pri_son">
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>
@@ -21,8 +21,8 @@
                 </div>
             </transition>
             <transition name="upper">
-                <div class="pt_x upper" v-if="v.v && v.v.length > 4">
-                    <ccf-vertify :item="v" :way="view.remind.SEND_WAY_TXT.note.v" ></ccf-vertify>
+                <div class="pt_x upper" v-if="show(v.v)">
+                    <ccf-vertify :item="v" :way="view.remind.SEND_WAY_TXT.email.v"></ccf-vertify>
                 </div>
             </transition>
         </div>
@@ -39,6 +39,16 @@ import CcfVertify from '../vertify/CcfVertify.vue'
             'data',
             '_cis'
         ],
+        computed: {
+            init() { return {
+                    v: '',
+                    code: '',
+                    is_first: true,
+                    is_vertify: false,
+                    need_vertify: true,
+                } }
+        },
+        mounted() { },
         methods: {
             show(v) { return (v.indexOf('@') > 0) && (v.indexOf('.com') > 0) },
             can(v) {
@@ -60,19 +70,11 @@ import CcfVertify from '../vertify/CcfVertify.vue'
             insert() {
                 let res = true
                 this.data.map(e => { if (!e.v) { res = false }})
-                if (res) { this.data.push( this.init() ) }
+                if (res) { this.data.push( this.init ) }
             },
             trash(i) {
                 if (this.data.length > 1) { this.data.splice(i, 1) }
-            },
-
-            init() { return Object.assign( {}, {
-                v: '',
-                code: '',
-                is_first: true,
-                is_vertify: false,
-                need_vertify: true,
-            }) }
+            }
         }
     }
 </script>

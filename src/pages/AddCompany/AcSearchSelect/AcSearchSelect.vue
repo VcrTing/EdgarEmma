@@ -40,6 +40,8 @@ import AcSsTr from './top/AcSsTr.vue'
         methods: {
             async search(q) {
                 let res = await this.serv.company.company_origin_search( this, q )
+                console.log(q)
+                console.log('res =', res)
                 this.items = res ? res : [ ]
             }
         }

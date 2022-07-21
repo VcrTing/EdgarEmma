@@ -1,5 +1,5 @@
 <template>
-    <nav class="py_x pb fx-l">
+    <nav class="pt pb fx-l">
         <div class="fx-l"
             v-for="(v, i) in data" :key="i"
             :class="v.class"

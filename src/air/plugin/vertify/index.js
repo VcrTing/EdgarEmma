@@ -4,7 +4,7 @@ import moment from "moment"
 export default {
     _now() { return moment(new Date()).format('yyyy-MM-DD hh:mm:ss') },
 
-    sav_timed() { sessionStorage.setItem('vertify_timed', moment(new Date()).format('yyyy-MM-DD hh:mm:ss') )},
+    sav_timed(uid) { sessionStorage.setItem('vertify_timed_' + uid, moment(new Date()).format('yyyy-MM-DD hh:mm:ss') )},
 
     _g_code(L = 6){
         let res = [ ]
@@ -16,8 +16,8 @@ export default {
     },
     genate_code() { return this._g_code() + '' },
 
-    cansend(itv = 50) {
-        let tt = sessionStorage.getItem('vertify_timed'); 
+    cansend(uid, itv = 50) {
+        let tt = sessionStorage.getItem('vertify_timed_' + uid); 
         tt = tt ? (moment( this._now() ).diff(moment(tt), 'seconds')) : itv
         return tt >= itv
     }

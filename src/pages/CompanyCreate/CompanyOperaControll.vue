@@ -61,7 +61,6 @@ import StatusProp from "../../components/alert/prop/StatusProp.vue"
                     if (this.typed == 'edit') {
                         res = await this.serv.company.company_update(this, this.deleteUpdateData(data))
                         if (res && res.id) { 
-                            console.log('分割线')
                             await this.serv.remind.remind_update_for_send(this, res) }
                     } else if (this.typed == 'plus') {
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))

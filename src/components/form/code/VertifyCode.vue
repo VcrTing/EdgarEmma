@@ -36,9 +36,7 @@ export default {
         'form.c_5' (n) { this.nextCode(5) }
     },
     created() { this.code = vertify.genate_code() },
-    mounted() {
-        this.resend()
-    },
+    mounted() { this.resend() },
     methods: {
         faii() { const ff = this.form
             for (let k in ff) { if (!ff[k]) { this.form_err[k] = true }

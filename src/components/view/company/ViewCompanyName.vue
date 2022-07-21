@@ -34,9 +34,15 @@
             }
         },
         methods: {
+            getTxt(src) {
+                let res = src ? (
+                    src.txt ? src.txt : src.v
+                ) : '(待補充)'
+                return res ? res.replace('\r', '') : ''
+            },
             getNameByLang(lang = 'en') {
                 let res = this.names.filter(e => e.lang == lang)
-                return res && res.length > 0 ? res[0].txt : ''
+                return res && res.length > 0 ? this.getTxt(res[0]) : ''
             }
         }
     }

@@ -1,11 +1,11 @@
 module.exports = {
     note: {
         'subject': (cd) => '',
-        'content': (to, code) => { return `尊敬的客戶，您的驗證碼為[${code}]，該驗證碼僅作用於您的郵箱 ${to}，請在驗證碼失效之前盡快將驗證碼填入到EdgarEmma網頁的驗證碼輸入框中，感謝您的配合。`}
+        'content': (to, code) => { return `尊敬的客戶，您的驗證碼為[${code}]，該驗證碼僅作用於您的手機號碼 ${to}，請在驗證碼失效之前盡快將驗證碼填入到EdgarEmma網頁的驗證碼輸入框中，感謝您的配合。`}
     },
     whatsapp: {
         'subject': (cd) => '',
-        'content': (to, code) => { return `尊敬的客戶，您的驗證碼為[${code}]，該驗證碼僅作用於您的郵箱 ${to}，請在驗證碼失效之前盡快將驗證碼填入到EdgarEmma網頁的驗證碼輸入框中，感謝您的配合。`}
+        'content': (to, code) => { return `尊敬的客戶，您的驗證碼為[${code}]，該驗證碼僅作用於您的手機號碼 ${to}，請在驗證碼失效之前盡快將驗證碼填入到EdgarEmma網頁的驗證碼輸入框中，感謝您的配合。`}
     },
     email: {
         'subject': (cd) => { return `【${cd}】EdgarEmma 表單的電子郵件驗證碼` },

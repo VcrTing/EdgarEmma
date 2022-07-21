@@ -13,9 +13,9 @@ const convert_names = function(names) {
     let res = { }
     names.map(n => {
         if (n.lang == 'hk') {
-            res.name_ch = n.txt
+            res.name_ch = n.txt ? n.txt : n.v
         } else if (n.lang == 'en') {
-            res.name_en = n.txt
+            res.name_en = n.txt ? n.txt : n.v
         }
     })
     return res

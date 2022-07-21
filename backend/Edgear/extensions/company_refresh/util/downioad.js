@@ -1,5 +1,4 @@
 
-const axios = require('axios')
 const util = require('./util')
 
 const ser = require('./ser_tabie')

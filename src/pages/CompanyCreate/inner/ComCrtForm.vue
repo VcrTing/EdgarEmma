@@ -26,17 +26,17 @@
             </input-wrapper>
         </div>
         
-            <input-wrapper class="pb_x" :label="'The phone number receive Whatsapp'" :valid="form_err.phones">
+            <input-wrapper :tip="'未有被驗證通過的電話號碼'" class="pb_x" :label="'The phone number receive Whatsapp'" :valid="form_err.phones">
                 <ccf-phone-add ref="phonesREF" :typed="'phone'" :data="form.phones"></ccf-phone-add>
             </input-wrapper>
 
-<div class="py">
+<div class="pb">
 <p>有關電郵提示，提供選項：</p>
 <div class="pt_s pb">想公司拍檔或公司行政財務等同事也同步收到電郵提升？立即增加他們的電郵。</div>
 </div>
 
-            <input-wrapper class="pb_x" :label="'The Email receive notification'" :valid="form_err.emails">
-                <ccf-phone-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-phone-add>
+            <input-wrapper :tip="'未有被驗證通過的電郵地址'" class="" :label="'The Email receive notification'" :valid="form_err.emails">
+                <ccf-email-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-email-add>
             </input-wrapper>
 
     </div>
@@ -49,11 +49,12 @@ import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
 import InputData from '../../../funcks/ui/input/InputData.vue'
 import InputWrapper from '../../../funcks/ui_components/input/InputWrapper.vue'
 import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
+import CcfEmailAdd from './extra/CcfEmailAdd.vue'
     export default {
-  components: { InputWrapper, InputData, ButtonPrimary, CcfPhoneAdd, CompanyTypeSelect },
+  components: { InputWrapper, InputData, ButtonPrimary, CcfPhoneAdd, CompanyTypeSelect, CcfEmailAdd },
         name: '',
         props: [
-            'origin'
+            'origin',
         ],
         computed: {
             since() {
@@ -63,7 +64,8 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
         data() {
             return {
                 form: {
-                    tax_id: '', name_en: '', name_ch: '', company_type: '', company_since: '', last_tax_filing_time: '', phones: [ ], emails: [ ]
+                    tax_id: '', name_en: '', name_ch: '', company_type: '', company_since: '', last_tax_filing_time: '', 
+                    phones: [ ], emails: [ ]
                 },
                 form_err: {
                     tax_id: '', name_en: '', name_ch: '', phones: '', emails: ''
@@ -105,7 +107,20 @@ import CcfPhoneAdd from './extra/CcfPhoneAdd.vue'
                     this.form = {
                         tax_id: '', name_en: '', name_ch: '', company_type: 1, // this.$refs.comtypeREF.now, 
                         company_since: y + '-01-01', last_tax_filing_time: y + '-01-01',
-                        phones: [ { v: '' } ], emails: [ { v: '' } ]
+                        phones: [ 
+                            {
+                                v: '',
+                                code: '',
+                                is_first: true,
+                                is_vertify: false,
+                                need_vertify: true,} ], 
+                        emails: [ 
+                            {
+                                v: '',
+                                code: '',
+                                is_first: true,
+                                is_vertify: false,
+                                need_vertify: true,} ]
                     }
                 }
             }
