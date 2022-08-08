@@ -39,6 +39,9 @@ import CcfEmailAdd from '../../../CompanyCreate/inner/extra/CcfEmailAdd.vue'
         props: [
             'def_phones', 'def_emails'
          ],
+         watch: {
+
+         },
         data() {
             return {
                 form: { phones: '', emails: '' },

@@ -47,7 +47,6 @@ import CountryFlagSelect from '../../../../components/form/select/CountryFlagSel
                 return src.length < 2 }
         },
         methods: {
-            show(v) { return (v.indexOf('@') > 0) && (v.indexOf('.com') > 0) },
             can(v) {
                 let res = (v != null && v != '' && v.length > 5)
                 if (this.typed == 'phone') {
