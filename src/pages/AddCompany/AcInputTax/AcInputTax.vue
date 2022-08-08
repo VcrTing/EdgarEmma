@@ -17,7 +17,6 @@ import AcItFirst from './panel/AcItFirst.vue'
         methods: {
 
             async submit(comp, remind) {
-                console.log('comp.send_way =', comp.send_way)
                 //
                 remind.send_way_world = comp.send_way ? comp.send_way : this.view.remind.SEND_WAY_DEF
 
@@ -29,18 +28,16 @@ import AcItFirst from './panel/AcItFirst.vue'
                 comp.last_tax_filing_time = new Date().getFullYear() + '-' + remind.send_date_real_str
                 comp = this.view.def.delete_strapi_def(comp)
 
-                let res = await this.serv.company.company_plus(this, comp)
+                let res = await this.serv.company.company_plus(this, this.ciear(comp) )
 
                 // 创建 REMIND
                 if (res) {
                     remind.company = res.id
-                    remind.send_typed = 0 
-                    remind.send_typed_finish = false
-                    remind.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
+                    remind = this.ciear_remind( remind, comp )
+                    
                     res = await this.serv.remind.create(this, remind)
-                    console.log('RES =', res)
                     if (res) {
-                        // setTimeout(e => { this.completed() }, 2)
+                        setTimeout(e => { this.completed() }, 2)
                     }
                 }
             },
@@ -51,6 +48,24 @@ import AcItFirst from './panel/AcItFirst.vue'
                 this.view.set_ss('company_active_checkbox', '')
 
                 this.$router.push('/home/add_company/finished')
+            },
+
+            ciear(comp) {
+                delete comp.id
+                if (!comp.order) { delete comp.order }
+                const phs = comp.phones ? comp.phones.filter(n => { if (n.v) { return true } else { return false } }) : [ ]
+                if (phs.length <= 0) { delete comp.phones }
+                return comp
+            },
+
+            ciear_remind(rmd, comp) {
+                rmd.send_typed = 0 
+                rmd.send_typed_finish = false
+                rmd.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
+                if (!rmd.remind_date) { delete rmd.remind_date }
+                delete rmd.filling
+                if (rmd.send_way_world instanceof Array) { rmd.send_way_world = rmd.send_way_world.join('_') }
+                return rmd
             }
         }
     }

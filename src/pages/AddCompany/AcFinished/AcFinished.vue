@@ -29,7 +29,7 @@ import ButtonPrimary from '../../../funcks/ui/button/ButtonPrimary.vue'
         mounted() {
             setTimeout(e => {
                 this.go()
-            }, 1000 * 20)
+            }, 1000 * 8)
         },
         methods: {
             go() {

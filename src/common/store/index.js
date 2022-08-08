@@ -11,6 +11,8 @@ export default new Vuex.Store({
 
         user: null,
         plant: null,
+
+        company: [ ]
     },
     mutations: {
         change(state, k_v) {
@@ -19,20 +21,14 @@ export default new Vuex.Store({
     },
     getters: { 
         
+        
         checkToken(state) {
             let res = false
-
                 const token = localStorage.getItem('oils_token')
-                
                 if ((token == undefined) || (token == '') || (token == null) || (token == 'undefined')) {
                     res = true
-                } else {
-                    state.token = token
-                    // console.log('token = ', token.substring(0, 15) + '...')
-                }
-    
+                } else { state.token = token }
             try{ } catch(e) { }
-            
             return v => { return res }
         },
     },

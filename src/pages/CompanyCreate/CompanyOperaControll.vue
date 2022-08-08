@@ -66,6 +66,7 @@ import PageHeaderEdit from '../../funcks/ui/header/PageHeaderEdit.vue'
                         if (res && res.id) { 
                             await this.serv.remind.remind_update_for_send(this, res) }
                     } else if (this.typed == 'plus') {
+                        console.log(this.buildPlus(data))
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))
                         if (res) { await this.plusRemind(res) }
                     }

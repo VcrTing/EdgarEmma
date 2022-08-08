@@ -18,6 +18,7 @@ const company = async function( vue, data = { _limit: 99 }) {
 }
 
 //
+// 内含 我的公司
 const company_search = async function(vue, q) {
     let cdt = build_search(q)
     cdt.user = vue.$store.state.user.id
@@ -61,10 +62,8 @@ const company_one = async function(vue, id) {
 const company_trash = async function(vue, comp) {
     // 1: 仅关闭了 Company，2: 也关闭了 Remind
     let res = await vue.net.put('company', comp.id, _tool.token(vue), { status: false, })
-    console.log('RES =', res)
     if (res.id) {
         const rmd = res.remind
-        console.log('RMD =', rmd)
         const _rmd = rmd ? await remind.remind_update('remind', { id: rmd.id, is_stop: true }) : 0
         return (_rmd.id) ? 2 : 0
     } return 0
