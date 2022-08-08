@@ -7,7 +7,11 @@ const WASH_KEY = [ 'subject', 'content' ]
 */
 const WASH_DEALING = {
     'user_email': (txt, data) => txt.replace('{{user_email}}', data.user.email),
-    'company_named': (txt, data) => txt.replace('{{company_named}}', (data.company.names[0].txt ? data.company.names[0].txt : data.company.names[0].v)),
+    'company_named': (txt, data) => {
+        const _src = data.company.names
+        const _n = (_src[0].txt ? _src[0].txt : _src[0].v)
+        _src ? txt.replace('{{company_named}}', _n ? _n : (_src[1].txt ? _src[1].txt : _src[1].v) ) : 0
+    },
     'filling_timed': (txt, data) => txt.replace('{{filling_timed}}', outdate.outdate( new Date().getFullYear() + '-' + data.remind.send_date_real_str) ),
 }
 

@@ -43,6 +43,7 @@ const _doing = async function(_tis, snd, ways) {
     _tis[ 'send_day_real' ] = outdate.outdate( _tis.day_sending )
     // 判断 能不能，返回结果是 电话s / 电邮s
     let can = _judge_send(_tis)
+    console.log('CAN =', can, ways)
     // 循环发送 类型
     for (let k in can) {
         // 获取 任务内容，先获取内容对象，再建立清洗参数，再拿去清洗，得出最终要发送的内容对象
@@ -53,7 +54,8 @@ const _doing = async function(_tis, snd, ways) {
                 if (cont.content) {
                     // 插入新 任务队列 结果
                     v.is_serial = true
-                    
+                    console.log('cont =', cont)
+                    console.log('cont.content =', cont.content)
                     v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
                     return v
                 }  else {

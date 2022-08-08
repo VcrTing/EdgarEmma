@@ -1,7 +1,7 @@
 <template>
 <div>
     <div v-show="!check" class="max-w_remind pt_x3">
-        <h4 class="py_x3">如果你想我們幫忙免費提醒你報稅，請輸入財政年度年結日</h4>
+        <h4 class="py_x3">如果你想收到有關稅局的合規提醒，例如提醒你報稅日期，請輸入你公司的財政年度年結日</h4>
 
         <div class="pt">
             <input-wrapper :class="{ 'input-disable': form.unsure }" :label="'財政年度年結日'" :valid="form_vid.filling">

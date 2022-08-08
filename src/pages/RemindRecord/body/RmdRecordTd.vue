@@ -24,7 +24,7 @@
                 </span>
             </div>
             <div class="w-16">
-                <view-remind-send-way v-if="v.remind" :way="v.remind.send_way_world"></view-remind-send-way>
+                <view-remind-send-way v-if="v.remind" :comp="v.company" :way="v.remind.send_way_world"></view-remind-send-way>
             </div>
             <div class="w-9">
                 <div v-if="v.is_serial">
