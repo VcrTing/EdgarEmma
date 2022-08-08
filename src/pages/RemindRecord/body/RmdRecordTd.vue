@@ -8,10 +8,10 @@
                 <span class="sus">{{ i + 1 }}</span>
             </div>
             <div class="w-11">
-                {{ v.company.tax_id }}
+                <div v-if="v.company">{{ v.company.tax_id }}</div>
             </div>
             <div class="w-21">
-                <view-company-name :one="true" :names="v.company.names"></view-company-name>
+                <view-company-name v-if="v.company" :one="true" :names="v.company.names"></view-company-name>
             </div>
             <div class="w-11">
                 <span class="pri_son" v-if="v.is_first">新增數據</span>
@@ -24,7 +24,7 @@
                 </span>
             </div>
             <div class="w-16">
-                <view-remind-send-way :way="v.remind.send_way_world"></view-remind-send-way>
+                <view-remind-send-way v-if="v.remind" :way="v.remind.send_way_world"></view-remind-send-way>
             </div>
             <div class="w-9">
                 <div v-if="v.is_serial">

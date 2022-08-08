@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "import_sys_logs",
+  "info": {
+    "name": "ImportSysLog",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "start": {
+      "type": "date"
+    },
+    "end": {
+      "type": "date"
+    },
+    "now": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "remark": {
+      "type": "string"
+    }
+  }
+}

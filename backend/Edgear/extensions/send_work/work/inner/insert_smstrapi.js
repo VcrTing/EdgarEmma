@@ -25,7 +25,12 @@ module.exports = {
             smstrapi.conf.KEY_EMAIL ](timed, to, cont.subject, cont.content, mark, true )
         if (res && res.id) { res = _build_result(res); res['to'] = to; return res }
     },
-    whatsapp: async function(to, timed, cont) {
+    whatsapp: async function(to, timed, cont, mark) {
         to = to.v ? to.v : null
+        // to = 接收者，timed = 发送日期，cont.content = 公司名称，cont.tempiate_name = 后台需要使用的模版名称
+        let res = await smstrapi.insert[ 
+            smstrapi.conf.KEY_WHATSAPP ](timed, to, cont.tempiate_name, cont.content, mark, true )
+        if (res && res.id) { res = _build_result(res); res['to'] = to; 
+            return res }
     }
 }

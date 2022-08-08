@@ -1,6 +1,8 @@
 
 import _tool from '../_tool'
 
+import remind from './remind'
+
 const build_search = function(q) {
     let res = { _limit: 99 }
     if (q) {
@@ -37,9 +39,6 @@ const company_plus = async function(vue, data) {
     return res
 }
 const company_origin_plus = async function(vue, data, caii = null) {
-    // let res = null
-    // res = { fail: true, code: 500 }
-    // res['code'] = _tool.catch_err(err + '')
     try {
         return await vue.net.post('company_origin', _tool.token(vue), data)
     } catch(err) {
@@ -58,12 +57,27 @@ const company_one = async function(vue, id) {
     return vue.view.clean( res )
 }
 
+//
+const company_trash = async function(vue, comp) {
+    // 1: 仅关闭了 Company，2: 也关闭了 Remind
+    let res = await vue.net.put('company', comp.id, _tool.token(vue), { status: false, })
+    console.log('RES =', res)
+    if (res.id) {
+        const rmd = res.remind
+        console.log('RMD =', rmd)
+        const _rmd = rmd ? await remind.remind_update('remind', { id: rmd.id, is_stop: true }) : 0
+        return (_rmd.id) ? 2 : 0
+    } return 0
+}
 
 export default {
     company,
+
     company_one,
     company_plus,
+    company_trash,
     company_update,
+
     company_origin_plus,
 
     company_search,

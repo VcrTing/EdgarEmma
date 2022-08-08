@@ -40,6 +40,11 @@ const ser_timed = function(e, mode = 0, long = false) {
     return long ? e.format('yyyy-MM-DD hh:mm:ss') : e.format('yyyy-MM-DD')
 }
 
+const ser_timed_month = function(e) {
+    e = moment(e)
+    return e.format('M月D日')
+}
+
 const ser_timed_short = function(e, mode = 0, long = false) {
     e = moment(e)
 
@@ -95,6 +100,8 @@ const getTodayEn = function(fill = false, num_month = 0, num_day = 0) {
 
 export default {
     ser_timed,
+    ser_timed_month,
+
     getToday,
     getTodayEn,
 

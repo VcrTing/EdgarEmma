@@ -16,23 +16,30 @@ export default {
     data() {
         return {
             data: { },
-            send_way: [ 'email' ],
+            send_way: [ 'email', 'whatsapp' ],
         }
     },
     mounted() {
         this.data = this.view.remind.SEND_WAY_TXT
         this.rest()
     },
+    computed: {
+        comp() {
+            return JSON.parse( sessionStorage.getItem('company_active_company') )
+        }
+    },
     methods: {
         
         rest() {
-            this.send_way = [ this.view.remind.SEND_WAY[ 1 ] ]
+            this.send_way = this.comp.send_way ? this.comp.send_way :
+                this.view.remind.SEND_WAY_DEF.split('_') // [ this.view.remind.SEND_WAY[ 1 ] ]
+            // console.log( this.comp, this.send_way )
         },
         collect() {
             return this.send_way
         },
 
-        ioc(snd =  [ 'email' ]) {
+        ioc(snd =  [ 'email', 'whatsapp' ]) {
             this.send_way = snd
         }
     }

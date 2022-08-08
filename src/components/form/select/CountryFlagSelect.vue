@@ -41,6 +41,9 @@
                         txt: '澳門', v: '+853', img: require('@/assets/flag/macau.jpeg')
                     },
                     {
+                        txt: '美國', v: '+001', img: require('@/assets/flag/macau.jpeg')
+                    },
+                    {
                         txt: '中國大陸', v: '+86', img: require('@/assets/flag/china.png')
                     }
                 ]

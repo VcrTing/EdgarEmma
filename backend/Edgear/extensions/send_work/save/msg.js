@@ -34,12 +34,15 @@ module.exports = {
                     <h2>你好 <span>{{user_email}}</span>，提醒你， </h2>
                     <p>你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。</p>
                     <p>如有查詢，請電郵<a href="mailto:info@EdgarEmma.com">info@EdgarEmma.com</a></p>
+                    <br/>
+                    <p class="sub"><a href="https://strapi07.svr.up5d.com/suspension/notice">暫停該公司的提醒？</a></p>
                 </div>
                 <style>
                     html { color: #1e1f22; }
                     p { color: #58595c; }
                     .box { padding: 24px; border-radius: 7px; background-color: #f7f8f9; text-align: center; }
                     .Logo { margin: 24px; max-width: 320px; }
+                    .sub { font-size: 12px; }
                 </style>
             </body>
             </html>` 
@@ -76,19 +79,12 @@ module.exports = {
         }
     ],
     'whatsapp': [
-        { id: 1,
-            params: { 
-                user_email: '',
-                company_named: '',
-                filling_timed: ''
-            }, 
-            subject: '', content: '你好，提提你，你旗下 {{company_named}} 公司需要在30天內完成報稅，遲左會罰款架。' },
-        { id: 2,
-            params: { 
-                user_email: '',
-                company_named: '',
-                filling_timed: '' }, 
-            subject: '', content: '你好，提醒你，您已成功添加了 {{company_named}}，請留心好該公司的報稅時間。' }
+        { id: 1, params: { company_named: '', }, 
+            tempiate_name: 'tax_reminder_01',
+            subject: '', content: '{{company_named}}' },
+        { id: 2, params: { company_named: '', }, 
+            tempiate_name: 'echo_new_company_added_01',
+            subject: '', content: '{{company_named}}' }
     ],
 
     'error': { id: 0, subject: '錯誤提示', content: '您尚未選擇發送內容。' }

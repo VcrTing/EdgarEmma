@@ -33,7 +33,7 @@ const _judge_send = function(tmd) {
     let can = { }
     can[ smstrapi.conf.KEY_NOTE ] = tmd.phones && tmd.phones.length > 0 ? tmd.phones : [ ]
     can[ smstrapi.conf.KEY_EMAIL ] = tmd.emails && tmd.emails.length > 0 ? tmd.emails : [ ]
-    can[ smstrapi.conf.KEY_WHATSAPP ] = tmd.whatsapp && tmd.whatsapp.length > 0 ? tmd.whatsapp : [ ]
+    can[ smstrapi.conf.KEY_WHATSAPP ] = tmd.phones && tmd.phones.length > 0 ? tmd.phones : [ ]
     for (let k in can) { if ( !can[ k ] ) { delete can[ k ] } }; return can
 }
 
@@ -53,6 +53,7 @@ const _doing = async function(_tis, snd, ways) {
                 if (cont.content) {
                     // 插入新 任务队列 结果
                     v.is_serial = true
+                    
                     v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
                     return v
                 }  else {
@@ -65,7 +66,9 @@ const _doing = async function(_tis, snd, ways) {
     }; return _tis
 }
 const _ser_send = async function(snd, ways) {
+    // 公司 报税日
     await snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
+    // 公司 since
     if (snd.times_since) { await snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }
     return snd
 }

@@ -30,8 +30,10 @@ export default {
     computed: {
         reciver() {
             let res = this.item.v
-            if (this.way == this.view.remind.SEND_WAY_TXT.note.v) {
-                if (!res.startsWith('+')) { res = '+852 ' + res } }
+            if (this.way == this.view.remind.SEND_WAY_TXT.whatsapp.v) {
+                if (!res.startsWith('+')) { 
+                    // res = '+852 ' + res 
+                } }
             return res
         }
     },
@@ -39,10 +41,11 @@ export default {
         async send_in(code) {
             const condition = {
                 email: this.reciver, code, send_way: this.way,
-                to_email: this.reciver, to_note: this.reciver,
+                to_email: this.reciver, to_note: this.reciver, to_whatsapp: this.reciver
             }
             
-            if (this.reciver) { 
+            this.conf.TEST ? console.log('发送验证码 =', condition) : 0
+            if (this.reciver && !this.conf.TEST) { 
                 let res = undefined
                 try {
                     res = await this.serv.code.code_send(this, condition)

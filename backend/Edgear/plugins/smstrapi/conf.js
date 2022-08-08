@@ -3,7 +3,8 @@ const TASK_LIMIT = 20
 const ENDPOINT = {
     key: 'plugins::smstrapi.key',
     smsnote: 'plugins::smstrapi.sms-note',
-    smsemail: 'plugins::smstrapi.sms-email'
+    smsemail: 'plugins::smstrapi.sms-email',
+    smswhatsapp: 'plugins::smstrapi.sms-whatsapp'
 }
 
 const KEY_NOTE = 'note'

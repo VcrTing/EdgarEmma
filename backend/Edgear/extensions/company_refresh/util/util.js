@@ -4,7 +4,7 @@ const jsdom = require('jsdom')
 const axios = require('axios')
 const moment = require('moment')
 
-const ROOT = path.join(__dirname, 'save')
+const ROOT = path.join(path.resolve(__dirname, '..'), 'save')
 
 const _ink = (mmt) => 
 `https://webb-site.com/dbpub/incHKcaltype.asp?y=${
@@ -15,16 +15,17 @@ const _ink = (mmt) =>
 const _timed = (n, add = 0) => moment(n).add(add, 'days')
 const _save = (mmt) => path.resolve(ROOT, path.join(mmt.format('yyyy'), mmt.format('MM')))
 const _name = (mmt) => `Emma_${mmt.format('yyyy')}_${mmt.format('MM')}_${mmt.format('DD')}`
-
+const dom = (htmi) => { const jd = new jsdom.JSDOM(htmi); return jd.window.document }
 
 module.exports = {
     _ink,
+    _timed,
     // 永远拿到 昨天的链接
     iink: function (tm, ad = -1) { tm = tm ? tm : (new Date()); return _ink(_timed(tm, ad)) },
     fiie: function (mmt) { return path.join( _save(mmt), _name(mmt) + '.csv' ) },
 
     // DOM 操作
-    dom: (htmi) => { const jd = new jsdom.JSDOM(htmi); return jd.window.document },
+    tabie: (htmi) => dom(htmi).querySelector('table'),
     // 文件操作
     write: (ff, datt) => fs.writeFileSync(ff, datt),
     read: (ff, caii) => fs.readFileSync(ff, 'utf-8'),

@@ -6,16 +6,19 @@
         <div class="pt">
             <input-wrapper :class="{ 'input-disable': form.unsure }" :label="'財政年度年結日'" :valid="form_vid.filling">
                 <input-data :_dis="form.unsure" :_date="form.filling" @result="save_fiii" v-if="form.filling"></input-data>
+                <div class="def-input" v-else>
+                    <input value="" class="input" placeholder="加載中...">
+                </div>
             </input-wrapper>
+
+            <div class="py_x2 upper" :class="{ 'die-seiect': form.unsure }">
+                <ac-it-day-choise @change="changeDay" :_date="form.remind_date" ref="rdREF"></ac-it-day-choise>
+            </div>
 
             <div class="pt_x2">
                 <input-check-box ref="usREF" @change="(us) => form.unsure = us">
-                    <span class="ttd">不確定年結日?</span>
+                    <span class="ttd">不確定年結日 / 暫時不需要稅務提醒</span>
                 </input-check-box>
-            </div>
-
-            <div class="py_x2 upper" v-show="form.unsure">
-                <ac-it-day-choise :_date="form.remind_date" ref="rdREF"></ac-it-day-choise>
             </div>
         </div>
 
@@ -33,7 +36,7 @@
             <div>
                 <button class="btn-hui" @click="$router.push('/home/add_company/input_remind')">返回修改</button>
             </div>
-            <button-primary class="px_x2 righter" @tap="is_submit">確認及發送一次有效驗證碼</button-primary>
+            <button-primary class="px_x2 righter" @tap="is_submit">確認</button-primary>
         </div>
     </div>
 </div>
@@ -61,8 +64,18 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
         },
         mounted() { this.def() },
         methods: {
+            changeDay(v) {
+                // console.log('改变时间 =', (new Date()).getFullYear() + '-' + v)
+                this.form.filling = null
+                this.view.set_ss('company_active_fiiiing', this.form.filling) 
+                setTimeout(e => {
+                    this.form.filling = (new Date()).getFullYear() + '-' + v
+                }, 400)
+            },
+
             save_fiii(v) { 
                 this.form.filling = v
+                this.$refs.rdREF.now = ''
                 this.view.set_ss('company_active_fiiiing', this.form.filling) },
             next() {
                 this.check = true
@@ -109,6 +122,10 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
     }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
     
+.die-seiect
+    .btn-pri
+        background: #6a6666 !important
+        border-color: #6a6666 !important
 </style>

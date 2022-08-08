@@ -7,19 +7,5 @@
 </template>
 
 <script>
-    export default {
-        name: '',
-        props: [
-            'header'
-        ],
-        data() {
-            return {
-                
-            }
-        }
-    }
+    export default { props: [ 'header' ] }
 </script>
-
-<style lang="sass" scoped>
-    
-</style>

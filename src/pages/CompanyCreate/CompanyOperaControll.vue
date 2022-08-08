@@ -1,6 +1,8 @@
 <template>
     <div class="">
-        <page-header :header="_header"></page-header>
+        <page-header-edit :header="_header" :cis="''">
+            <button @click="trash" class="btn-pri_tin btn-def" v-if="typed == 'edit'">刪除公司</button>
+        </page-header-edit>
 
         <com-crt-form class="pb_x2 pt" ref="formREF" v-if="typed == 'plus'"></com-crt-form>
 
@@ -8,7 +10,7 @@
             <com-crt-form class="pb_x2" ref="formREF" v-if="def" :origin="def"></com-crt-form>
         </div>
 
-        <div class="fx-c py_x2">
+        <div class="fx-c py_x3">
             <button-primary class="px_x lefter" @tap="submit">
                 <i v-if="loading" class="fas fa-circle-notch circle-around"></i>
                 <span v-else>保存</span>
@@ -33,9 +35,10 @@ import ButtonPrimaryOut from '../../funcks/ui/button/ButtonPrimaryOut.vue'
 import PageHeader from '../../funcks/ui/header/PageHeader.vue'
 import ComCrtForm from "./inner/ComCrtForm.vue"
 import StatusProp from "../../components/alert/prop/StatusProp.vue"
+import PageHeaderEdit from '../../funcks/ui/header/PageHeaderEdit.vue'
 
     export default {
-        components: { ComCrtForm, ButtonPrimary, ButtonPrimaryOut, PageHeader, StatusProp },
+        components: { ComCrtForm, ButtonPrimary, ButtonPrimaryOut, PageHeader, StatusProp, PageHeaderEdit },
         props: [ 'typed', 'def' ],
         data() {
             return {
@@ -83,6 +86,7 @@ import StatusProp from "../../components/alert/prop/StatusProp.vue"
 
             buildPlus(res) {
                 res.user = this.$store.state.user.id
+                res.is_stop = this.unsure
                 res.last_tax_filing_time = res.last_tax_filing_time ? res.last_tax_filing_time.substring(0, 10) : ''
                 return res
             },
@@ -99,7 +103,12 @@ import StatusProp from "../../components/alert/prop/StatusProp.vue"
                 console.log('UPDATE RES =', res)
                 return res
             },
-            ani() { setTimeout(e => { this.loading = false }, 1200) }
+            ani() { setTimeout(e => { this.loading = false }, 1200) },
+
+            trash() {
+                this.view.set_ss('company_wiii_trash', this.def)
+                this.$router.push('/home/company_trash/')
+            }
         }
     }
 </script>

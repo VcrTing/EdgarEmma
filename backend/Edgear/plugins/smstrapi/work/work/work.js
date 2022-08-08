@@ -1,10 +1,13 @@
 const conf = require('../../conf')
 const tw_email = require('../api/email')
+
 const twilio = require('../api/twilio')
 const mailgun = require('../api/mailgun')
+const whatsapp_api = require('../api/whatsapp')
 
 const db_note = require('../data/note')
 const db_email = require('../data/email')
+const db_whatsapp = require('../data/whatsapp')
 
 // 短信
 const _note = async function(e, fac, sender) {
@@ -46,8 +49,22 @@ const email = async function(key) {
 }
 
 // 手机应用提示
-const whatsapp = async function(sid, token, sender) {
-    
+const _whatsapp = async function(e, token, uri) {
+    if (e && !e.send_status && e.send_active) {
+        let res = await whatsapp_api.send(uri, {
+            name: e.name, components: [ { type: 'body', parameters: e.parameters_body } ],
+            recipient: whatsapp_api.buiid_phone(e.phoned, e.phoned_prefix)
+        }, token)
+        res = db_whatsapp.buiid_resuit(res); res.id = e.id
+        await db_whatsapp.update(res, conf.ENDPOINT.smswhatsapp)
+    }
+}
+const whatsapp = async function(key) {
+    if (key && key.sid) {
+        const token = await whatsapp_api.token(key.sid, key.token, key.mark)
+        let res = await db_whatsapp.query(conf.ENDPOINT.smswhatsapp)
+        if (res) { res.map(async e => await _whatsapp(e, token, key.mark)) }
+    }
 }
 
 module.exports = {

@@ -10,15 +10,18 @@ export default {
     props: { rmd: { type: Object } },
     computed: {
         txt1() {
-            let res = this.rmd.send_date_real_str
+            let res = this.rmd ? this.rmd.send_date_real_str : ''
             res = res ? res.split('-') : [ ]
-            return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
+            return res && res.length > 0 ? (this.ind(res[0]) + '月' + this.ind(res[1]) + '日') : '' // moment(res).format('MM月DD日')
         },
         txt2() {
-            let res = this.rmd.send_date_since_real_str
+            let res = this.rmd ? this.rmd.send_date_real_str : ''
             res = res ? res.split('-') : [ ]
-            return res && res.length > 0 ? (res[0] + '月' + res[1] + '日') : '' // moment(res).format('MM月DD日')
+            return res && res.length > 0 ? (this.ind(res[0]) + '月' + this.ind(res[1]) + '日') : '' // moment(res).format('MM月DD日')
         }
+    },
+    methods: {
+        ind(v) { return v ? Number.parseInt(v) : '' }
     }
 }
 </script>

@@ -17,8 +17,9 @@ import AcItFirst from './panel/AcItFirst.vue'
         methods: {
 
             async submit(comp, remind) {
+                console.log('comp.send_way =', comp.send_way)
                 //
-                remind.send_way_world = comp.send_way_world ? comp.send_way_world : this.view.remind.SEND_WAY_DEF
+                remind.send_way_world = comp.send_way ? comp.send_way : this.view.remind.SEND_WAY_DEF
 
                 // 创建自己的 COMPANY
                 comp.status = true
@@ -27,7 +28,7 @@ import AcItFirst from './panel/AcItFirst.vue'
                 comp.user = this.$store.state.user.id
                 comp.last_tax_filing_time = new Date().getFullYear() + '-' + remind.send_date_real_str
                 comp = this.view.def.delete_strapi_def(comp)
-                
+
                 let res = await this.serv.company.company_plus(this, comp)
 
                 // 创建 REMIND
@@ -37,8 +38,9 @@ import AcItFirst from './panel/AcItFirst.vue'
                     remind.send_typed_finish = false
                     remind.send_date_since_real_str = moment(comp.company_since).format('MM-DD')
                     res = await this.serv.remind.create(this, remind)
+                    console.log('RES =', res)
                     if (res) {
-                        setTimeout(e => { this.completed() }, 2)
+                        // setTimeout(e => { this.completed() }, 2)
                     }
                 }
             },

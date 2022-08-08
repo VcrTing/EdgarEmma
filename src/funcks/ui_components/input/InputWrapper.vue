@@ -17,7 +17,7 @@
             'tip'
         ],
         mounted() {
-            this.msg = this.tip ? this.tip : '請檢查妳的輸入'
+            this.msg = this.tip ? this.tip : '請檢查你的輸入'
         },
         data() {
             return {

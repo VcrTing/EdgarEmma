@@ -16,7 +16,7 @@ const ser_name = function(txt, ine = '\n') {
     return sps ? sps.map(e => {
         const res = { }
         res[ 'lang' ] = cn_or_en(e)
-        res[ 'v' ] = e; return res }) : null
+        res[ 'txt' ] = e.replace('"', '').replace('\"', ''); return res }) : null
 }
 
 module.exports = {

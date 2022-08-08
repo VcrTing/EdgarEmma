@@ -11,7 +11,7 @@
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>
                     </nav>
-                    <div class="w-60 mb-w-382">
+                    <div class="w-60 mb-w-382" v-show="show_plus">
                         <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
                         >
@@ -40,13 +40,9 @@ import CcfVertify from '../vertify/CcfVertify.vue'
             '_cis'
         ],
         computed: {
-            init() { return {
-                    v: '',
-                    code: '',
-                    is_first: true,
-                    is_vertify: false,
-                    need_vertify: true,
-                } }
+            show_plus() {
+                let src = this.data ? this.data : [ ]
+                return src.length < 2 }
         },
         mounted() { },
         methods: {
@@ -70,11 +66,20 @@ import CcfVertify from '../vertify/CcfVertify.vue'
             insert() {
                 let res = true
                 this.data.map(e => { if (!e.v) { res = false }})
-                if (res) { this.data.push( this.init ) }
+                if (res && this.data.length <= 1 ) { 
+                    this.data.push( this.init() ) }
             },
             trash(i) {
                 if (this.data.length > 1) { this.data.splice(i, 1) }
-            }
+            },
+
+            init() { return Object.assign( {}, {
+                v: '',
+                code: '',
+                is_first: true,
+                is_vertify: false,
+                need_vertify: true,
+            }) }
         }
     }
 </script>

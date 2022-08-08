@@ -20,7 +20,6 @@ module.exports = async function() {
 
     fisrt_send()
     if (hour()) { 
-        console.log('工作')
         await remind_to_send()
         await send_to_smstrapi() }
 }

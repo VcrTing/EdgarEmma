@@ -25,17 +25,25 @@
                 <input-data :_date="form.last_tax_filing_time" v-if="form.last_tax_filing_time" @result="(v) => form.last_tax_filing_time = v"></input-data>
             </input-wrapper>
         </div>
+
+<nav class="upper" v-if="has_phone_or_email">
+    <div class="py">
+    <p>註意：</p>
+    <div class="pt_s pb">同一個公司，你可以添加最多2個WhatsApp和2個電郵提示服務，方便和公司其他合夥人，董事或行政經理同日收到合規提示</div>
+    </div>
+</nav>
         
-            <input-wrapper :tip="'未有被驗證通過的電話號碼'" class="pb_x" :label="'The phone number receive Whatsapp'" :valid="form_err.phones">
+            <input-wrapper :tip="'請檢查電話號碼的有效性'" class="pb_x" :label="'The phone number receive Whatsapp'" :valid="form_err.phones">
                 <ccf-phone-add ref="phonesREF" :typed="'phone'" :data="form.phones"></ccf-phone-add>
             </input-wrapper>
+
 
 <div class="pb">
 <p>有關電郵提示，提供選項：</p>
 <div class="pt_s pb">想公司拍檔或公司行政財務等同事也同步收到電郵提升？立即增加他們的電郵。</div>
 </div>
 
-            <input-wrapper :tip="'未有被驗證通過的電郵地址'" class="" :label="'The Email receive notification'" :valid="form_err.emails">
+            <input-wrapper :tip="'請檢查電郵地址的有效性'" class="" :label="'The Email receive notification'" :valid="form_err.emails">
                 <ccf-email-add ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-email-add>
             </input-wrapper>
 
@@ -59,6 +67,13 @@ import CcfEmailAdd from './extra/CcfEmailAdd.vue'
         computed: {
             since() {
                 return this.form.company_since ? this.form.company_since : this.view.timed.getToday()
+            },
+            has_phone_or_email() {
+                const p = this.form.phones
+                const e = this.form.emails
+                let res = (p && p[0] && p[0].v)
+                if (e && e[0] && e[0].v) { res = true }
+                return res
             }
         },
         data() {
@@ -79,7 +94,10 @@ import CcfEmailAdd from './extra/CcfEmailAdd.vue'
                 this.form_err.name_en = (!this.form.name_en || this.form.name_en.length < 2 || this.form.name_en.length > 220)
                 // this.form_err.name_ch = (!this.form.name_ch || this.form.name_ch.length < 2 || this.form.name_ch.length > 160)
 
-                this.form_err.phones = this.$refs.phonesREF.valid().length <= 0
+                const phs = this.form.phones.filter(e => { if (e.v) { return true }; return false })
+                this.form_err.phones = phs.length > 0 ?
+                    this.$refs.phonesREF.valid().length <= 0 :
+                    false
                 this.form_err.emails = this.$refs.emailsREF.valid().length <= 0
 
                 for (let k in this.form_err) {

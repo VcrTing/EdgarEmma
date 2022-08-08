@@ -16,9 +16,16 @@ import ButtonPrimaryOut from '../../../../funcks/ui/button/ButtonPrimaryOut.vue'
   components: { ButtonPrimaryOut },
         name: '',
         props: [ '_def' ],
+        watch: {
+            now(n) {
+                if (n) {
+                    n ? this.$emit('change', n) : 0
+                }
+            }
+        },
         data() {
             return {
-                now: '03-21',
+                now: null,
 
                 dates: [
                     {
@@ -31,7 +38,7 @@ import ButtonPrimaryOut from '../../../../funcks/ui/button/ButtonPrimaryOut.vue'
             }
         },
         mounted() {
-            this.now = this._def ? this._def : '03-31'
+            this.now = this._def ? this._def : null
         },
     }
 </script>

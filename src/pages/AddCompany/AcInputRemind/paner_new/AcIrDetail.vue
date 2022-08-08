@@ -4,16 +4,16 @@
 
         <div class="pt">
 
-            <input-wrapper :tip="'未有被驗證通過的電話號碼'" :label="'WhatsApp'" :valid="form_err.phones">
+            <input-wrapper :tip="'請檢查電話號碼的有效性'" :label="'WhatsApp'" :valid="form_err.phones">
                 <ccf-phone-add :_cis="'ac-ir-dt-input'" ref="phonesREF"  :typed="'phone'" :data="form.phones"></ccf-phone-add>
             </input-wrapper>
 
             <div class="py_s"></div>
-            <input-wrapper :tip="'未有被驗證通過的電郵地址'" :label="'Email'" :valid="form_err.emails">
+            <input-wrapper :tip="'請檢查電郵地址的有效性'" :label="'Email'" :valid="form_err.emails">
                 <ccf-email-add :_cis="'ac-ir-dt-input'" ref="emailsREF" :typed="'email'" :data="form.emails"></ccf-email-add>
             </input-wrapper>
 
-            <checkbox-send-way ></checkbox-send-way>
+            <checkbox-send-way ref="wayREF"></checkbox-send-way>
         </div>
 
         <div class="fx-c py_x2">
@@ -48,13 +48,16 @@ import CcfEmailAdd from '../../../CompanyCreate/inner/extra/CcfEmailAdd.vue'
         created() { this.reset() },
         methods: {
             vaiid() {
-                this.form_err.phones = this.$refs.phonesREF.valid().length <= 0
+                const phs = this.form.phones.filter(e => { if (e.v) { return true }; return false })
+                this.form_err.phones = phs.length > 0 ? this.$refs.phonesREF.valid().length <= 0 : 0
                 this.form_err.emails = this.$refs.emailsREF.valid().length <= 0
 
                 for (let k in this.form_err) { if (this.form_err[k]) { return true } }
             },
             confirm() {
                 if (!this.vaiid()) {
+                    this.comp.send_way = this.$refs.wayREF.collect()
+                    sessionStorage.setItem('company_active_company', JSON.stringify( this.comp ))
                     
                     this.$emit('submit', [
                         this.form.phones, this.form.emails
@@ -81,7 +84,7 @@ import CcfEmailAdd from '../../../CompanyCreate/inner/extra/CcfEmailAdd.vue'
         computed: {
 
             comp() {
-                return null
+                return JSON.parse( sessionStorage.getItem('company_active_company') )
             }
         }
     }

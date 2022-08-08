@@ -5,11 +5,9 @@
 </template>
 
 <script>
-import AcIrConfirmCode from './paner/AcIrConfirmCode.vue'
-import AcIrInputDetaii from './paner/AcIrInputDetaii.vue'
 import AcIrDetail from './paner_new/AcIrDetail.vue'
 export default {
-  components: { AcIrInputDetaii, AcIrConfirmCode, AcIrDetail },
+  components: { AcIrDetail },
     data() {
         return {
             company: { }

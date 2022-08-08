@@ -38,6 +38,8 @@ const remind_update_for_send = async function(vue, comp) {
     return await remind_update(vue, res)
 }
 
+
+
 export default {
     create,
     remind_update,

@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/import-sys-log",
+      "handler": "import-sys-log.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/import-sys-log",
+      "handler": "import-sys-log.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/import-sys-log",
+      "handler": "import-sys-log.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ const conf = require('../conf')
 const insert = require('./db/insert')
 
 const instant = require('./instant/instant')
+const instant_whatsapp = require('./instant/instant-whatsapp')
 
 module.exports = {
     conf,
@@ -11,5 +12,6 @@ module.exports = {
     // conts 数据固定，格式为：{ subject: 'null/这是一封邮件', content: '短信内容/邮件HTML内容' }
     insert,
 
-    instant
+    instant,
+    instant_whatsapp
 }
