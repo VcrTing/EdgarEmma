@@ -48,8 +48,12 @@ import CcfEmailAdd from '../../../CompanyCreate/inner/extra/CcfEmailAdd.vue'
         created() { this.reset() },
         methods: {
             vaiid() {
-                const phs = this.form.phones.filter(e => { if (e.v) { return true }; return false })
-                this.form_err.phones = phs.length > 0 ? this.$refs.phonesREF.valid().length <= 0 : 0
+                if (this.$refs.wayREF.need_phoned()) {
+                    this.form_err.phones = this.$refs.phonesREF.valid( true ).length <= 0
+                } else {
+                    const phs = this.form.phones.filter(e => { if (e.v) { return true }; return false })
+                    this.form_err.phones = phs.length > 0 ? this.$refs.phonesREF.valid().length <= 0 : 0
+                }
                 this.form_err.emails = this.$refs.emailsREF.valid().length <= 0
 
                 for (let k in this.form_err) { if (this.form_err[k]) { return true } }

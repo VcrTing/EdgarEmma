@@ -41,6 +41,11 @@ export default {
 
         ioc(snd =  [ 'email', 'whatsapp' ]) {
             this.send_way = snd
+        },
+
+        // 查看是否需要 号码
+        need_phoned() {
+            return this.send_way.indexOf( this.view.remind.WAY_WHATSAPP) >= 0
         }
     }
 }

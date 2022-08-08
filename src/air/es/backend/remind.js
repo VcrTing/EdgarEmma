@@ -1,12 +1,13 @@
+const WAY_WHATSAPP = 'whatsapp'
 
-const SEND_WAY = [ 'note', 'email', 'whatsapp' ]
+const SEND_WAY = [ 'note', 'email', WAY_WHATSAPP ]
 const SEND_WAY_TXT = {
     'email': { v: 'email', def: true, txt: '電郵提示', id: "way_email", class: 'checkbox-need', require: true },
     // 'note': { v: 'note', def: true, txt: '短信提示', id: "way_note", class: 'pl', require: false },
-    'whatsapp': { v: 'whatsapp', def: true, txt: 'Whatsapp 推送', id: "way_whatsapp", class: 'pl', require: false },
+    WAY_WHATSAPP: { v: WAY_WHATSAPP, def: true, txt: 'Whatsapp 推送', id: "way_" + WAY_WHATSAPP, class: 'pl', require: false },
 }
 
-const SEND_WAY_DEF = 'whatsapp_email'
+const SEND_WAY_DEF = WAY_WHATSAPP + '_email'
 
 const send_way_world = function(sw) {
     return sw.join('_')
@@ -26,5 +27,7 @@ export default {
 
     SEND_WAY,
     SEND_WAY_TXT,
-    SEND_WAY_DEF
+    SEND_WAY_DEF,
+
+    WAY_WHATSAPP
 }

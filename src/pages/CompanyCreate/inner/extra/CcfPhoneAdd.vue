@@ -58,7 +58,12 @@ import CountryFlagSelect from '../../../../components/form/select/CountryFlagSel
                 return  res
             },
 
-            valid() {
+            valid(must = false) {
+                if (must) {
+                    return this.data.filter(e => 
+                            (this.can(e.v) && e.is_vertify) ? true : false
+                        )
+                }
                 return this.data ? 
                     this.data.filter(e => 
                             (this.can(e.v) && e.is_vertify) ? true : false
