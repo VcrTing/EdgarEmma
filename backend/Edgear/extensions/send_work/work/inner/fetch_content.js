@@ -6,13 +6,22 @@ const WASH_KEY = [ 'subject', 'content' ]
     DATA 参数要准备三个字段，user、company、remind
 */
 const WASH_DEALING = {
-    'user_email': (txt, data) => txt.replace('{{user_email}}', data.user.email),
+    'user_email': (txt, data) => txt ? txt.replace('{{user_email}}', data.user.email) : 0,
     'company_named': (txt, data) => {
+        let res = undefined
         const _src = data.company.names
-        const _n = (_src[0].txt ? _src[0].txt : _src[0].v)
-        _src ? txt.replace('{{company_named}}', _n ? _n : (_src[1].txt ? _src[1].txt : _src[1].v) ) : 0
+        if (_src) {
+            if (_src[0]) {
+                if (_src[0].txt) { res = _src[0].txt }
+                if (_src[0].v) { res = _src[0].v }
+            } 
+            if (!res) {
+                if (_src[1].txt) { res = _src[1].txt }
+                if (_src[1].v) { res = _src[1].v }
+            } } 
+        return txt ? txt.replace('{{company_named}}', res ? res : '(暫無公司名稱)') : ''
     },
-    'filling_timed': (txt, data) => txt.replace('{{filling_timed}}', outdate.outdate( new Date().getFullYear() + '-' + data.remind.send_date_real_str) ),
+    'filling_timed': (txt, data) => txt ? txt.replace('{{filling_timed}}', outdate.outdate( new Date().getFullYear() + '-' + data.remind.send_date_real_str) ) : 0,
 }
 
 // 清洗内容
