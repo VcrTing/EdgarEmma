@@ -49,7 +49,7 @@ const _doing = async function(_tis, snd, ways) {
         if ((ways.indexOf(k) >= 0)) {
             let cont = content.wash_content( content.content(k, _tis.conts), _build_params(snd))
             // 取出每个 联络电话 / 电邮
-            can[ k ].map(async v => {
+            can[ k ] = can[ k ].map(async v => {
                 if (cont.content) {
                     // 插入新 任务队列 结果
                     v.is_serial = true
