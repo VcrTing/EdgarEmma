@@ -11,6 +11,11 @@ module.exports = {
             code: '123456',
             send_way: [ 'email', 'note' ]
         }
+
+更新：
+/root/SAVE/EdgarEmma/backend/Edgear/extensions
+cp ./smstrapi ~/edgaremma-crm/plugins/smstrapi
+cp ./sc-instant.js ~/edgaremma-crm/api/send-code/controllers/sc-instant.js
     */
     async send_code(ctx) {
         const _whatsapp = smstrapi.conf.KEY_WHATSAPP
