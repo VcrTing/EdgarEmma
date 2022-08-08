@@ -20,15 +20,12 @@ module.exports = {
         let res = [ ]
         send_way.map(async e => {
             if (e != _whatsapp) {
-                /*
                 res.push( await smstrapi.instant(
                     e, dat[ 'to_' + e ], 
                     content[e].subject(dat.code), content[e].content(dat[ 'email' ], dat.code) )
                 )
-                */
             } else {
                 // 发送验证码给 whatsapp
-                console.log('发送 whatsapp =', dat.code, dat[ 'to' ] ? dat[ 'to' ] : dat[ 'to_' + _whatsapp ])
                 await smstrapi.instant_whatsapp.send_code(
                     dat.code, 
                     dat[ 'to_' + _whatsapp ]
@@ -37,14 +34,5 @@ module.exports = {
         })
 
         return res
-    },
-    async send_code_whatsapp(ctx) {
-        const _w = smstrapi.conf.KEY_WHATSAPP
-        let dat = ctx.query
-        // 发送验证码给 whatsapp
-        await smstrapi.instant_whatsapp.send_code(
-            dat.code, 
-            dat[ 'to' ] ? dat[ 'to' ] : dat[ 'to_' + _w ]
-        )
     }
 };
