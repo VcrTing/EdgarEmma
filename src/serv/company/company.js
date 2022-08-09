@@ -18,10 +18,10 @@ const company = async function( vue, data = { _limit: 99 }) {
 }
 
 //
-// 内含 我的公司
-const company_search = async function(vue, q) {
+// 
+const company_search = async function(vue, q, status = null) {
     let cdt = build_search(q)
-    cdt.user = vue.$store.state.user.id
+    cdt.user = vue.$store.state.user.id; status ? (cdt.status = true) : 0
     let res = await vue.net.get('company', _tool.token(vue), cdt)
     res = res ? res : [ ]
     return res.sort((n, o) => (o.id - n.id))
@@ -32,6 +32,10 @@ const company_origin_search = async function(vue, q) {
         res = res ? res : [ ]
         return res.sort((n, o) => (o.id - n.id))
     }
+}
+// My Company
+const company_my = async function(vue, q) {
+    return await company_search(vue, q, true)
 }
 
 //
@@ -64,13 +68,14 @@ const company_trash = async function(vue, comp) {
     let res = await vue.net.put('company', comp.id, _tool.token(vue), { status: false, })
     if (res.id) {
         const rmd = res.remind
-        const _rmd = rmd ? await remind.remind_update('remind', { id: rmd.id, is_stop: true }) : 0
+        const _rmd = rmd ? await remind.remind_update(vue, { id: rmd.id, is_stop: true }) : 0
         return (_rmd.id) ? 2 : 0
     } return 0
 }
 
 export default {
     company,
+    company_my,
 
     company_one,
     company_plus,

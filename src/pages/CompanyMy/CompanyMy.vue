@@ -22,22 +22,12 @@ import ComMyTr from './Top/ComMyTr.vue'
 
     export default {
         components: { LayoutTable, ComMyTr, ComMyTd, ButtonPrimaryOut },
-        name: '',
-        data() {
-            return {
-                alive: true,
-                items: [ ]
-            }
-        },
+        data() { return { alive: true, items: [ ] } },
         mounted() { this.search() },
         methods: {
             async search(q) {
-                let res = await this.serv.company.company_search( this, q )
-                console.log('My Company =', res)
-                
-                if (res) {
-                    this.items = res
-                }
+                let res = await this.serv.company.company_my( this, q )
+                if (res) { this.items = res }
             }
         }
     }

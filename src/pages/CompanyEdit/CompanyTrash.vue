@@ -7,14 +7,15 @@
 
         <div class="py"></div>
 
-        <div class="py_x3">
+        <div class="py_x3 upper">
             
             <button-primary-out @tap="$router.back()">
                 返回
             </button-primary-out>
             <span class="px_s"></span>
-            <button-primary class="px_x2" @tap="trash()">
-                確認
+            <button-primary class="px_x2 righter" @tap="trash()">
+                <i v-if="ioading" class="fas fa-circle-notch circle-around"></i>
+                <span v-else>確認</span>
             </button-primary>
         
         </div>
@@ -26,13 +27,21 @@ import ButtonPrimary from '../../funcks/ui/button/ButtonPrimary.vue'
 import ButtonPrimaryOut from '../../funcks/ui/button/ButtonPrimaryOut.vue'
     export default {
         components: { ButtonPrimary, ButtonPrimaryOut },
-        data() { return { comp: { } } },
+        data() { return { comp: { }, ioading: true } },
         created() {
             this.comp = this.view.get_ss('company_wiii_trash')
+            setTimeout(e => this.ioading = false, 400)
         },
         methods: {
             async trash() {
-                await this.serv.company.company_trash(this, this.comp)
+                if (!this.ioading) {
+                    this.ioading = true
+                    const res = await this.serv.company.company_trash(this, this.comp)
+                    if (res > 0) {
+                        setTimeout(e => this.go('/home/company_my'), 800)
+                    }
+                    setTimeout(e => this.ioading = false, 500)
+                }
             }
         }
     }

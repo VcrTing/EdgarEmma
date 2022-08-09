@@ -12,17 +12,20 @@
                     日期:&nbsp;{{ conf.VERSION_TIMED }}
                 </p>
             </nav>
+            
+            <account-tool ref="accREF"></account-tool>
         </div>
     </main-layout>
 </template>
 
 <script>
 import MainMenu from '../../components/menu/main/MainMenu.vue'
+import AccountTool from '../../components/tool/AccountTool.vue'
 import MainLayout from '../../funcks/ui_layout/main/MainLayout.vue'
 import CompanyMy from '../CompanyMy/CompanyMy.vue'
 
     export default {
-        components: {CompanyMy, MainLayout, MainMenu },
+        components: {CompanyMy, MainLayout, MainMenu, AccountTool },
         name: '',
         data() {
             return {

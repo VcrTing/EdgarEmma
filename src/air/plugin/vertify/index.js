@@ -16,7 +16,7 @@ export default {
     },
     genate_code() { return this._g_code() + '' },
 
-    cansend(uid, itv = 50) {
+    cansend(uid, itv = 35) {
         let tt = sessionStorage.getItem('vertify_timed_' + uid); 
         tt = tt ? (moment( this._now() ).diff(moment(tt), 'seconds')) : itv
         return tt >= itv

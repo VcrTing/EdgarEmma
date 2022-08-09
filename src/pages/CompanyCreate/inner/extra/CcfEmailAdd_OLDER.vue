@@ -1,21 +1,16 @@
 <template>
     <div>
-        <div :class="_cis" v-for="(v, i) in buiid_result(data)" :key="i" class="pb">
+        <div :class="_cis" v-for="(v, i) in data" :key="i" class="pb">
             <transition name="upper">
                 <div class="fx-l upper" 
                     :class="{ 'pt': i > 0 }"
                 >
-                    <div class="w-40 input-attach mb-w-618 input-email" :class="{ 'vertify-input-succ': is_vertified(v) }">
-
+                    <nav class="w-40 input-attach mb-w-618 input-email">
                         <input type="text" placeholder="請輸入電郵地址" v-model="v.v" class="input">
                         <span class="icon pri_son">
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>
-
-                        <span class="sts-vertified" v-if="is_vertified(v)">
-                            <span class="i-right righter"></span>
-                        </span>
-                    </div>
+                    </nav>
                     <div class="w-60 mb-w-382 pl input-email-add" v-show="show_plus">
                         <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
@@ -25,13 +20,11 @@
                     </div>
                 </div>
             </transition>
-            <nav v-show="!is_vertified(v)">
-                <transition name="upper">
-                    <div v-show="v.v && (vid.val_email(v.v))">
-                        <ccf-vertify @refresh="refresh" :item="v" :is_vertify="is_vertified(v)" :way="view.remind.SEND_WAY_TXT.email.v" ></ccf-vertify>
-                    </div>
-                </transition>
-            </nav>
+            <transition name="upper">
+                <div class="pt_x upper" v-if="show(v.v)">
+                    <ccf-vertify :item="v" :way="view.remind.SEND_WAY_TXT.email.v"></ccf-vertify>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -39,31 +32,21 @@
 <script>
 import ButtonPrimary from '@/funcks/ui/button/ButtonPrimary.vue'
 import CcfVertify from '../vertify/CcfVertify.vue'
-import CountryFlagSelect from '../../../../components/form/select/CountryFlagSelect.vue'
-import PhonePrefixSelect from '../../../../components/form/select/PhonePrefixSelect.vue'
     export default {
-  components: { ButtonPrimary, CcfVertify, CountryFlagSelect, PhonePrefixSelect },
+  components: { ButtonPrimary, CcfVertify },
         props: [
             'typed',
             'data',
             '_cis'
         ],
-        data() {
-            return {
-                judge_res: [ ]
-            }
-        },
         computed: {
             show_plus() {
                 let src = this.data ? this.data : [ ]
-                return src.length < 2 },
+                return src.length < 2 }
         },
-        mounted( ) {
-            this.refresh()
-        },
+        mounted() { },
         methods: {
-            
-
+            show(v) { return (v.indexOf('@') > 0) && (v.indexOf('.com') > 0) },
             can(v) {
                 let res = (v != null && v != '' && v.length > 5)
                 if (this.typed == 'phone') {
@@ -74,17 +57,8 @@ import PhonePrefixSelect from '../../../../components/form/select/PhonePrefixSel
                 return  res
             },
 
-            valid(must = false) {
-                if (must) {
-                    return this.data.filter(e => 
-                            (this.can(e.v) && e.is_vertify) ? true : false
-                        )
-                }
-                return this.data ? 
-                    this.data.filter(e => 
-                            (this.can(e.v) && e.is_vertify) ? true : false
-                        ) : 
-                    false
+            valid() {
+                return this.data ? this.data.filter(e => (this.can(e.v) && e.is_vertify) ? true : false) : false
             },
 
             submit() { return this.valid() },
@@ -105,25 +79,7 @@ import PhonePrefixSelect from '../../../../components/form/select/PhonePrefixSel
                 is_first: true,
                 is_vertify: false,
                 need_vertify: true,
-            }) },
-
-            buiid_result(many) {
-                many = many.map(e => {
-                    this.view.buiid_reciver(e, this.typed); return e
-                }); return many
-            },
-
-            is_vertified(one) {
-                let res = false
-                res = this.judge_res.indexOf( one.v_origin ) >= 0; one.is_vertify = res
-                return res
-            },
-
-            refresh() {
-                const res = this.view.get_ss(
-                    this.typed == this.view.remind.WAY_EAIL ? 'email_of_vertify' : 'phone_of_vertify'
-                ); this.judge_res = this.view.kiii_repeat(res)
-            }
+            }) }
         }
     }
 </script>

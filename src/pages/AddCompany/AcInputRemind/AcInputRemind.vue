@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ac-ir-detail @submit="next" :def_phones="company.phones" :def_emails="company.emails"></ac-ir-detail>
+        <ac-ir-detail v-if="company" @submit="next" :def_phones="company.phones" :def_emails="company.emails"></ac-ir-detail>
     </div>
 </template>
 
@@ -39,6 +39,9 @@ export default {
 
         async refresh() {
             this.company = this.view.get_ss('company_active_company')
+            if (!this.company) {
+                this.go('/home/add_company/search_select')
+            }
         }
     }
 }

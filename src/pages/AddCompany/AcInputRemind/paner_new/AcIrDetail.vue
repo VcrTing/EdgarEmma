@@ -2,7 +2,7 @@
     <div class="max-w_remind pt_x3">
         <h4 class="py_x3 ttd t-c">請輸入接收提醒的方式</h4>
 
-        <div class="pt">
+        <div class="pt remind-vertify-panner">
 
             <input-wrapper :tip="'請檢查電話號碼的有效性'" :label="'WhatsApp'" :valid="form_err.phones">
                 <ccf-phone-add :_cis="'ac-ir-dt-input'" ref="phonesREF"  :typed="'phone'" :data="form.phones"></ccf-phone-add>
@@ -97,6 +97,5 @@ import CcfEmailAdd from '../../../CompanyCreate/inner/extra/CcfEmailAdd.vue'
     }
 </script>
 
-<style lang="sass" scoped>
-    
+<style lang="sass">
 </style>

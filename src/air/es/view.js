@@ -35,5 +35,25 @@ export default {
     get_ss(k) {
         k = sessionStorage.getItem(k)
         return k ? JSON.parse(k) : null
+    },
+    
+    buiid_reciver(one, way) {
+        if (way != remind.WAY_EAIL) {
+            const pfx = one.prefix
+            one.v_origin = Number.parseInt( (pfx ? pfx : '852') + one.v + '' )
+        } else {
+            one.v_origin = one.v
+        }
+        return one
+    },
+
+    kiii_repeat(arr) {
+        let res = [ ]
+        arr.map(e => {
+            if (res.indexOf(e) < 0) {
+                res.push(e)
+            }
+        })
+        return res
     }
 }

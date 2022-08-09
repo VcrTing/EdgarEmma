@@ -12,7 +12,9 @@ export default new Vuex.Store({
         user: null,
         plant: null,
 
-        company: [ ]
+        company: [ ],
+
+        company_of_me: [ ]
     },
     mutations: {
         change(state, k_v) {

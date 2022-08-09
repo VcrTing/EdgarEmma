@@ -28,5 +28,9 @@ export default {
     SEND_WAY_TXT,
     SEND_WAY_DEF,
 
-    WAY_WHATSAPP: 'whatsapp'
+    WAY_NOTE: 'note',
+    WAY_EAIL: 'email',
+    
+    WAY_WHATSAPP: 'whatsapp',
+
 }

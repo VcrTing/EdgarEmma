@@ -1,7 +1,7 @@
 <template>
 <div>
     <div v-show="!check" class="max-w_remind pt_x3">
-        <h4 class="py_x3">如果你想收到有關稅局的合規提醒，例如提醒你報稅日期，請輸入你公司的財政年度年結日</h4>
+        <h4 class="py_x3 t-c">如果你想收到有關稅局的合規提醒，例如提醒你報稅日期，請輸入你公司的財政年度年結日</h4>
 
         <div class="pt">
             <input-wrapper :class="{ 'input-disable': form.unsure }" :label="'財政年度年結日'" :valid="form_vid.filling">
@@ -128,4 +128,7 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
     .btn-pri
         background: #6a6666 !important
         border-color: #6a6666 !important
+
+h4
+    text-indent: 1em
 </style>

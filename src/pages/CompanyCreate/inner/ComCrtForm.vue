@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row pb_x">
+        <div class="pb_x">
             <input-wrapper class="w-40 mb-w-618" :label="'公司編號 CR No.'" :valid="form_err.tax_id">
                 <input type="text" class="input" placeholder="請輸入" v-model="form.tax_id">
             </input-wrapper>
@@ -14,22 +14,22 @@
             <input type="text" class="input" placeholder="請輸入" v-model="form.name_ch">
         </input-wrapper>
 
-        <div class="row pb_x fx-l">
+        <div class="pb_x fx-l">
             <input-wrapper class="w-40 mb-w-618" :label="'成立日期 Company Since'">
                 <input-data :_date="since" v-if="since" @result="(v) => form.company_since = v"></input-data>
             </input-wrapper>
         </div>
 
-        <div class="row pb_x">
+        <div class="pb_x">
             <input-wrapper class="w-40 mb-w-618" :label="'財政年度年結日 Last Tax filing time'">
                 <input-data :_date="form.last_tax_filing_time" v-if="form.last_tax_filing_time" @result="(v) => form.last_tax_filing_time = v"></input-data>
             </input-wrapper>
         </div>
 
-<nav class="upper" v-if="has_phone_or_email">
+<nav class="upper" v-show="show_tip">
     <div class="py">
     <p>註意：</p>
-    <div class="pt_s pb">同一個公司，你可以添加最多2個WhatsApp和2個電郵提示服務，方便和公司其他合夥人，董事或行政經理同日收到合規提示</div>
+    <div class="pt_s pb pr_x2">同一個公司，你可以添加最多2個WhatsApp和2個電郵提示服務，方便和公司其他合夥人，董事或行政經理同日收到合規提示</div>
     </div>
 </nav>
         
@@ -64,6 +64,13 @@ import CcfEmailAdd from './extra/CcfEmailAdd.vue'
         props: [
             'origin',
         ],
+        watch: {
+            'form.name_en'(n) {
+                if (n && n.length > 3) {
+                    this.show_tip = true
+                }
+            }
+        },
         computed: {
             since() {
                 return this.form.company_since ? this.form.company_since : this.view.timed.getToday()
@@ -78,6 +85,7 @@ import CcfEmailAdd from './extra/CcfEmailAdd.vue'
         },
         data() {
             return {
+                show_tip: false,
                 form: {
                     tax_id: '', name_en: '', name_ch: '', company_type: '', company_since: '', last_tax_filing_time: '', 
                     phones: [ ], emails: [ ]
@@ -129,6 +137,7 @@ import CcfEmailAdd from './extra/CcfEmailAdd.vue'
                             {
                                 v: '',
                                 code: '',
+                                prefix: '852',
                                 is_first: true,
                                 is_vertify: false,
                                 need_vertify: true,} ], 

@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="upper pt_x" :class="{ 'vertify-code-succ': is_vertify }">
     <vertify-code-iniine ref="vciREF" @send="send_in" @result="result_in"
         :_first="first" 
-        :_vertified="item.is_vertify && (!item.need_vertify)"
+        :def_code="item.code"
+        :_vertified="is_vertify"
     ></vertify-code-iniine>
   </div>
 </template>
@@ -11,30 +12,28 @@
 import VertifyCodeIniine from '../../../../components/form/code/VertifyCodeIniine.vue'
 export default {
   components: { VertifyCodeIniine },
-    props: [ 'item', 'way', '_updated' ],
+    props: [ 'item', 'way', '_updated', 'is_vertify' ],
     data() {
         return {
-            first: true
+            first: true,
         }
-    },
-    created() {
-        this.item.v_origin = this.item.v
-        this.first = this.item.is_first // ( (!this.item.is_vertify) && this.item.need_vertify )
-        
     },
     mounted() {
-        if (this.item.code) {
-            this.$refs.vciREF.ioc(this.item.code)
-        }
+        // this.item.code ? this.$refs.vciREF.ioc( this.item.code ) : 0
     },
     computed: {
-        reciver() {
-            let res = this.item.v
-            if (this.way == this.view.remind.SEND_WAY_TXT.whatsapp.v) {
-                if (!res.startsWith('+')) { 
-                    // res = '+852 ' + res 
-                } }
-            return res
+        judge_res() { const res = this.view.get_ss(
+                this.way == this.view.remind.WAY_EAIL ? 'email_of_vertify' : 'phone_of_vertify'
+            ); return this.view.kiii_repeat(res)
+        },
+        reciver() { return this.item.v_origin },
+        // 是否判断成功
+        vertified() {
+            let res = false
+            if (this.judge_res) {
+                res = this.judge_res.indexOf( this.reciver ) >= 0
+                this.item.is_vertify = res
+            } return res
         }
     },
     methods: {
@@ -46,32 +45,40 @@ export default {
             
             this.conf.TEST ? console.log('发送验证码 =', condition) : 0
             if (this.reciver && !this.conf.TEST) { 
-                let res = undefined
                 try {
-                    res = await this.serv.code.code_send(this, condition)
+                    await this.serv.code.code_send(this, condition)
                 } catch(err) {
-                    res = await this.serv.code.code_send(this, condition)
+                    setTimeout(async e => await this.serv.code.code_send(this, condition), 3000)
                 }
             }
+        },
+
+        success() {
+            this.judge_res.push( this.reciver )
+            this.view.set_ss(
+                this.way == this.view.remind.WAY_EAIL ? 'email_of_vertify' : 'phone_of_vertify',
+                this.view.kiii_repeat( this.judge_res )
+            )
         },
         result_in() {
             const res = this.$refs.vciREF.coiiect()
             if (res[0] == res[1]) {
                 this.item.code = res[0]
-                this.$refs.vciREF.succ()
+                this.success()
 
-                this.item.is_first = false
                 this.item.is_vertify = true
                 this.item.need_vertify = false
 
                 this.$emit('vaiid')
+                this.$refs.vciREF.succ()
             } else {
-                this.$refs.vciREF.faii()
 
-                this.item.is_first = true
                 this.item.is_vertify = false
                 this.item.need_vertify = true
+                this.$refs.vciREF.faii()
             }
+
+            this.$emit('refresh')
         }
     }
 }

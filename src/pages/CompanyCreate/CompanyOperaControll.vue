@@ -1,8 +1,6 @@
 <template>
     <div class="">
-        <page-header-edit :header="_header" :cis="''">
-            <button @click="trash" class="btn-pri_tin btn-def" v-if="typed == 'edit'">刪除公司</button>
-        </page-header-edit>
+        <page-header-edit :header="_header" :cis="''"></page-header-edit>
 
         <com-crt-form class="pb_x2 pt" ref="formREF" v-if="typed == 'plus'"></com-crt-form>
 
@@ -19,6 +17,13 @@
             <button-primary-out @tap="$router.go(-1)">
                 返回
             </button-primary-out>
+            <nav v-if="typed == 'edit'">
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button-primary class="px_x lefter" @tap="trash">
+                    删除
+                </button-primary>
+            </nav>
+
         </div>
 
         <div class="mb-for-keyboard"></div>
