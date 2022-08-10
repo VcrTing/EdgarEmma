@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/send-codes/remind/add",
+      "handler": "sc-instant.send_add_remind",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="upper pt_x" :class="{ 'vertify-code-succ': is_vertify }">
+  <div v-if="can_send" class="upper pt_x" :class="{ 'vertify-code-succ': is_vertify }">
     <vertify-code-iniine ref="vciREF" @send="send_in" @result="result_in"
         :_first="first" 
         :def_code="item.code"
@@ -34,15 +34,25 @@ export default {
                 res = this.judge_res.indexOf( this.reciver ) >= 0
                 this.item.is_vertify = res
             } return res
-        }
+        },
+        //
+        can_send() {
+            let res = true
+            if (this.way != this.view.remind.WAY_EAIL) {
+                const src = this.item.v
+                if (isNaN(src)) { res = false }
+            }
+            return res
+        },
+
     },
     methods: {
+
         async send_in(code) {
             const condition = {
                 email: this.reciver, code, send_way: this.way,
                 to_email: this.reciver, to_note: this.reciver, to_whatsapp: this.reciver
             }
-            
             this.conf.TEST ? console.log('发送验证码 =', condition) : 0
             if (this.reciver && !this.conf.TEST) { 
                 try {

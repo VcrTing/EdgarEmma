@@ -37,8 +37,8 @@ import ButtonPrimaryOut from '../../funcks/ui/button/ButtonPrimaryOut.vue'
                 if (!this.ioading) {
                     this.ioading = true
                     const res = await this.serv.company.company_trash(this, this.comp)
-                    if (res > 0) {
-                        setTimeout(e => this.go('/home/company_my'), 800)
+                    if (res && res > 0) {
+                        setTimeout(e => this.$router.push('/home/company_my'), 800)
                     }
                     setTimeout(e => this.ioading = false, 500)
                 }

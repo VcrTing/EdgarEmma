@@ -125,17 +125,7 @@ export default {
             }
         },
         ioc_empty() { 
-            console.log('清空')
-            this.form = {
-                c_0: '',
-                c_1: '',
-                c_2: '',
-                c_3: '',
-                c_4: '',
-                c_5: ''
-            }
-            // let ff = this.form; for (let i= 0; i< 6; i ++ ) { ff[ 'c_' + i ] = '' } 
-            // ff = this.form_err; for (let i= 0; i< 6; i ++ ) { ff[ 'c_' + i ] = '' } 
+            this.form = { c_0: '', c_1: '', c_2: '', c_3: '', c_4: '', c_5: '' }
         }
     },
     props: [ '_vertified', 'def_code' ],
@@ -166,8 +156,7 @@ export default {
         }
     },
     created() { this.code = vertify.genate_code() },
-    mounted() { 
-    },
+    mounted() { },
 
     watch: {
         'form.c_0' (n) { this.next_input(0) },

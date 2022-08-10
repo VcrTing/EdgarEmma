@@ -36,7 +36,6 @@ export default {
         async fetching(condition) {
             this.loading = true
             let res = await this.serv.send.many(this, condition )
-            console.log('sends =', res)
             if (res) { this.items = res }
             setTimeout(e => this.loading = false, 600)
         }

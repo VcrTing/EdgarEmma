@@ -10,10 +10,12 @@ const build_search = function(q) {
 }
 
 const many = async function( vue, data = { _limit: 99 }) {
-    console.log('data =', data)
-    let res = await vue.net.get('send', _tool.token(vue), data)
-    // res.data = vue.view.clean( res )
-    return res
+    let res = [ ]
+    const src = await vue.net.get('send', _tool.token(vue), data)
+    src.filter(e => {
+        const _st = e.remind.is_stop
+        if (!_st || e.is_first) { res.push( e ) }
+    }); return res
 }
 
 const one = async function(vue, id) {

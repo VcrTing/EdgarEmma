@@ -5,6 +5,9 @@ const insert = require('./db/insert')
 const instant = require('./instant/instant')
 const instant_whatsapp = require('./instant/instant-whatsapp')
 
+const instant_remind_add = require('./instant-add/instant-remind-add')
+
+
 module.exports = {
     conf,
     // typed 传入 note / email / whatsapp
@@ -13,5 +16,7 @@ module.exports = {
     insert,
 
     instant,
-    instant_whatsapp
+    instant_whatsapp,
+
+    instant_remind_add
 }

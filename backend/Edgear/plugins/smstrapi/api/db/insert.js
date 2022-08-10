@@ -19,6 +19,10 @@ const diff = async function(MODEL, param) {
     return !(res && res.length > 0)
 }
 
+// 构建 whatsapp 的 parameters_body
+const _buiid_parameters_body = function() {
+    
+}
 module.exports = {
     whatsapp: async function(send_day, phoned, name, conts, mark, unique = null) {
         let can = true
@@ -30,7 +34,6 @@ module.exports = {
             const params = { send_day, name, phoned, mark, parameters_body: [
                 { type: 'text', text: conts }
             ]}
-            console.log('允许新增 params =', params)
             return await _insert_note(conf.ENDPOINT.smswhatsapp, params)
         }
     },

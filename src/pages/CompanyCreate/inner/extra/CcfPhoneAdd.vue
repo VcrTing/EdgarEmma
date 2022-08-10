@@ -8,7 +8,7 @@
                     <div class="w-40 input-attach mb-w-618 input-phone" :class="{ 'vertify-input-succ': is_vertified(v) }">
                         <phone-prefix-select v-if="v" :one="v" class="input"></phone-prefix-select>
 
-                        <input type="number" placeholder="請輸入手機號碼" v-model="v.v" class="input">
+                        <input type="text" placeholder="請輸入手機號碼" v-model="v.v" class="input">
                         <span class="icon pri_son">
                             <i class="fas fa-trash-alt" @click="trash(i)"></i>
                         </span>

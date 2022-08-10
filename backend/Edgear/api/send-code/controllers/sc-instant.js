@@ -1,6 +1,7 @@
 
 
 const content = require('./sci-cont')
+const instant = require('../../../extensions/send_work/instant')
 const smstrapi = require('../../../plugins/smstrapi/api/index')
 module.exports = {
     /*
@@ -17,6 +18,7 @@ module.exports = {
 cp ./smstrapi ~/edgaremma-crm/plugins/smstrapi
 cp ./sc-instant.js ~/edgaremma-crm/api/send-code/controllers/sc-instant.js
     */
+    // 及时发送 验证码
     async send_code(ctx) {
         const _whatsapp = smstrapi.conf.KEY_WHATSAPP
         let dat = ctx.request.body
@@ -39,5 +41,23 @@ cp ./sc-instant.js ~/edgaremma-crm/api/send-code/controllers/sc-instant.js
         })
 
         return res
+    },
+    // 即时发送新增提醒
+    async send_add_remind(ctx) {
+        let dat = ctx.query // ctx.request.body
+        const send_way = dat.send_way ? dat.send_way.split('_') : [ ]
+        const comp = await strapi.services['company'].find({ id: dat.company })
+
+        if (comp) {
+            const phs = comp.phones
+            const ems = comp.emails
+    
+            send_way ? send_way.map(async e => {
+                instant.remind[ e ](
+                    dat.company_name, dat[ 'to_' + e ]
+                )
+            }) : 0
+        }
+        return comp
     }
 };
