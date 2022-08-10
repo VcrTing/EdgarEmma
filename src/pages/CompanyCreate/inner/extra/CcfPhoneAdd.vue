@@ -5,7 +5,7 @@
                 <div class="fx-l upper" 
                     :class="{ 'pt': i > 0 }"
                 >
-                    <div class="w-40 input-attach mb-w-618 input-phone" :class="{ 'vertify-input-succ': is_vertified(v) }">
+                    <div class="w-40 input-attach mb-w-75 input-phone" :class="{ 'vertify-input-succ': is_vertified(v) }">
                         <phone-prefix-select v-if="v" :one="v" class="input"></phone-prefix-select>
 
                         <input type="text" placeholder="請輸入手機號碼" v-model="v.v" class="input">
@@ -17,7 +17,7 @@
                             <span class="i-right righter"></span>
                         </span>
                     </div>
-                    <div class="w-60 mb-w-382 pl input-phone-add" v-show="show_plus">
+                    <div class="w-60 mb-w-25 pl input-phone-add" v-show="show_plus">
                         <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
                         >

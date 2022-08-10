@@ -20,8 +20,17 @@ const diff = async function(MODEL, param) {
 }
 
 // 构建 whatsapp 的 parameters_body
-const _buiid_parameters_body = function() {
-    
+
+const _buiid_parameters_body = function(params) {
+    let res = [ ]
+    // 分割线 三下划线
+    params = params ? params.split('___') : []
+    if (params) {
+        // 0. company name
+        // 1. filling timed
+        params.map(e => { res.push({ type: 'text', text: e }) })
+    }
+    return res
 }
 module.exports = {
     whatsapp: async function(send_day, phoned, name, conts, mark, unique = null) {
@@ -29,11 +38,8 @@ module.exports = {
         if (unique) {
             can = await diff(conf.ENDPOINT.smswhatsapp, { send_day, phoned, mark })
         }
-        
         if (can && phoned) {
-            const params = { send_day, name, phoned, mark, parameters_body: [
-                { type: 'text', text: conts }
-            ]}
+            const params = { send_day, name, phoned, mark, parameters_body: _buiid_parameters_body(conts)}
             return await _insert_note(conf.ENDPOINT.smswhatsapp, params)
         }
     },

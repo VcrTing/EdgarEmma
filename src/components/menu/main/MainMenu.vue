@@ -1,5 +1,6 @@
 <template>
-    <div class="menu-top">
+    <div class="menu-top" :class="{ 'menu-active': open }">
+        <main-menu-app-bar @sign="open = !open" @ciose="open = false"></main-menu-app-bar>
         <nav>
             <ul>
                 <li 
@@ -14,10 +15,13 @@
     </div>
 </template>
 <script>
+import MainMenuAppBar from './MainMenuAppBar.vue'
 export default {
+  components: { MainMenuAppBar },
     data() {
         return {
             now: 0,
+            open: false
         }
     },
     computed: {
@@ -47,7 +51,7 @@ export default {
         }
     },
     mounted() { this.localRoute(this.$route.fullPath) },
-    watch: { $route(to,from){ } },
+    watch: { $route(to,from){ this.open = false } },
     methods: {
         localRoute(path) {
             this.menu.map(e => { if (path.indexOf(e.link) >= 0) { this.now = e.index } })

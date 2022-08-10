@@ -79,9 +79,9 @@ module.exports = {
         }
     ],
     'whatsapp': [
-        { id: 1, params: { company_named: '', }, 
+        { id: 1, params: { company_named: '', filling_timed: '' }, 
             tempiate_name: 'tax_reminder_01',
-            subject: '', content: '{{company_named}}' },
+            subject: '', content: '{{company_named}}___{{filling_timed}}' },
         { id: 2, params: { company_named: '', }, 
             tempiate_name: 'echo_new_company_added_01',
             subject: '', content: '{{company_named}}' }

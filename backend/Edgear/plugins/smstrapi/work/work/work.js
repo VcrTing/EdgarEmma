@@ -22,9 +22,10 @@ const _note = async function(e, fac, sender) {
 }
 const note = async function(key) {
     if (key && key.sid) {
-        const fac = twilio.factory(key.sid, key.token)
         let res = await db_note.query( conf.ENDPOINT.smsnote )
-        if (res) { res.map(async e => _note(e, fac, key.sender)) }
+        if (res) { 
+            const fac = twilio.factory(key.sid, key.token)
+            res.map(async e => _note(e, fac, key.sender)) }
     }
 }
 
@@ -42,9 +43,10 @@ const _email = async function(e, fac, domain, from) {
 
 const email = async function(key) {
     if (key && key.sender) {
-        const fac = mailgun.factory(key.sid, key.token)
         let res = await db_email.query(conf.ENDPOINT.smsemail)
-        if (res) { res.map(async e => await _email(e, fac, key.sender, key.sid)) }
+        if (res) { 
+            const fac = mailgun.factory(key.sid, key.token)
+            res.map(async e => await _email(e, fac, key.sender, key.sid)) }
     }
 }
 
@@ -61,9 +63,10 @@ const _whatsapp = async function(e, token, uri) {
 }
 const whatsapp = async function(key) {
     if (key && key.sid) {
-        const token = await whatsapp_api.token(key.sid, key.token, key.mark)
         let res = await db_whatsapp.query(conf.ENDPOINT.smswhatsapp)
-        if (res) { res.map(async e => await _whatsapp(e, token, key.mark)) }
+        if (res) { 
+            const token = await whatsapp_api.token(key.sid, key.token, key.mark)
+            res.map(async e => await _whatsapp(e, token, key.mark)) }
     }
 }
 

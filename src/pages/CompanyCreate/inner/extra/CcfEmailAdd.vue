@@ -5,7 +5,7 @@
                 <div class="fx-l upper" 
                     :class="{ 'pt': i > 0 }"
                 >
-                    <div class="w-40 input-attach mb-w-618 input-email" :class="{ 'vertify-input-succ': is_vertified(v) }">
+                    <div class="w-40 input-attach mb-w-75 input-email" :class="{ 'vertify-input-succ': is_vertified(v) }">
 
                         <input type="text" placeholder="請輸入電郵地址" v-model="v.v" class="input">
                         <span class="icon pri_son">
@@ -16,7 +16,7 @@
                             <span class="i-right righter"></span>
                         </span>
                     </div>
-                    <div class="w-60 mb-w-382 pl input-email-add" v-show="show_plus">
+                    <div class="w-60 mb-w-25 pl input-email-add" v-show="show_plus">
                         <button-primary class="btn-icon mh_n mh_n-w" @tap="insert()"
                             v-if="i == (data.length - 1)"
                         >
