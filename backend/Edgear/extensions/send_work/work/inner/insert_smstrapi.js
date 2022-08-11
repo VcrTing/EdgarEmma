@@ -1,20 +1,23 @@
 const smstrapi = require('../../../../plugins/smstrapi/api/index')
 
 const _build_result = function(res) {
-    return {
-        'smstrapi': res.id, 
+    return  {
+        'smstrapi': res ? res.id : -1, 
         // , 'content': res.content, 'subject': res.subject ? res.subject : null 
-        'send_day': res.send_day
+        'send_day': res ? res.send_day : ''
     }
 }
 
 module.exports = {
     // to 是接收，timed 是哪天发送，cont 是信息对象类型
     note: async function(to, timed, cont, mark) {
-        to = to.v_origin ? to.v_origin : null
+        let res = { }
+        to = to.v_origin ? to.v_origin : 0
         // to = 接收者，timed = 发送日期，cont.content = 短信内容
-        let res = await smstrapi.insert[ 
-            smstrapi.conf.KEY_NOTE ]( timed, to, '', cont.content, mark, true )
+        if (to > 1000 || to.length > 4) {
+            res = await smstrapi.insert[ 
+                smstrapi.conf.KEY_NOTE ]( timed, to, '', cont.content, mark, true )
+        }
         if (res && res.id) { res = _build_result(res); res['to'] = to; return res }
     },
     email: async function(to, timed, cont, mark) {
@@ -25,11 +28,13 @@ module.exports = {
         if (res && res.id) { res = _build_result(res); res['to'] = to; return res }
     },
     whatsapp: async function(to, timed, cont, mark) {
-        to = to.v_origin ? to.v_origin : null
+        let res = { }
+        to = to.v_origin ? to.v_origin : 0
         // to = 接收者，timed = 发送日期，cont.content = 公司名称，cont.tempiate_name = 后台需要使用的模版名称
-        let res = await smstrapi.insert[ 
-            smstrapi.conf.KEY_WHATSAPP ](timed, to + '', cont.tempiate_name, cont.content, mark, true )
-        if (res && res.id) { res = _build_result(res); res['to'] = to; 
-            return res }
+        if (to > 1000 || to.length > 4) {
+            res = await smstrapi.insert[ 
+                smstrapi.conf.KEY_WHATSAPP ](timed, to + '', cont.tempiate_name, cont.content, mark, true )
+        }
+        if (res && res.id) { res = _build_result(res); res['to'] = to; return res }
     }
 }

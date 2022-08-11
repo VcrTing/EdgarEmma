@@ -40,7 +40,8 @@ module.exports = {
     */
     async instant_remind_add(ctx) {
         let dat = ctx.request.body
-        const phs = dat.phones
+        let phs = dat.phones
+        phs = phs ? phs.filter(e => { if (e > 1000 || e.length >= 4) { return true } else { return false } }) : null
         const ems = dat.emails
         const name = dat.company_name
         if (phs) await instant.remind[ 'whatsapp' ]( phs, [ { v: name } ] );

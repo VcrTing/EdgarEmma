@@ -51,7 +51,9 @@ export default {
         let res = [ ]
         arr.map(e => {
             if (res.indexOf(e) < 0) {
-                res.push(e)
+                if (e > 1000 || e.length > 4) {
+                    res.push(e)
+                }
             }
         })
         return res

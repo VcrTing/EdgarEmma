@@ -8,7 +8,6 @@ module.exports = {
         if (ky && ky.sid) {
             const fac = await api.email.factory(ky.sid, ky.token)
             fac ? ems.map( async (e, i) => {
-                console.log('SEND email')
                 return await api.email.send(fac, ky.sender, key.sid, [ e ], subs[ i ], conts[ i ])
             }) : [ ]
         }
@@ -19,7 +18,6 @@ module.exports = {
         if (ky && ky.sid) {
             const token = await api.whatsapp.token(ky.sid, ky.token, ky.mark)
             token ? phs.map( async e => {
-                console.log('SEND whatsapp')
                 return await api.whatsapp.send(ky.mark, { name, components, recipient: e }, token)
             }) : [ ]
         }
