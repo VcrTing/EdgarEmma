@@ -17,8 +17,8 @@ module.exports = async function() {
         let way = e.remind.send_way_world
         way = way ? way.split('_') : [ ]
         
-        try { // 序列化 Send，生成发送
-            e = await func._ser_send( e, way ) } catch( err ) { }
+        // 序列化 Send，生成发送
+        try { e = await func._ser_send( e, way ) } catch( err ) { }
 
         // 修改 结果
         await upd.updSend_Result(e)

@@ -57,9 +57,9 @@
       }
     },
     {
-      "method": "GET",
-      "path": "/send-codes/remind/add",
-      "handler": "sc-instant.send_add_remind",
+      "method": "POST",
+      "path": "/send-instant/remind/add",
+      "handler": "sc-instant.instant_remind_add",
       "config": {
         "policies": []
       }

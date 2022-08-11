@@ -1,8 +1,8 @@
 <template>
     <nav class="menu-app-bar fx-s px_x2">
-        <div class="w-100" @click="menu()">
+        <div class="w-100 hand" @click="menu()">
             <i class="fa fa-list"></i>
-            菜单
+            菜單
         </div>
         <!--div class="w-30 t-r sub_son" @click="ciose()">
             <span>

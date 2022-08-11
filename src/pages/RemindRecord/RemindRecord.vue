@@ -4,6 +4,7 @@
             <rmd-record-tr class="tr"></rmd-record-tr>
             <rmd-record-td class="td" :_items="items"></rmd-record-td>
         </layout-table>
+        <div class="py_x2"></div>
     </div>
 </template>
 

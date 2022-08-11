@@ -12,11 +12,6 @@ module.exports = {
             code: '123456',
             send_way: [ 'email', 'note' ]
         }
-
-更新：
-/root/SAVE/EdgarEmma/backend/Edgear/extensions
-cp ./smstrapi ~/edgaremma-crm/plugins/smstrapi
-cp ./sc-instant.js ~/edgaremma-crm/api/send-code/controllers/sc-instant.js
     */
     // 及时发送 验证码
     async send_code(ctx) {
@@ -31,33 +26,25 @@ cp ./sc-instant.js ~/edgaremma-crm/api/send-code/controllers/sc-instant.js
                     e, dat[ 'to_' + e ], 
                     content[e].subject(dat.code), content[e].content(dat[ 'email' ], dat.code) )
                 )
-            } else {
-                // 发送验证码给 whatsapp
-                await smstrapi.instant_whatsapp.send_code(
-                    dat.code, 
-                    dat[ 'to_' + _whatsapp ]
-                )
-            }
+            } else { // 发送验证码给 whatsapp
+                await smstrapi.instant_whatsapp.send_code( dat.code, dat[ 'to_' + _whatsapp ] ) }
         })
-
         return res
     },
-    // 即时发送新增提醒
-    async send_add_remind(ctx) {
-        let dat = ctx.query // ctx.request.body
-        const send_way = dat.send_way ? dat.send_way.split('_') : [ ]
-        const comp = await strapi.services['company'].find({ id: dat.company })
-
-        if (comp) {
-            const phs = comp.phones
-            const ems = comp.emails
     
-            send_way ? send_way.map(async e => {
-                instant.remind[ e ](
-                    dat.company_name, dat[ 'to_' + e ]
-                )
-            }) : 0
-        }
-        return comp
+    // 即时发送 新增提醒
+    /*
+        phones: [ '85292779625' ]
+        emails: [ 'vcrting@163.com' ]
+        company_name: '我的公司'
+    */
+    async instant_remind_add(ctx) {
+        let dat = ctx.request.body
+        const phs = dat.phones
+        const ems = dat.emails
+        const name = dat.company_name
+        if (phs) await instant.remind[ 'whatsapp' ]( phs, [ { v: name } ] );
+        if (ems) await instant.remind[ 'email' ]( ems, name );
+        return ems
     }
 };

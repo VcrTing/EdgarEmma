@@ -37,6 +37,13 @@ const _judge_send = function(tmd) {
     for (let k in can) { if ( !can[ k ] ) { delete can[ k ] } }; return can
 }
 
+// 7. 构建虚拟首发
+const _first = async function(send_day) {
+    return {
+        'smstrapi': 0, 
+        'send_day': ( (new Date().getFullYear()) + send_day ) }
+}
+
 // 1. 判断发送是否现在，是的话就建立发送任务
 const _doing = async function(_tis, snd, ways) {
     // 判断是否 超出当前时间
@@ -53,7 +60,10 @@ const _doing = async function(_tis, snd, ways) {
                 if (cont.content) {
                     // 插入新 任务队列 结果
                     v.is_serial = true
-                    v.result = await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
+                    v.result = 
+                        // 废除 这里的首发
+                        snd.is_first ? _first(_tis[ 'send_day_real' ]) :
+                            await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
                     return v
                 }  else {
                     // 用户没有选择 该发送方式 的 时候

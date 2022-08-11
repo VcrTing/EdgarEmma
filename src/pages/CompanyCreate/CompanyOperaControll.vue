@@ -73,7 +73,7 @@ import PageHeaderEdit from '../../funcks/ui/header/PageHeaderEdit.vue'
                     } else if (this.typed == 'plus') {
                         console.log(this.buildPlus(data))
                         res = await this.serv.company.company_plus(this, this.buildPlus(data))
-                        if (res) { await this.plusRemind(res) }
+                        if (res) { const rmd = await this.plusRemind(res); this.$emit('finish_create', rmd) }
                     }
                     if (res) { setTimeout(e => { this.loading = false; this.$router.push('/home/company_my') }, 600) }
                 }; this.ani()

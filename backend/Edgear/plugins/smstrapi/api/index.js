@@ -1,14 +1,17 @@
 const conf = require('../conf')
 
+const api = require('../work/api/_api')
+
 const insert = require('./db/insert')
 
 const instant = require('./instant/instant')
 const instant_whatsapp = require('./instant/instant-whatsapp')
 
-const instant_remind_add = require('./instant-add/instant-remind-add')
-
+const one_off_send = require('./one_off_send/one_off_send')
 
 module.exports = {
+    api,
+
     conf,
     // typed 传入 note / email / whatsapp
     // user 数据固定，格式为：{ to_prefix: '852/null', to: '92779625/xxx@email.com', from: 'null/xxx@email.com' }
@@ -18,5 +21,5 @@ module.exports = {
     instant,
     instant_whatsapp,
 
-    instant_remind_add
+    one_off_send
 }

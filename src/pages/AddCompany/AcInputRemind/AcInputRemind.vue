@@ -1,6 +1,7 @@
 <template>
     <div>
         <ac-ir-detail v-if="company" @submit="next" :def_phones="company.phones" :def_emails="company.emails"></ac-ir-detail>
+        <div class="mb-for-keyboard"></div>
     </div>
 </template>
 

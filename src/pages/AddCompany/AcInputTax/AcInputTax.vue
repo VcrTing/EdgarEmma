@@ -1,6 +1,7 @@
 <template>
     <div>
         <ac-it-first @submit="submit"></ac-it-first>
+        <div class="mb-for-keyboard"></div>
     </div>
 </template>
 
@@ -35,9 +36,16 @@ import AcItFirst from './panel/AcItFirst.vue'
                     remind.company = res.id
                     remind = this.ciear_remind( remind, comp )
                     
-                    res = await this.serv.remind.create(this, remind)
-                    if (res) {
-                        setTimeout(e => { this.completed() }, 2)
+                    const rmd = await this.serv.remind.create(this, remind)
+                    if (rmd) {
+                        const way = rmd.send_way_world
+                        try {
+                            await this.serv.instant.instant_remind_add(this, res, way ? way.split('_') : [ ])
+                            setTimeout(e => { this.completed() }, 2)
+                        } catch(err) {
+                            setTimeout(async e => 
+                                await this.serv.instant.instant_remind_add(this, res, way ? way.split('_') : [ ]), 3000)
+                        }
                     }
                 }
             },
