@@ -77,8 +77,8 @@ const _doing = async function(_tis, snd, ways) {
 const _ser_send = async function(snd, ways) {
     // 公司 报税日
     await snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
-    // 公司 since
-    if (snd.times_since) { await snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }
+    // 公司 since，取消 since 发送
+    //  if (snd.times_since) { await snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }
     return snd
 }
 
