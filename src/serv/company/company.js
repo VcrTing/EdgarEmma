@@ -3,8 +3,8 @@ import _tool from '../_tool'
 
 import remind from './remind'
 
-const build_search = function(q) {
-    let res = { _limit: 99 }
+const build_search = function(q, _start = 0, _limit = 499) {
+    let res = { _start ,_limit }
     if (q) {
         if (Number.parseInt(q)) { res['tax_id_contains'] = Number.parseInt(q)
         } else { res['names_contains'] = q  } }
@@ -26,17 +26,22 @@ const company_search = async function(vue, q, status = null) {
     res = res ? res : [ ]
     return res.sort((n, o) => (o.id - n.id))
 }
-const company_origin_search = async function(vue, q) {
-    if (q) {
-        let res = await vue.net.get('company_origin', _tool.token(vue), build_search(q))
-        res = res ? res : [ ]
-        return res.sort((n, o) => (o.id - n.id))
-    }
-}
 // My Company
 const company_my = async function(vue, q) {
     return await company_search(vue, q, true)
 }
+
+// 搜索 源头公司
+const company_origin_search = async function(vue, q, start, iimit = 3) {
+    if (q) {
+        let res = await vue.net.get('company_origin', _tool.token(vue), build_search(q, start, iimit))
+        res = res ? res : [ ]
+        return res.sort((n, o) => (o.id - n.id))
+    }
+}
+const count_comp_os = async function(vue, q) {
+    return await vue.net.get('company_origin_count', _tool.token(vue), build_search(q, 0, 999999))
+} 
 
 //
 const company_plus = async function(vue, data) {
@@ -84,6 +89,7 @@ export default {
 
     company_origin_plus,
 
+    count_comp_os,
     company_search,
     company_origin_search
 }

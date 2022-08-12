@@ -16,6 +16,7 @@ const ENDPOINT = {
   company: '/companies',
   import_record: '/import-records',
   company_origin: '/company-origins',
+  company_origin_count: '/company-origins/count',
   company_search: '/companies_search',
 
   sms_code: '/send-codes/code/send',

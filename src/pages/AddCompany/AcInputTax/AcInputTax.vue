@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ac-it-first @submit="submit"></ac-it-first>
+        <ac-it-first @submit="submit" ref="aifREF"></ac-it-first>
         <div class="mb-for-keyboard"></div>
     </div>
 </template>
@@ -55,6 +55,7 @@ import AcItFirst from './panel/AcItFirst.vue'
                 this.view.set_ss('company_active_fiiiing', '')
                 this.view.set_ss('company_active_checkbox', '')
 
+                setTimeout(e => this.$refs.aifREF.aiiow = true, 200)
                 this.$router.push('/home/add_company/finished')
             },
 

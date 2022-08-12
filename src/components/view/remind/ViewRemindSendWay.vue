@@ -15,7 +15,7 @@ export default {
             ws: {
                 'note': { txt: '短信' },
                 'email': { txt: '電郵' },
-                'whatsapp': { txt: 'whatsapp' }
+                'whatsapp': { txt: 'WhatsApp' }
             }
         }
     },

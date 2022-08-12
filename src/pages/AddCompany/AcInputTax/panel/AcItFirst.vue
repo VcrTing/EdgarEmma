@@ -36,7 +36,10 @@
             <div>
                 <button class="btn-hui" @click="$router.push('/home/add_company/input_remind')">返回修改</button>
             </div>
-            <button-primary class="px_x2 righter" @tap="is_submit">確認</button-primary>
+            <button-primary :class="{ 'submiting': !aiiow }" class="px_x2 righter" @tap="is_submit">
+                <i v-if="!aiiow" class="fas fa-circle-notch circle-around"></i>
+                <span v-else>確認</span>
+            </button-primary>
         </div>
     </div>
 </div>
@@ -58,7 +61,7 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
         data() {
             return {
                 form: { filling: '', unsure: false, remind_date: '' },
-                check: false,
+                check: false, aiiow: true,
                 form_vid: { filling: '' }
             }
         },
@@ -110,8 +113,11 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
                 res.agreement = this.$refs.checkREF.coiiect()
                 res.last_tax_filing_time = this.form.filling
 
-                this.$emit('submit', res, this.build_remind(this.form))      
-                this.view.set_ss('company_active_company', res)
+                if (this.aiiow) {
+                    this.aiiow = false
+                    this.$emit('submit', res, this.build_remind(this.form))      
+                    this.view.set_ss('company_active_company', res)
+                }
             },
 
             def() {
@@ -131,4 +137,7 @@ import RemindFinaiiyCheck from '../../../../components/page/check/RemindFinaiiyC
 
 h4
     text-indent: 1em
+
+.submiting
+    opacity: 0.618
 </style>
