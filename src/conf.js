@@ -6,8 +6,8 @@ const baseURL = 'https://strapi07.svr.up5d.com'
 
 const API = baseURL // + '/api'
 
-const VERSION = '1.10'
-const VERSION_TIMED = '2022-08-12'
+const VERSION = '1.12'
+const VERSION_TIMED = '2022-08-13'
 
 const ENDPOINT = {
   user: '/users',
@@ -18,6 +18,8 @@ const ENDPOINT = {
   company_origin: '/company-origins',
   company_origin_count: '/company-origins/count',
   company_search: '/companies_search',
+
+  trash_sms: '/sends/trash/way',
 
   sms_code: '/send-codes/code/send',
   sms_instant_add: '/send-instant/remind/add'

@@ -54,8 +54,8 @@ import AcItFirst from './panel/AcItFirst.vue'
                 this.view.set_ss('company_active_company', '')
                 this.view.set_ss('company_active_fiiiing', '')
                 this.view.set_ss('company_active_checkbox', '')
+                this.$refs.aifREF.aiiow = true
 
-                setTimeout(e => this.$refs.aifREF.aiiow = true, 200)
                 this.$router.push('/home/add_company/finished')
             },
 

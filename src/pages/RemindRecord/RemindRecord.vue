@@ -42,32 +42,14 @@ export default {
             if (this.plant && this.plant.is_admin != true) { res.user = this.user.id }
             return res
         },
-        // 过滤，非首发时，过滤掉 3日之外的发送
-        _ser_timed_less(ts) {
-            ts = ts ? ts.map(e => e.send_day_real) : [ ]
-            ts = ts.sort((n, o) => { 
-                if ((moment(n) >= moment(o))) { return true } else { return false } })
-            return ts ? ts[ ts.length - 1 ] : ''
-        },
-        ser_appr(src) {
-            // let res = [ ]
-            return src.map(e => {
-                console.log(e.times)
-                const tii = e.times ? this._ser_timed_less(e.times) : ''
-                e.timed_iess = tii
-                return e
-            })
-        },
 
         // 获取数据
         async fetching(condition) {
             this.loading = true
             let res = await this.serv.send.many(this, condition )
             if (res) { 
-                res = this.ser_appr( res )
                 this.items = res
                 this.items_origin = res
-                console.log('RES =', res) 
             }
             setTimeout(e => this.loading = false, 600)
         }

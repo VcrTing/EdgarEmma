@@ -9,15 +9,11 @@
 <script>
 import moment from 'moment'
 export default {
-    props: { rmd: { type: Object }, times: { type: Array },  },
+    props: { first: { type: Boolean }, times: { type: String },  },
     computed: {
         txt1() {
-            let res = [ ]
-            if (this.times) {
-                const src = this.times.map(e => e.send_day_real ? e.send_day_real : e.day_sending)
-                res = src.map(e => { if (e) { return moment(e).format('M月D日') } })
-            }
-            return res ? res.join('，') : ''
+            
+            return this.view.ser_timed(this.times, 0, true)
             // return moment( this.timed_iess ).format('yyyy-MM-DD')
             /*
             let res = this.rmd ? this.rmd.send_date_real_str : ''

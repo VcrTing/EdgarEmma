@@ -37,7 +37,7 @@ const ser_timed = function(e, mode = 0, long = false) {
     if (mode == 1) {
         return long ? e.format('ss:mm:hh DD/MM/yyyy') : e.format('DD/MM/yyyy')
     }
-    return long ? e.format('yyyy-MM-DD hh:mm:ss') : e.format('yyyy-MM-DD')
+    return long ? e.format('yyyy-MM-DD hh:mm') : e.format('yyyy-MM-DD')
 }
 
 const ser_timed_month = function(e) {

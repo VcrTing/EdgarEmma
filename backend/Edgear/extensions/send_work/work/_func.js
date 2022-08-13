@@ -60,10 +60,11 @@ const _doing = async function(_tis, snd, ways) {
                 if (cont.content) {
                     // 插入新 任务队列 结果
                     v.is_serial = true
-                    v.result = 
+                    const _res = 
                         // 废除 这里的首发
                         snd.is_first ? _first(_tis[ 'send_day_real' ]) :
                             await insert[ k ]( v, _tis[ 'send_day_real' ], cont, _build_mark(k, snd.id))
+                    v.result = _res; snd.result.push( _res )
                     return v
                 }  else {
                     // 用户没有选择 该发送方式 的 时候
@@ -76,6 +77,7 @@ const _doing = async function(_tis, snd, ways) {
 }
 const _ser_send = async function(snd, ways) {
     // 公司 报税日
+    snd.result = [ ]
     await snd.times.map(async e => { e = await _doing(e, snd, ways); return e })
     // 公司 since，取消 since 发送
     //  if (snd.times_since) { await snd.times_since.map(async e => { e = await _doing(e, snd, ways); return e }) }

@@ -33,16 +33,34 @@ import ButtonPrimaryOut from '../../funcks/ui/button/ButtonPrimaryOut.vue'
             setTimeout(e => this.ioading = false, 400)
         },
         methods: {
+            async trash_send(sends) {
+                const _this = this
+                sends.map( async e => {
+                    const cond = {
+                        id: e.id
+                    }
+                    e.result ? e.result.map(async _re => {
+                        // 删掉 SMSTRAPI
+                        _re ? await _this.serv.send.trash_send( _this, { way: _re.way, ids: [ _re.smstrapi ] }) : 0
+                    }) : 0
+                })
+            },
+            
             async trash() {
                 if (!this.ioading) {
                     this.ioading = true
-                    const res = await this.serv.company.company_trash(this, this.comp)
-                    if (res && res > 0) {
+                    let res = await this.serv.company.company_trash(this, this.comp)
+
+                    // 删除 send 与 strapi 任务
+                    const ts = await this.trash_send(this.comp.sends)
+
+                    if (res) {
                         setTimeout(e => this.$router.push('/home/company_my'), 400)
                     }
                     setTimeout(e => this.ioading = false, 2000)
                 }
-            }
+            },
+
         }
     }
 </script>

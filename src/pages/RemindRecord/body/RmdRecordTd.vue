@@ -13,23 +13,23 @@
             <div class="w-21">
                 <view-company-name v-if="v.company" :one="true" :names="v.company.names"></view-company-name>
             </div>
-            <div class="w-10">
+            <div class="w-11">
                 <span class="pri_son" v-if="v.is_first">新增數據</span>
                 <span v-else class="sus_son">提醒報稅</span>
             </div>
-            <div class="w-25">
-                <view-remind-date v-if="!v.is_first" :rmd="v.remind" :times="v.times"></view-remind-date>
-                <span v-else>
-                    {{ view.ser_timed(v.published_at) }}
-                </span>
+            <div class="w-24">
+                <view-remind-date :first="v.is_first" :times="v.send_day ? v.send_day : v.published_at"></view-remind-date>
             </div>
             <div class="w-15">
-                <view-remind-send-way v-if="v.remind" :comp="v.company" :way="v.remind.send_way_world"></view-remind-send-way>
+                <view-remind-send-way v-if="v.remind" :comp="v.company" :way="v.way ? v.way : v.remind.send_way_world"></view-remind-send-way>
             </div>
             <div class="w-10">
                 <div v-if="v.is_serial">
-                    <span v-if="v.is_first" class="btn-succ_txt">成功</span>
-                    <span v-else class="btn-war_txt">等待發送</span>
+                    <span v-if="v.is_first" class="btn-succ_txt">已發送</span>
+                    <div v-else>
+                        <span v-if="v.is_sended" class="btn-succ_txt">已發送</span>
+                        <span v-else class="btn-war_txt">等待發送</span>
+                    </div>
                 </div>
                 <div class="sus_ipt" v-else>
                     隊列中
@@ -47,9 +47,8 @@
 import ViewCompanyName from '../../../components/view/company/ViewCompanyName.vue'
 import ViewRemindDate from '../../../components/view/remind/ViewRemindDate.vue'
 import ViewRemindSendWay from '../../../components/view/remind/ViewRemindSendWay.vue'
-import ViewSendTimes from '../../../components/view/send/ViewSendTimes.vue'
     export default {
-        components: {ViewCompanyName, ViewSendTimes, ViewRemindDate, ViewRemindSendWay  },
+        components: {ViewCompanyName, ViewRemindDate, ViewRemindSendWay  },
         name: '',
         props: [ '_items' ],
         data() {

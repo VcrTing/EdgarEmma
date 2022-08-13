@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/sends/trash/way",
+      "handler": "option_for_smstrapi.trash_of_way",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

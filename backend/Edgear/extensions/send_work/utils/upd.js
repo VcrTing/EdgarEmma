@@ -22,6 +22,7 @@ const updSend = async function(id, snd) {
 const updSend_Result = async function(snd) {
     const id = snd.id 
     const data = { times: snd.times, is_serial: true, finish_first: snd.finish_first ? true : false }
+    data.result = snd.result
     return await updSend(id, data)
 }
 

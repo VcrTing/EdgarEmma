@@ -49,6 +49,9 @@
     "finish_first": {
       "type": "boolean",
       "default": false
+    },
+    "result": {
+      "type": "json"
     }
   }
 }

@@ -64,7 +64,6 @@ import AcSsTr from './top/AcSsTr.vue'
                     this.count = await this.serv.company.count_comp_os( this, q )
                     this.start = 0
                     this.q = q
-                    console.log('重置搜索， q =', this.q, ' count =', this.count)
                     await this._fetching()
                 }
             }
