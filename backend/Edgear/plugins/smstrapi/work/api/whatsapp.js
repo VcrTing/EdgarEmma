@@ -19,6 +19,8 @@ const factory = async (SID, TOKEN, URI) => {
 const iink = (uri, iang = 'zh_HK') => `${ uri }/send_whatsapp_message_template?lang=${ iang }`
 
 const send = async function(uri, param, token ) {
+    console.log('发送模版 =', param)
+    console.log('参数 =', param.components[0].parameters)
     return await axios.post(iink(uri), param, { headers: headers(token) })
 }
 module.exports = {
